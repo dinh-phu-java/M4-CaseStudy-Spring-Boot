@@ -82,9 +82,7 @@
                                     <label>Quận Huyện</label>
 
                                     <select class="form-control select2bs4" id="district-option" style="width: 100%;" th:field="*{district}">
-                                        <th:block th:each="cat : ${categories}">
-                                            <option th:value="${cat.categoryName}" th:text="${cat.categoryName}"></option>
-                                        </th:block>
+
                                     </select>
                                 </div>
                             </div>
@@ -185,7 +183,12 @@
                 data:"province="+provinceName,
                 url:"/real-estate/get-district",
                 success:function(district){
-                    alert(district);
+
+                    let content;
+                    for (let i=0;i<district.length;i++){
+                        content+=`<option value="${district[i].name}">${district[i].name}</option>`;
+                    }
+                    document.getElementById('district-option').innerHTML=content;
                 }
             });
             event.preventDefault();
