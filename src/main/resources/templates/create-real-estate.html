@@ -34,7 +34,7 @@
 
             <div class="card card-default" style="margin-top:15px;">
                 <div class="card-header">
-                    <h3 class="card-title">Select2 (Bootstrap4 Theme)</h3>
+                    <h3 class="card-title">Tạo bài đăng mới</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -45,13 +45,13 @@
                 <div class="card-body">
 <!--                    th:object="${realEstateDTO}"-->
 <!--                    th:action="@{/real-estate/create}"-->
-                    <form  method="post" th:object="${realEstateDTO}" th:action="@{/real-estate/create}">
+                    <form  method="post" th:object="${realEstateDTO}" th:action="@{/real-estate/create}" id="create-estate-form">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Loại Bất động sản</label>
-<!--                                    th:field="*{category}"-->
-                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{category}">
+                                    <label>Loại Bất động sản *</label>
+
+                                    <select class="form-control select2bs4" style="width: 100%;" name="category" th:field="*{category}">
                                         <th:block th:each="cat : ${categories}">
                                             <option th:value="${cat.categoryName}" th:text="${cat.categoryName}"></option>
                                         </th:block>
@@ -64,9 +64,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Thành phố</label>
+                                    <label>Thành phố *</label>
 
-                                    <select class="form-control select2bs4" id="province-option" style="width: 100%;" th:field="*{province}">
+                                    <select class="form-control select2bs4" id="province-option" style="width: 100%;" th:field="*{province}" >
                                         <th:block th:each="pro : ${provinces}">
                                             <option th:value="${pro.name}" th:text="${pro.name}"></option>
                                         </th:block>
@@ -79,17 +79,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Quận Huyện</label>
+                                    <label>Quận Huyện *</label>
 
-                                    <select class="form-control select2bs4" id="district-option" style="width: 100%;" th:field="*{district}">
+                                    <select class="form-control select2bs4" id="district-option" style="width: 100%;" th:field="*{district}"  >
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Phường xã</label>
-
-                                    <select class="form-control select2bs4" id="ward-option" style="width: 100%;" th:field="*{ward}">
+                                    <label>Phường xã *</label>
+                                    <select class="form-control select2bs4" id="ward-option" style="width: 100%;"  th:field="*{ward}" >
                                     </select>
                                 </div>
                             </div>
@@ -97,42 +96,81 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Minimal</label>
-                                    <select class="form-control select2bs4" style="width: 100%;">
-                                        <option selected="selected">Alabama</option>
-                                        <option>Alaska</option>
-                                        <option>California</option>
-                                        <option>Delaware</option>
-                                        <option>Tennessee</option>
-                                        <option>Texas</option>
-                                        <option>Washington</option>
-                                    </select>
+                                    <label>Địa Chỉ *</label>
+                                    <input type="text" class="form-control" th:field="*{address}" placeholder="Địa chỉ">
                                 </div>
-
                             </div>
-                            <!-- /.col -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Multiple</label>
-                                    <select class="select2bs4" multiple="multiple" data-placeholder="Select a State"
-                                            style="width: 100%;">
-                                        <option>Alabama</option>
-                                        <option>Alaska</option>
-                                        <option>California</option>
-                                        <option>Delaware</option>
-                                        <option>Tennessee</option>
-                                        <option>Texas</option>
-                                        <option>Washington</option>
-                                    </select>
-                                </div>
-
-                            </div>
-                            <!-- /.col -->
-                            <button class="btn-primary">Thêm mới</button>
                         </div>
-                    <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Tiêu đề *</label>
+                                    <input type="text" class="form-control" th:field="*{title}" placeholder="Tiêu đề" >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Mô tả *</label>
+                                    <textarea class="textarea" placeholder="Place some text here"
+                                              style="width: 100%; height: 350px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" th:field="*{description}" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Tổng giá *</label>
+                                    <input th:field="*{totalprice}" type="number" class="form-control" placeholder="Tổng giá">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Đơn vị</label>
+                                    <select class="form-control" name="donvi" id="donvi">
+                                        <option value="tỷ">Tỷ</option>
+                                        <option value="triệu">Triệu</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Đơn giá *</label>
+                                    <input th:field="*{priceUnit}" type="number" class="form-control" placeholder="Đơn giá">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Đơn giá</label>
+                                    <input class="form-control" type="text" value="VND/m2" name="dongia" id="dongia" readonly/>
+
+                                </div>
+                            </div>
+                        </div>
+<!--                        areatypes    -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Loại diện tích *</label>
+                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{areaType}">
+                                        <th:block th:each="area : ${areatypes}">
+                                            <option th:value="${area.areaName}" th:text="${area.areaName}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-outline-primary" value="Tạo bài mới" id="register"/>
                     </form>
                 </div>
                 <!-- /.card-body -->
@@ -165,9 +203,9 @@
 <script>
 
     $(document).ready(function(){
-        // alert("alobc");
+
         $('#province-option').change(function(event){
-            // $('#province-option').innerHTML
+
             let provinceName=$('#province-option').val();
             $.ajax({
                 headers:{
@@ -191,7 +229,7 @@
 
 
         $('#district-option').change(function(event){
-            // $('#province-option').innerHTML
+
             let districtName=$('#district-option').val();
 
             $.ajax({
@@ -203,11 +241,7 @@
                 data:"district="+districtName,
                 url:"/real-estate/get-ward",
                 success:function(ward){
-                    // let content;
-                    // for (let i=0;i<ward.length;i++){
-                    //     content+=`<option value="${ward[i].name}">${ward[i].name}</option>`;
-                    // }
-                    // document.getElementById('ward-option').innerHTML=content;
+
                     let content;
                     for (let i=0;i<ward.length;i++){
                         content+=`<option value="${ward[i].name}">${ward[i].name}</option>`;
@@ -219,10 +253,81 @@
         }) ;
 
 
+    });
 
 
+</script>
+<script>
+    $().ready(function() {
+        $("#create-estate-form").validate({
+            onfocusout: false,
+            onkeyup: false,
+            onclick: false,
+            rules: {
+                "totalprice": {
+                    required: true,
+                    number:true,
+                    maxlength: 8
+                },
+                "areaType":{
+                  required:true
+                },
+                "priceUnit": {
+                    required: true,
+                    number:true,
+                    maxlength: 15
+                },
+                "category":{
+                    required:true
+                },
+                "district":{
+                    required:true
+                },
+                "ward":{
+                    required:true
+                },
+                "address":{
+                    required:true
+                },
+                "title":{
+                    required:true
+                },
+                "description":{
+                    required:true
+                }
+            },
+            messages: {
+                "totalprice":{
+                    required:"Bắt buộc nhập tổng giá",
+                    number:"Không phải là số",
+                    maxlength:"Tối đa 8 ký tự"
+                },
+                "areaType":{
+                    required:"Bắt buộc nhập loại diện tích"
+                },
+                "priceUnit":{
+                    required:"Bắt buộc nhập đơn giá",
+                    number:"Không phải là số",
+                    maxlength:"Tối đa 15 ký tự"
+                },
+                "district":{
+                    required:"Bắt buộc nhập quận huyện"
+                },
+                "ward":{
+                    required:"Bắt buộc nhập phường xã"
+                },
+                "address":{
+                    required:"Bắt buộc nhập địa chị"
+                },
+                "title":{
+                    required:"Bắt buộc nhập tiêu đề"
+                },
+                "description":{
+                    required:"Bắt buộc nhập miêu tả"
+                }
+            }
+        });
     });
 </script>
-
 </body>
 </html>

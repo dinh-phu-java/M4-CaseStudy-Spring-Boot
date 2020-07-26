@@ -40,11 +40,14 @@ public class RealEstate {
     @Column(name="price_unit")
     private String priceUnit;
 
-    @Column(name="billions")
-    private String billions;
+    @Column(name="total_price")
+    private String totalprice;
 
-    @Column(name="millions")
-    private String millions;
+//    @Column(name="billions")
+//    private String billions;
+//
+//    @Column(name="millions")
+//    private String millions;
 
     @Column(name="total_area")
     private String totalArea;
@@ -92,7 +95,7 @@ public class RealEstate {
     public RealEstate() {
     }
 
-    public RealEstate(String category, String province, String district, String ward, String address, String title, String description, String priceUnit, String billions, String millions, String totalArea, String areaType, String direction, String bedRoomQuantity, String bathRoomQuantity, String legalPaper, InternalUtilities internalUtilities, ExternalUtilities externalUtilities, AroundUtilities aroundUtilities, RealEstateType realEstateType, User user, RealEstateImage realEstateImage) {
+    public RealEstate(String category, String province, String district, String ward, String address, String title, String description, String priceUnit, String totalprice, String totalArea, String areaType, String direction, String bedRoomQuantity, String bathRoomQuantity, String legalPaper, InternalUtilities internalUtilities, ExternalUtilities externalUtilities, AroundUtilities aroundUtilities, RealEstateType realEstateType, User user, RealEstateImage realEstateImage) {
         this.category = category;
         this.province = province;
         this.district = district;
@@ -101,8 +104,7 @@ public class RealEstate {
         this.title = title;
         this.description = description;
         this.priceUnit = priceUnit;
-        this.billions = billions;
-        this.millions = millions;
+        this.totalprice = totalprice;
         this.totalArea = totalArea;
         this.areaType = areaType;
         this.direction = direction;
@@ -189,20 +191,12 @@ public class RealEstate {
         this.priceUnit = priceUnit;
     }
 
-    public String getBillions() {
-        return billions;
+    public String getTotalprice() {
+        return totalprice;
     }
 
-    public void setBillions(String billions) {
-        this.billions = billions;
-    }
-
-    public String getMillions() {
-        return millions;
-    }
-
-    public void setMillions(String millions) {
-        this.millions = millions;
+    public void setTotalprice(String totalprice) {
+        this.totalprice = totalprice;
     }
 
     public String getTotalArea() {
@@ -313,8 +307,7 @@ public class RealEstate {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", priceUnit='" + priceUnit + '\'' +
-                ", billions='" + billions + '\'' +
-                ", millions='" + millions + '\'' +
+                ", totalprice='" + totalprice + '\'' +
                 ", totalArea='" + totalArea + '\'' +
                 ", areaType='" + areaType + '\'' +
                 ", direction='" + direction + '\'' +

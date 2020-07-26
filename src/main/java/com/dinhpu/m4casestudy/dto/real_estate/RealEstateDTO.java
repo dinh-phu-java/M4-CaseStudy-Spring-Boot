@@ -36,10 +36,13 @@ public class RealEstateDTO {
     @NotBlank
     private String priceUnit;
 
+//    @NotNull
+//    private String billions;
+//    @NotNull
+//    private String millions;
+
     @NotNull
-    private String billions;
-    @NotNull
-    private String millions;
+    private String totalprice;
 
     @NotBlank
     private String totalArea;
@@ -80,7 +83,7 @@ public class RealEstateDTO {
     public RealEstateDTO() {
     }
 
-    public RealEstateDTO(@NotEmpty String category, @NotEmpty String province, @NotEmpty String district, @NotEmpty String ward, @NotBlank String address, @NotBlank String title, @NotBlank String description, @NotBlank String priceUnit, @NotNull String billions, @NotNull String millions, @NotBlank String totalArea, @NotEmpty String areaType, @NotEmpty String direction, @NotBlank String bedRoomQuantity, @NotBlank String bathRoomQuantity, @NotEmpty String legalPaper, @NotEmpty InternalUtilities internalUtilities, @NotEmpty ExternalUtilities externalUtilities, @NotEmpty AroundUtilities aroundUtilities, @NotEmpty RealEstateType realEstateType, User user, @NotEmpty RealEstateImage realEstateImage) {
+    public RealEstateDTO(@NotEmpty String category, @NotEmpty String province, @NotEmpty String district, @NotEmpty String ward, @NotBlank String address, @NotBlank String title, @NotBlank String description, @NotBlank String priceUnit, @NotNull String totalprice, @NotBlank String totalArea, @NotEmpty String areaType, @NotEmpty String direction, @NotBlank String bedRoomQuantity, @NotBlank String bathRoomQuantity, @NotEmpty String legalPaper, @NotEmpty InternalUtilities internalUtilities, @NotEmpty ExternalUtilities externalUtilities, @NotEmpty AroundUtilities aroundUtilities, @NotEmpty RealEstateType realEstateType, User user, @NotEmpty RealEstateImage realEstateImage) {
         this.category = category;
         this.province = province;
         this.district = district;
@@ -89,8 +92,7 @@ public class RealEstateDTO {
         this.title = title;
         this.description = description;
         this.priceUnit = priceUnit;
-        this.billions = billions;
-        this.millions = millions;
+        this.totalprice = totalprice;
         this.totalArea = totalArea;
         this.areaType = areaType;
         this.direction = direction;
@@ -177,20 +179,12 @@ public class RealEstateDTO {
         this.priceUnit = priceUnit;
     }
 
-    public String getBillions() {
-        return billions;
+    public String getTotalprice() {
+        return totalprice;
     }
 
-    public void setBillions(String billions) {
-        this.billions = billions;
-    }
-
-    public String getMillions() {
-        return millions;
-    }
-
-    public void setMillions(String millions) {
-        this.millions = millions;
+    public void setTotalprice(String totalprice) {
+        this.totalprice = totalprice;
     }
 
     public String getTotalArea() {
@@ -287,5 +281,33 @@ public class RealEstateDTO {
 
     public void setRealEstateImage(RealEstateImage realEstateImage) {
         this.realEstateImage = realEstateImage;
+    }
+
+    @Override
+    public String toString() {
+        return "RealEstateDTO{" +
+                "id=" + id +
+                ", category='" + category + '\'' +
+                ", province='" + province + '\'' +
+                ", district='" + district + '\'' +
+                ", ward='" + ward + '\'' +
+                ", address='" + address + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", priceUnit='" + priceUnit + '\'' +
+                ", totalprice='" + totalprice + '\'' +
+                ", totalArea='" + totalArea + '\'' +
+                ", areaType='" + areaType + '\'' +
+                ", direction='" + direction + '\'' +
+                ", bedRoomQuantity='" + bedRoomQuantity + '\'' +
+                ", bathRoomQuantity='" + bathRoomQuantity + '\'' +
+                ", legalPaper='" + legalPaper + '\'' +
+                ", internalUtilities=" + internalUtilities +
+                ", externalUtilities=" + externalUtilities +
+                ", aroundUtilities=" + aroundUtilities +
+                ", realEstateType=" + realEstateType +
+                ", user=" + user +
+                ", realEstateImage=" + realEstateImage +
+                '}';
     }
 }

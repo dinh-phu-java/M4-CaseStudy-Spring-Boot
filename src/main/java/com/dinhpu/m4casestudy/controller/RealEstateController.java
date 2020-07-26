@@ -5,10 +5,7 @@ import com.dinhpu.m4casestudy.model.real_estate.District;
 import com.dinhpu.m4casestudy.model.real_estate.Province;
 import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
 import com.dinhpu.m4casestudy.model.real_estate.Ward;
-import com.dinhpu.m4casestudy.services.real_estate.ICategoryServices;
-import com.dinhpu.m4casestudy.services.real_estate.IDistrictServices;
-import com.dinhpu.m4casestudy.services.real_estate.IProvinceServices;
-import com.dinhpu.m4casestudy.services.real_estate.IWardServices;
+import com.dinhpu.m4casestudy.services.real_estate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +31,16 @@ public class RealEstateController {
     @Autowired
     private IWardServices wardServices;
 
+    @Autowired
+    private IAreaTypeServices areaTypeServices;
+
     @GetMapping("/create")
     public String showRealEstateCreateForm(Model theModel){
         RealEstateDTO realEstateDTO =new RealEstateDTO();
 
         theModel.addAttribute("provinces",provinceServices.findAll());
         theModel.addAttribute("categories",categoryServices.findAll());
+        theModel.addAttribute("areatypes",areaTypeServices.findAll());
         theModel.addAttribute("realEstateDTO",realEstateDTO);
 
         return "create-real-estate";
