@@ -80,9 +80,8 @@ public class RealEstate {
     @JoinColumn(name="around_utilities_id")
     private AroundUtilities aroundUtilities;
 
-    @ManyToOne
-    @JoinColumn(name="real_estate_type_id")
-    private RealEstateType realEstateType;
+    @Column(name="real_estate_type_id")
+    private String realEstateType;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name="user_id")
@@ -95,7 +94,7 @@ public class RealEstate {
     public RealEstate() {
     }
 
-    public RealEstate(String category, String province, String district, String ward, String address, String title, String description, String priceUnit, String totalprice, String totalArea, String areaType, String direction, String bedRoomQuantity, String bathRoomQuantity, String legalPaper, InternalUtilities internalUtilities, ExternalUtilities externalUtilities, AroundUtilities aroundUtilities, RealEstateType realEstateType, User user, RealEstateImage realEstateImage) {
+    public RealEstate(String category, String province, String district, String ward, String address, String title, String description, String priceUnit, String totalprice, String totalArea, String areaType, String direction, String bedRoomQuantity, String bathRoomQuantity, String legalPaper, InternalUtilities internalUtilities, ExternalUtilities externalUtilities, AroundUtilities aroundUtilities, String realEstateType, User user, RealEstateImage realEstateImage) {
         this.category = category;
         this.province = province;
         this.district = district;
@@ -271,11 +270,11 @@ public class RealEstate {
         this.aroundUtilities = aroundUtilities;
     }
 
-    public RealEstateType getRealEstateType() {
+    public String getRealEstateType() {
         return realEstateType;
     }
 
-    public void setRealEstateType(RealEstateType realEstateType) {
+    public void setRealEstateType(String realEstateType) {
         this.realEstateType = realEstateType;
     }
 

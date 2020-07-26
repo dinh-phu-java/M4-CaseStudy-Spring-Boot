@@ -34,6 +34,12 @@ public class RealEstateController {
     @Autowired
     private IAreaTypeServices areaTypeServices;
 
+    @Autowired
+    private IDirectionServices directionServices;
+
+    @Autowired
+    private ILegalPaperServices legalPaperServices;
+
     @GetMapping("/create")
     public String showRealEstateCreateForm(Model theModel){
         RealEstateDTO realEstateDTO =new RealEstateDTO();
@@ -42,7 +48,8 @@ public class RealEstateController {
         theModel.addAttribute("categories",categoryServices.findAll());
         theModel.addAttribute("areatypes",areaTypeServices.findAll());
         theModel.addAttribute("realEstateDTO",realEstateDTO);
-
+        theModel.addAttribute("directions",directionServices.findAll());
+        theModel.addAttribute("legals",legalPaperServices.findAll());
         return "create-real-estate";
     }
 

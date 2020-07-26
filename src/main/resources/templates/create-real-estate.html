@@ -46,6 +46,16 @@
 <!--                    th:object="${realEstateDTO}"-->
 <!--                    th:action="@{/real-estate/create}"-->
                     <form  method="post" th:object="${realEstateDTO}" th:action="@{/real-estate/create}" id="create-estate-form">
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" th:field="*{realEstateType}" value="Bán" checked>
+                            <label class="form-check-label" >Bán</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" th:field="*{realEstateType}" value="Thuê">
+                            <label class="form-check-label" >Thuê</label>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -167,10 +177,53 @@
                                         </th:block>
                                     </select>
                                 </div>
-
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Hướng *</label>
+                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{direction}">
+                                        <th:block th:each="direct : ${directions}">
+                                            <option th:value="${direct.directionName}" th:text="${direct.directionName}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Số phòng ngủ *</label>
+                                    <input th:field="*{bedRoomQuantity}" type="number" class="form-control" placeholder="Số phòng ngủ">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Số phòng tắm</label>
+                                    <input th:field="*{bathRoomQuantity}" type="number" class="form-control" placeholder="Số phòng tắm">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Pháp lý *</label>
+                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{legalPaper}">
+                                        <th:block th:each="legal : ${legals}">
+                                            <option th:value="${legal.legalPaperName}" th:text="${legal.legalPaperName}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <input type="submit" class="btn btn-outline-primary" value="Tạo bài mới" id="register"/>
+
                     </form>
                 </div>
                 <!-- /.card-body -->
