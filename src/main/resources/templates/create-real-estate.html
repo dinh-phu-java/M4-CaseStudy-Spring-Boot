@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <label>Thành phố</label>
 
-                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{province}">
+                                    <select class="form-control select2bs4" id="province-option" style="width: 100%;" th:field="*{province}">
                                         <th:block th:each="pro : ${provinces}">
                                             <option th:value="${pro.name}" th:text="${pro.name}"></option>
                                         </th:block>
@@ -81,7 +81,7 @@
                                 <div class="form-group">
                                     <label>Quận Huyện</label>
 
-                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{category}">
+                                    <select class="form-control select2bs4" id="district-option" style="width: 100%;" th:field="*{district}">
                                         <th:block th:each="cat : ${categories}">
                                             <option th:value="${cat.categoryName}" th:text="${cat.categoryName}"></option>
                                         </th:block>
@@ -92,7 +92,7 @@
                                 <div class="form-group">
                                     <label>Phường xã</label>
 
-                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{category}">
+                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{ward}">
                                         <th:block th:each="cat : ${categories}">
                                             <option th:value="${cat.categoryName}" th:text="${cat.categoryName}"></option>
                                         </th:block>
@@ -166,8 +166,33 @@
 <!-- ./wrapper -->
 
 <div id="foot-script" th:replace="fragments/admin/foot-script.html :: foot-script">
-
 </div>
+
+<script>
+
+    $(document).ready(function(){
+        // alert("alobc");
+        $('#province-option').change(function(event){
+            // $('#province-option').innerHTML
+            let provinceName=$('#province-option').val();
+            // let json={id:2,name:provinceName,type:'test'};
+            $.ajax({
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                type:"GET",
+                data:"province="+provinceName,
+                url:"/real-estate/get-district",
+                success:function(district){
+                    alert(district);
+                }
+            });
+            event.preventDefault();
+
+        }) ;
+    });
+</script>
 
 </body>
 </html>
