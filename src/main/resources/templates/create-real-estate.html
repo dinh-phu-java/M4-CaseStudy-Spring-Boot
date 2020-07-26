@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/head.html :: admin-head(~{ :: .admin-title })">
+
+    <title class="admin-title">User Profile</title>
+    <!-- Tell the browser to be responsive to screen width -->
+
+</head>
+<body class="hold-transition sidebar-mini">
+
+<div class="wrapper">
+    <!-- Navbar -->
+
+    <nav th:replace="fragments/admin/navbar-right.html :: navbar-right">
+    </nav>
+
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+
+    <aside th:replace="fragments/admin/menu-bar.html :: menu-bar">
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+
+        <!--        <section th:replace="fragments/admin/content-header.html :: content-header(~{:: .pageTitle},~{:: .my-content})">-->
+        <!--            <li class="pageTitle"><a href="#">Home</a></li>-->
+        <!--            <span class="my-content" th:text="'Profile: '+${session.loginUser.fullName}"></span>-->
+        <!--        </section>-->
+        <section class="content">
+            <div class="container-fluid">
+
+            <div class="card card-default" style="margin-top:15px;">
+                <div class="card-header">
+                    <h3 class="card-title">Select2 (Bootstrap4 Theme)</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+<!--                    th:object="${realEstateDTO}"-->
+<!--                    th:action="@{/real-estate/create}"-->
+                    <form  method="post" th:object="${realEstateDTO}" th:action="@{/real-estate/create}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Bất động sản</label>
+<!--                                    th:field="*{category}"-->
+                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{category}">
+                                        <th:block th:each="cat : ${categories}">
+                                            <option th:value="${cat.categoryName}" th:text="${cat.categoryName}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <!-- /.row -->
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Minimal</label>
+                                    <select class="form-control select2bs4" style="width: 100%;">
+                                        <option selected="selected">Alabama</option>
+                                        <option>Alaska</option>
+                                        <option>California</option>
+                                        <option>Delaware</option>
+                                        <option>Tennessee</option>
+                                        <option>Texas</option>
+                                        <option>Washington</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Multiple</label>
+                                    <select class="select2bs4" multiple="multiple" data-placeholder="Select a State"
+                                            style="width: 100%;">
+                                        <option>Alabama</option>
+                                        <option>Alaska</option>
+                                        <option>California</option>
+                                        <option>Delaware</option>
+                                        <option>Tennessee</option>
+                                        <option>Texas</option>
+                                        <option>Washington</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <!-- /.col -->
+                            <button class="btn-primary">Thêm mới</button>
+                        </div>
+                    <!-- /.row -->
+                    </form>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Made By Dinh Phu
+                </div>
+            </div>
+        <!-- /.card -->
+            </div>
+        </section>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer" th:replace="fragments/admin/footer.html :: footer">
+
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside th:replace="fragments/admin/footer.html :: control-sidebar">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<div id="foot-script" th:replace="fragments/admin/foot-script.html :: foot-script">
+
+</div>
+
+</body>
+</html>

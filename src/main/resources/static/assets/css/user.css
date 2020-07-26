@@ -1,0 +1,6 @@
+/* Here comes your own styling */
+
+.secondary-navigation .container .right li a span#my-span {
+    margin:0;
+    padding:0;
+}

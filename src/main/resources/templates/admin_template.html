@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/head.html :: admin-head(~{ :: .admin-title })">
+
+  <title class="admin-title">Dinh Phu Admin Page</title>
+  <!-- Tell the browser to be responsive to screen width -->
+
+</head>
+<body class="hold-transition sidebar-mini">
+
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav th:replace="fragments/admin/navbar-right.html :: navbar-right">
+
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside th:replace="fragments/admin/menu-bar.html :: menu-bar">
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section th:replace="fragments/admin/content-header.html :: content-header(~{:: .pageTitle},~{:: .my-content})">
+      <li class="pageTitle"><a href="#">Home</a></li>
+      <span class="my-content">Text Editor</span>
+    </section>
+
+    <!-- Main content -->
+    <section th:replace="fragments/admin/text-editor.html :: text-editor">
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer" th:replace="fragments/admin/footer.html :: footer">
+
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside th:replace="fragments/admin/footer.html :: control-sidebar">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<div id="foot-script" th:replace="fragments/admin/foot-script.html :: foot-script">
+
+</div>
+
+
+
+</body>
+</html>

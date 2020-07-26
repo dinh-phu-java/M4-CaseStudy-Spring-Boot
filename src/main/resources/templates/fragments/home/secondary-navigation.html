@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="secondary-navigation" th:fragment="secondary-navigation">
+    <div class="container">
+        <ul class="left">
+            <li>
+                <span>
+                   <a th:href="@{/}" style="margin: 0;padding: 0;"> <i class="fa fa-home"></i> Home</a>
+                </span>
+            </li>
+        </ul>
+        <!--end left-->
+        <ul class="right">
+            <li>
+                <a href="my-ads.html">
+                    <i class="fa fa-heart"></i>My Ads
+                </a>
+            </li>
+
+            <!-- th:block rather than unneeded div -->
+
+            <th:block th:if="${session.loginUser == null}">
+                <li>
+                    <a th:href="@{/loginPage}">
+                        <i class="fa fa-sign-in"></i>Sign In
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/register}">
+                        <i class="fa fa-pencil-square-o"></i>Register
+                    </a>
+                </li>
+            </th:block>
+            <th:block th:unless="${session.loginUser ==null}">
+                <li>
+                    <a th:href="@{/userProfile}" >
+                        <i class="fa fa-user-edit"></i><span th:text="${session.loginUser.fullName}" style="margin: 0;padding: 0"></span>
+                    </a>
+                </li>
+                <li>
+<!--                    <a th:href="@{/logout}">-->
+<!--                        <i class="fa fa-sign-out"></i> Logout-->
+<!--                    </a>-->
+                    <form th:action="@{/logout}" method="post" style="margin: 0;padding: 0;">
+                        <a >
+                            <i class="fa fa-sign-out"></i>  <button style="padding: 0;margin: 0;border: none;background-color: rgb(54, 54, 54);color: rgb(255, 255, 255);">Logout</button>
+                        </a>
+                    </form>
+                </li>
+            </th:block>
+
+<!--            <li>-->
+<!--                <a th:href="@{/loginPage}">-->
+<!--                    <i class="fa fa-sign-in"></i>Sign In-->
+<!--                </a>-->
+<!--            </li>-->
+
+<!--            <li>-->
+<!--                <a th:href="@{/register}">-->
+<!--                    <i class="fa fa-pencil-square-o"></i>Register-->
+<!--                </a>-->
+<!--            </li>-->
+        </ul>
+        <!--end right-->
+    </div>
+    <!--end container-->
+</div>
+
+</html>

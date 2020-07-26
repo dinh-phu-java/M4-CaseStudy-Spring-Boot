@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<section class="content-header" th:fragment="content-header(pageTitle,content)">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 th:insert="${content}">Text Editors</h1>
+            </div>
+<!--            <div class="col-sm-6">-->
+<!--                <ol class="breadcrumb float-sm-right">-->
+<!--                    <li class="breadcrumb-item" th:replace="${pageTitle}"><a href="#" ></a></li>-->
+<!--                    <li class="breadcrumb-item active" th:insert="${content}"></li>-->
+<!--                </ol>-->
+<!--            </div>-->
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+</html>

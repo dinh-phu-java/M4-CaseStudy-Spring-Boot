@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/home/head.html :: my-head(~{ :: .my-own-title})">
+
+    <title class="my-own-title">Home Page Title</title>
+
+</head>
+<body>
+<div class="page home-page">
+    <!--*********************************************************************************************************-->
+    <!--************ HERO ***************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <header class="hero has-dark-background">
+        <div class="hero-wrapper">
+
+            <!--============ Secondary Navigation ===============================================================-->
+            <div class="secondary-navigation" th:replace="fragments/home/secondary-navigation.html :: secondary-navigation">
+            </div>
+            <!--============ End Secondary Navigation ===========================================================-->
+
+            <div class="background" th:replace="fragments/home/header-background.html :: header-background">
+            </div>
+            <!--end background-->
+        </div>
+        <!--end hero-wrapper-->
+    </header>
+    <!--end hero-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ CONTENT ************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <section class="content">
+        <section class="block">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
+
+                        <form class="form" th:method="post"  th:action="@{/register}" th:object="${crmUser}">
+                            <div class="form-group">
+                                <label  class="col-form-label required">Your Name</label>
+                                <input  type="text" class="form-control" th:field="*{fullName}" placeholder="Your Name"  required>
+                            </div>
+                            <div th:if="${#fields.hasErrors('fullName')}"
+                                 style="margin-bottom: 25px" class="text-danger">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('fullName')}" th:text="'Full Name ' + ${err}" />
+                                </ul>
+                            </div>
+                            <!--end form-group-->
+                            <div class="form-group">
+                                <label class="col-form-label required">Email</label>
+                                <input  type="email" class="form-control" th:field="*{email}" placeholder="Your Email" required>
+                            </div>
+                            <div th:if="${#fields.hasErrors('email')}"
+                                 style="margin-bottom: 25px" class="text-danger">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('email')}" th:text="'Email ' + ${err}" />
+                                </ul>
+                            </div>
+                            <div th:if="${registrationError}" class="alert alert-danger col-xs-offset-1 col-xs-10">
+                                <span th:text="${registrationError}"></span>
+                            </div>
+                            <!--end form-group-->
+                            <div class="form-group">
+                                <label  class="col-form-label required">Phone Number</label>
+                                <input  type="text" class="form-control" th:field="*{phoneNumber}" placeholder="Phone Number" required>
+                            </div>
+                            <div th:if="${#fields.hasErrors('phoneNumber')}"
+                                 style="margin-bottom: 25px" class="text-danger">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('phoneNumber')}" th:text="'Phone Number ' + ${err}" />
+                                </ul>
+                            </div>
+                            <!--end form-group-->
+                            <div class="form-group">
+                                <label  class="col-form-label required">Address</label>
+                                <input  type="text" class="form-control" th:field="*{address}" placeholder="Address" required>
+                            </div>
+                            <div th:if="${#fields.hasErrors('address')}"
+                                 style="margin-bottom: 25px" class="text-danger">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('address')}" th:text="'Address ' + ${err}" />
+                                </ul>
+                            </div>
+                            <!--end form-group-->
+
+                            <!--end form-group-->
+                            <div class="d-flex justify-content-between align-items-baseline">
+                                <label>
+                                    <input type="checkbox" name="newsletter" value="1">
+                                    Receive Newsletter
+                                </label>
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <p>
+                            By clicking "Register" button, you agree with our <a href="#" class="link">Terms & Conditions.</a>
+                        </p>
+                    </div>
+                    <!--end col-md-6-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+        <!--end block-->
+    </section>
+    <!--end content-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <footer class="footer" th:replace="fragments/home/footer.html :: footer">
+    </footer>
+    <!--end footer-->
+</div>
+<!--end page-->
+
+<div id="foot-script" th:replace="fragments/home/foot-script.html :: foot-script">
+</div>
+
+
+
+</body>
+</html>
