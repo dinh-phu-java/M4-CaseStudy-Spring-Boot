@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface IServices<T> {
     public List<T> findAll();
-    public T findById(Integer id);
+    public T findById(Long id);
     public T save(T model);
-    public T remove(Integer id);
+    public T remove(Long id);
 
 }

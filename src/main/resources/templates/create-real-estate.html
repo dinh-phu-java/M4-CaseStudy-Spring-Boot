@@ -47,9 +47,9 @@
 <!--                    th:action="@{/real-estate/create}"-->
                     <form  method="post" th:object="${realEstateDTO}" th:action="@{/real-estate/create}">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Bất động sản</label>
+                                    <label>Loại Bất động sản</label>
 <!--                                    th:field="*{category}"-->
                                     <select class="form-control select2bs4" style="width: 100%;" th:field="*{category}">
                                         <th:block th:each="cat : ${categories}">
@@ -59,11 +59,48 @@
                                 </div>
 
                             </div>
-
-
                         </div>
                         <!-- /.row -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Thành phố</label>
 
+                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{province}">
+                                        <th:block th:each="pro : ${provinces}">
+                                            <option th:value="${pro.name}" th:text="${pro.name}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Quận Huyện</label>
+
+                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{category}">
+                                        <th:block th:each="cat : ${categories}">
+                                            <option th:value="${cat.categoryName}" th:text="${cat.categoryName}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Phường xã</label>
+
+                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{category}">
+                                        <th:block th:each="cat : ${categories}">
+                                            <option th:value="${cat.categoryName}" th:text="${cat.categoryName}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6">

@@ -18,7 +18,7 @@ public class CategoryServices implements ICategoryServices {
     }
 
     @Override
-    public Category findById(Integer id) {
+    public Category findById(Long id) {
         return null;
     }
 
@@ -28,7 +28,7 @@ public class CategoryServices implements ICategoryServices {
     }
 
     @Override
-    public Category remove(Integer id) {
+    public Category remove(Long id) {
         return null;
     }
 }
