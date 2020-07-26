@@ -1,9 +1,11 @@
 package com.dinhpu.m4casestudy.controller;
 
 import com.dinhpu.m4casestudy.dto.real_estate.RealEstateDTO;
+import com.dinhpu.m4casestudy.model.real_estate.District;
 import com.dinhpu.m4casestudy.model.real_estate.Province;
 import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
 import com.dinhpu.m4casestudy.services.real_estate.ICategoryServices;
+import com.dinhpu.m4casestudy.services.real_estate.IDistrictServices;
 import com.dinhpu.m4casestudy.services.real_estate.IProvinceServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/real-estate")
@@ -21,6 +25,9 @@ public class RealEstateController {
 
     @Autowired
     private IProvinceServices provinceServices;
+
+    @Autowired
+    private IDistrictServices districtServices;
 
     @GetMapping("/create")
     public String showRealEstateCreateForm(Model theModel){
@@ -43,9 +50,10 @@ public class RealEstateController {
 
 
     @GetMapping("/get-district")
-    public ResponseEntity<String> getDistrictOption(@RequestParam String province){
-        
-        return new ResponseEntity<>(province, HttpStatus.OK);
+    public ResponseEntity<List<District>> getDistrictOption(@RequestParam String province){
+        List<District> districts=districtServices.myAllDistrictQueryByProvinceName(province);
+
+        return new ResponseEntity<>(districts, HttpStatus.OK);
     }
 
 }
