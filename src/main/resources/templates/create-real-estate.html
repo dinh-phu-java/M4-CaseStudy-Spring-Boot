@@ -82,7 +82,6 @@
                                     <label>Quận Huyện</label>
 
                                     <select class="form-control select2bs4" id="district-option" style="width: 100%;" th:field="*{district}">
-
                                     </select>
                                 </div>
                             </div>
@@ -90,10 +89,7 @@
                                 <div class="form-group">
                                     <label>Phường xã</label>
 
-                                    <select class="form-control select2bs4" style="width: 100%;" th:field="*{ward}">
-                                        <th:block th:each="cat : ${categories}">
-                                            <option th:value="${cat.categoryName}" th:text="${cat.categoryName}"></option>
-                                        </th:block>
+                                    <select class="form-control select2bs4" id="ward-option" style="width: 100%;" th:field="*{ward}">
                                     </select>
                                 </div>
                             </div>
@@ -173,7 +169,6 @@
         $('#province-option').change(function(event){
             // $('#province-option').innerHTML
             let provinceName=$('#province-option').val();
-            // let json={id:2,name:provinceName,type:'test'};
             $.ajax({
                 headers:{
                     'Accept':'application/json',
@@ -192,8 +187,40 @@
                 }
             });
             event.preventDefault();
-
         }) ;
+
+
+        $('#district-option').change(function(event){
+            // $('#province-option').innerHTML
+            let districtName=$('#district-option').val();
+
+            $.ajax({
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                type:"GET",
+                data:"district="+districtName,
+                url:"/real-estate/get-ward",
+                success:function(ward){
+                    // let content;
+                    // for (let i=0;i<ward.length;i++){
+                    //     content+=`<option value="${ward[i].name}">${ward[i].name}</option>`;
+                    // }
+                    // document.getElementById('ward-option').innerHTML=content;
+                    let content;
+                    for (let i=0;i<ward.length;i++){
+                        content+=`<option value="${ward[i].name}">${ward[i].name}</option>`;
+                    }
+                    document.getElementById('ward-option').innerHTML=content;
+                }
+            });
+            event.preventDefault();
+        }) ;
+
+
+
+
     });
 </script>
 
