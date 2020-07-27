@@ -2,7 +2,9 @@ package com.dinhpu.m4casestudy.controller;
 
 import com.dinhpu.m4casestudy.dto.real_estate.RealEstateDTO;
 import com.dinhpu.m4casestudy.model.real_estate.*;
+import com.dinhpu.m4casestudy.model.user.User;
 import com.dinhpu.m4casestudy.services.real_estate.*;
+import com.dinhpu.m4casestudy.services.user.IUserServices;
 import com.dinhpu.m4casestudy.utils.RealEstateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -39,7 +42,7 @@ public class RealEstateController {
     private ILegalPaperServices legalPaperServices;
 
     @Autowired
-    private IInternalServices internalServices;
+    private IUserServices userServices;
 
     @Autowired
     private IRealEstateServices realEstateServices;
@@ -68,19 +71,27 @@ public class RealEstateController {
                                           Model theModel,
                                           @RequestParam(value = "internals" , required = false) String[] internals,
                                           @RequestParam(value="externals",required=false) String[] externals,
-                                          @RequestParam(value="arounds",required=false) String[] arounds){
+                                          @RequestParam(value="arounds",required=false) String[] arounds,
+                                          HttpSession session){
 
         InternalUtilities internalUtilities=new InternalUtilities();
         ExternalUtilities externalUtilities=new ExternalUtilities();
         AroundUtilities aroundUtilities=new AroundUtilities();
         RealEstateUtils.loopForSetInternalUtilites(internals,internalUtilities);
         RealEstateUtils.loopForSetExternalUtilites(externals,externalUtilities);
-        RealEstateUtils.loopForSetAroundUtilites(externals,aroundUtilities);
+        RealEstateUtils.loopForSetAroundUtilites(arounds,aroundUtilities);
 
         realEstateDTO.setInternalUtilities(internalUtilities);
         realEstateDTO.setExternalUtilities(externalUtilities);
         realEstateDTO.setAroundUtilities(aroundUtilities);
+
         RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO);
+
+        User loginUser=(User)session.getAttribute("loginUser");
+        User ownUser=userServices.findUserByEmail(loginUser.getEmail()) ;
+
+        realEstate.setUser(ownUser);
+
         realEstateServices.save(realEstate);
 //        theModel.addAttribute("realEstateDTO",realEstateDTO);
 //        return "create-real-estate";
