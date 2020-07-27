@@ -35,7 +35,11 @@
             <div class="card card-default" style="margin-top:15px;">
                 <div class="card-header">
                     <h3 class="card-title">Tạo bài đăng mới</h3>
-
+                    <div style="margin-bottom: 25px" class="text-danger" th:if="${message != null}">
+                        <ul>
+                            <li th:text="${message}" />
+                        </ul>
+                    </div>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>

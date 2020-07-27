@@ -78,7 +78,7 @@ public class RealEstateController {
         theModel.addAttribute("internalUtils",internalUtilities);
         theModel.addAttribute("externalUtils",externalUtilities);
         theModel.addAttribute("aroundUtils",aroundUtilities);
-
+        theModel.addAttribute("message",null);
         return "create-real-estate";
     }
 
@@ -158,6 +158,7 @@ public class RealEstateController {
         theModel.addAttribute("internalUtils",realEstateDTO.getInternalUtilities());
         theModel.addAttribute("externalUtils",realEstateDTO.getExternalUtilities());
         theModel.addAttribute("aroundUtils",realEstateDTO.getAroundUtilities());
+        theModel.addAttribute("message","Thêm thành công");
         return "create-real-estate";
 
     }
