@@ -222,6 +222,20 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Tiện ích bên trong: </label>
+                                    <input type="checkbox" name="internals" value="internet" th:checked="${internalUtils.internet}"> Internet
+                                    <input type="checkbox" name="internals" value="television" th:checked="${internalUtils.television}"> Television
+                                    <input type="checkbox" name="internals" value="toilet" th:checked="${internalUtils.toilet}"> Toilet
+                                    <input type="checkbox" name="internals" value="aircondition" th:checked="${internalUtils.airCondition}"> Air Condition
+                                    <input type="checkbox" name="internals" value="kitchen" th:checked="${internalUtils.kitchen}"> Kitchen
+
+                                </div>
+                            </div>
+                        </div>
+
                         <input type="submit" class="btn btn-outline-primary" value="Tạo bài mới" id="register"/>
 
                     </form>
@@ -311,76 +325,76 @@
 
 </script>
 <script>
-    $().ready(function() {
-        $("#create-estate-form").validate({
-            onfocusout: false,
-            onkeyup: false,
-            onclick: false,
-            rules: {
-                "totalprice": {
-                    required: true,
-                    number:true,
-                    maxlength: 8
-                },
-                "areaType":{
-                  required:true
-                },
-                "priceUnit": {
-                    required: true,
-                    number:true,
-                    maxlength: 15
-                },
-                "category":{
-                    required:true
-                },
-                "district":{
-                    required:true
-                },
-                "ward":{
-                    required:true
-                },
-                "address":{
-                    required:true
-                },
-                "title":{
-                    required:true
-                },
-                "description":{
-                    required:true
-                }
-            },
-            messages: {
-                "totalprice":{
-                    required:"Bắt buộc nhập tổng giá",
-                    number:"Không phải là số",
-                    maxlength:"Tối đa 8 ký tự"
-                },
-                "areaType":{
-                    required:"Bắt buộc nhập loại diện tích"
-                },
-                "priceUnit":{
-                    required:"Bắt buộc nhập đơn giá",
-                    number:"Không phải là số",
-                    maxlength:"Tối đa 15 ký tự"
-                },
-                "district":{
-                    required:"Bắt buộc nhập quận huyện"
-                },
-                "ward":{
-                    required:"Bắt buộc nhập phường xã"
-                },
-                "address":{
-                    required:"Bắt buộc nhập địa chị"
-                },
-                "title":{
-                    required:"Bắt buộc nhập tiêu đề"
-                },
-                "description":{
-                    required:"Bắt buộc nhập miêu tả"
-                }
-            }
-        });
-    });
+    // $().ready(function() {
+    //     $("#create-estate-form").validate({
+    //         onfocusout: false,
+    //         onkeyup: false,
+    //         onclick: false,
+    //         rules: {
+    //             "totalprice": {
+    //                 required: true,
+    //                 number:true,
+    //                 maxlength: 8
+    //             },
+    //             "areaType":{
+    //               required:true
+    //             },
+    //             "priceUnit": {
+    //                 required: true,
+    //                 number:true,
+    //                 maxlength: 15
+    //             },
+    //             "category":{
+    //                 required:true
+    //             },
+    //             "district":{
+    //                 required:true
+    //             },
+    //             "ward":{
+    //                 required:true
+    //             },
+    //             "address":{
+    //                 required:true
+    //             },
+    //             "title":{
+    //                 required:true
+    //             },
+    //             "description":{
+    //                 required:true
+    //             }
+    //         },
+    //         messages: {
+    //             "totalprice":{
+    //                 required:"Bắt buộc nhập tổng giá",
+    //                 number:"Không phải là số",
+    //                 maxlength:"Tối đa 8 ký tự"
+    //             },
+    //             "areaType":{
+    //                 required:"Bắt buộc nhập loại diện tích"
+    //             },
+    //             "priceUnit":{
+    //                 required:"Bắt buộc nhập đơn giá",
+    //                 number:"Không phải là số",
+    //                 maxlength:"Tối đa 15 ký tự"
+    //             },
+    //             "district":{
+    //                 required:"Bắt buộc nhập quận huyện"
+    //             },
+    //             "ward":{
+    //                 required:"Bắt buộc nhập phường xã"
+    //             },
+    //             "address":{
+    //                 required:"Bắt buộc nhập địa chị"
+    //             },
+    //             "title":{
+    //                 required:"Bắt buộc nhập tiêu đề"
+    //             },
+    //             "description":{
+    //                 required:"Bắt buộc nhập miêu tả"
+    //             }
+    //         }
+    //     });
+    // });
 </script>
 </body>
 </html>

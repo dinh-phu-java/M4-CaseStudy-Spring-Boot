@@ -1,11 +1,9 @@
 package com.dinhpu.m4casestudy.controller;
 
 import com.dinhpu.m4casestudy.dto.real_estate.RealEstateDTO;
-import com.dinhpu.m4casestudy.model.real_estate.District;
-import com.dinhpu.m4casestudy.model.real_estate.Province;
-import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
-import com.dinhpu.m4casestudy.model.real_estate.Ward;
+import com.dinhpu.m4casestudy.model.real_estate.*;
 import com.dinhpu.m4casestudy.services.real_estate.*;
+import com.dinhpu.m4casestudy.utils.RealEstateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,9 +38,13 @@ public class RealEstateController {
     @Autowired
     private ILegalPaperServices legalPaperServices;
 
+    @Autowired
+    private IInternalServices internalServices;
+
     @GetMapping("/create")
     public String showRealEstateCreateForm(Model theModel){
         RealEstateDTO realEstateDTO =new RealEstateDTO();
+        InternalUtilities internalUtilities=new InternalUtilities();
 
         theModel.addAttribute("provinces",provinceServices.findAll());
         theModel.addAttribute("categories",categoryServices.findAll());
@@ -50,11 +52,18 @@ public class RealEstateController {
         theModel.addAttribute("realEstateDTO",realEstateDTO);
         theModel.addAttribute("directions",directionServices.findAll());
         theModel.addAttribute("legals",legalPaperServices.findAll());
+        theModel.addAttribute("internalUtils",internalUtilities);
+
         return "create-real-estate";
     }
 
     @PostMapping("/create")
-    public String processCreateRealEstate(@ModelAttribute RealEstateDTO realEstateDTO,Model theModel){
+    public String processCreateRealEstate(@ModelAttribute RealEstateDTO realEstateDTO,Model theModel,@RequestParam(value = "internals" , required = false) String[] internals){
+        InternalUtilities internalUtilities=new InternalUtilities();
+        for (int i=0;i< internals.length;i++){
+            RealEstateUtils.setInternalUtilities(internals[i],internalUtilities);
+        }
+        realEstateDTO.setInternalUtilities(internalUtilities);
         theModel.addAttribute("realEstateDTO",realEstateDTO);
         return "create-real-estate";
     }
