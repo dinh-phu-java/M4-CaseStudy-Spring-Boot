@@ -101,7 +101,7 @@ public class RealEstateUtils {
         realEstate.setLegalPaper(realEstateDTO.getLegalPaper());
         realEstate.setPriceUnit(realEstateDTO.getPriceUnit());
         realEstate.setProvince(realEstateDTO.getProvince());
-        realEstate.setRealEstateImage(realEstateDTO.getRealEstateImage());
+//        realEstate.setRealEstateImage(realEstateDTO.getRealEstateImage());
         realEstate.setRealEstateType(realEstateDTO.getRealEstateType());
         realEstate.setTitle(realEstateDTO.getTitle());
         realEstate.setTotalArea(realEstateDTO.getTotalArea());

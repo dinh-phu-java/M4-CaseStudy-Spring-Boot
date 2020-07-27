@@ -107,8 +107,11 @@ public class RealEstateController {
         User loginUser=(User)session.getAttribute("loginUser");
         User ownUser=userServices.findUserByEmail(loginUser.getEmail()) ;
 
-        RealEstateImage realEstateImage=new RealEstateImage();
-        ArrayList<String> urlList=new ArrayList<>();
+        realEstate.setUser(ownUser);
+
+        RealEstate createRealEstate=  realEstateServices.save(realEstate);
+
+
         for (int i=0;i<files.length;i++){
 
             String fileName=files[i].getOriginalFilename();
@@ -131,19 +134,19 @@ public class RealEstateController {
 
                     String imageUrl=resourcePath+ownUser.getId()+"/"+"real_estate/"+fileName;
 
-                    urlList.add(imageUrl);
+                    RealEstateImage realEstateImage= new RealEstateImage(imageUrl,createRealEstate);
+
+                    createRealEstate.addRealEstateImage(realEstateImage);
 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
             }
         }
+        realEstateServices.save(createRealEstate);
 
-        realEstate.setUser(ownUser);
+        createRealEstate.getRealEstateImages().forEach(k-> System.out.println(k.getImage()));
 
-        realEstateServices.save(realEstate);
-//        theModel.addAttribute("realEstateDTO",realEstateDTO);
-//        return "create-real-estate";
         return "create-success";
     }
 

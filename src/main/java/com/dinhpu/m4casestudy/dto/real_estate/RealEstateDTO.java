@@ -76,7 +76,6 @@ public class RealEstateDTO {
 
     private User user;
 
-    @NotEmpty
     private RealEstateImage realEstateImage;
 
     public RealEstateDTO() {

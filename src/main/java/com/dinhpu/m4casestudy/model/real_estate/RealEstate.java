@@ -3,6 +3,8 @@ package com.dinhpu.m4casestudy.model.real_estate;
 import com.dinhpu.m4casestudy.model.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="real_estate")
@@ -87,14 +89,20 @@ public class RealEstate {
     @JoinColumn(name="user_id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="image_id")
-    private RealEstateImage realEstateImage;
+    @OneToMany(fetch=FetchType.LAZY,mappedBy = "realEstate",cascade ={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<RealEstateImage> realEstateImages;
+
+    public void addRealEstateImage(RealEstateImage realEstateImage){
+        if (realEstateImages==null){
+            realEstateImages=new ArrayList<>();
+        }
+        realEstateImages.add(realEstateImage);
+    }
 
     public RealEstate() {
     }
 
-    public RealEstate(String category, String province, String district, String ward, String address, String title, String description, String priceUnit, String totalprice, String totalArea, String areaType, String direction, String bedRoomQuantity, String bathRoomQuantity, String legalPaper, InternalUtilities internalUtilities, ExternalUtilities externalUtilities, AroundUtilities aroundUtilities, String realEstateType, User user, RealEstateImage realEstateImage) {
+    public RealEstate(String category, String province, String district, String ward, String address, String title, String description, String priceUnit, String totalprice, String totalArea, String areaType, String direction, String bedRoomQuantity, String bathRoomQuantity, String legalPaper, InternalUtilities internalUtilities, ExternalUtilities externalUtilities, AroundUtilities aroundUtilities, String realEstateType, User user) {
         this.category = category;
         this.province = province;
         this.district = district;
@@ -115,7 +123,6 @@ public class RealEstate {
         this.aroundUtilities = aroundUtilities;
         this.realEstateType = realEstateType;
         this.user = user;
-        this.realEstateImage = realEstateImage;
     }
 
     public Long getId() {
@@ -286,12 +293,12 @@ public class RealEstate {
         this.user = user;
     }
 
-    public RealEstateImage getRealEstateImage() {
-        return realEstateImage;
+    public List<RealEstateImage> getRealEstateImages() {
+        return realEstateImages;
     }
 
-    public void setRealEstateImage(RealEstateImage realEstateImage) {
-        this.realEstateImage = realEstateImage;
+    public void setRealEstateImages(List<RealEstateImage> realEstateImages) {
+        this.realEstateImages = realEstateImages;
     }
 
     @Override
@@ -316,9 +323,9 @@ public class RealEstate {
                 ", internalUtilities=" + internalUtilities +
                 ", externalUtilities=" + externalUtilities +
                 ", aroundUtilities=" + aroundUtilities +
-                ", realEstateType=" + realEstateType +
+                ", realEstateType='" + realEstateType + '\'' +
                 ", user=" + user +
-                ", realEstateImage=" + realEstateImage +
+                ", realEstateImages=" + realEstateImages +
                 '}';
     }
 }
