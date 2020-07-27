@@ -1,6 +1,7 @@
 package com.dinhpu.m4casestudy.utils;
 
 import com.dinhpu.m4casestudy.dto.real_estate.RealEstateDTO;
+import com.dinhpu.m4casestudy.model.real_estate.ExternalUtilities;
 import com.dinhpu.m4casestudy.model.real_estate.InternalUtilities;
 import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
 
@@ -22,6 +23,39 @@ public class RealEstateUtils {
             case "kitchen":
                 internalUtilities.setKitchen(true);
                 break;
+        }
+    }
+
+    public static void loopForSetInternalUtilites(String[] internals,InternalUtilities internalUtilities){
+        for (int i=0;i< internals.length;i++){
+            RealEstateUtils.setInternalUtilities(internals[i],internalUtilities);
+        }
+    }
+
+    public static void setExternalUtilities(String checkBoxValue, ExternalUtilities externalUtilities){
+        switch (checkBoxValue){
+            case "balcony":
+                externalUtilities.setBalcony(true);
+                break;
+            case "garden":
+                externalUtilities.setGarden(true);
+                break;
+            case "swimmingpool":
+                externalUtilities.setSwimmingPool(true);
+                break;
+            case "services":
+                externalUtilities.setServices(true);
+                break;
+            case "security":
+                externalUtilities.setSecurity(true);
+                break;
+        }
+    }
+
+
+    public static void loopForSetExternalUtilites(String[] external,ExternalUtilities externalUtilities){
+        for (int i=0;i< external.length;i++){
+            RealEstateUtils.setExternalUtilities(external[i],externalUtilities);
         }
     }
 

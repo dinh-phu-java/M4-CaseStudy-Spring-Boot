@@ -168,7 +168,7 @@
                         </div>
 <!--                        areatypes    -->
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Loại diện tích *</label>
                                     <select class="form-control select2bs4" style="width: 100%;" th:field="*{areaType}">
@@ -176,6 +176,12 @@
                                             <option th:value="${area.areaName}" th:text="${area.areaName}"></option>
                                         </th:block>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tổng diện tích(m2) *</label>
+                                    <input type="text" class="form-control" th:field="*{totalArea}" placeholder="/m2">
                                 </div>
                             </div>
                         </div>
@@ -235,6 +241,34 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Tiện ích bên ngoài: </label>
+                                    <input type="checkbox" name="externals" value="balcony" th:checked="${externalUtils.balcony}"> Balcony
+                                    <input type="checkbox" name="externals" value="garden" th:checked="${externalUtils.garden}"> Garden
+                                    <input type="checkbox" name="externals" value="swimmingpool" th:checked="${externalUtils.swimmingPool}"> Swimming Pool
+                                    <input type="checkbox" name="externals" value="services" th:checked="${externalUtils.services}"> Services
+                                    <input type="checkbox" name="externals" value="security" th:checked="${externalUtils.security}"> Security
+
+                                </div>
+                            </div>
+                        </div>
+
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Tiện ích xung quanh: </label>-->
+<!--                                    <input type="checkbox" name="arounds" value="internet" th:checked="${aroundUtils.internet}"> Internet-->
+<!--                                    <input type="checkbox" name="arounds" value="television" th:checked="${aroundUtils.television}"> Television-->
+<!--                                    <input type="checkbox" name="arounds" value="toilet" th:checked="${aroundUtils.toilet}"> Toilet-->
+<!--                                    <input type="checkbox" name="arounds" value="aircondition" th:checked="${aroundUtils.airCondition}"> Air Condition-->
+<!--                                    <input type="checkbox" name="arounds" value="kitchen" th:checked="${aroundUtils.kitchen}"> Kitchen-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
                         <input type="submit" class="btn btn-outline-primary" value="Tạo bài mới" id="register"/>
 

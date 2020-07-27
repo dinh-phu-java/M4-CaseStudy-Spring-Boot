@@ -48,7 +48,8 @@ public class RealEstateController {
     public String showRealEstateCreateForm(Model theModel){
         RealEstateDTO realEstateDTO =new RealEstateDTO();
         InternalUtilities internalUtilities=new InternalUtilities();
-
+        ExternalUtilities externalUtilities=new ExternalUtilities();
+        AroundUtilities aroundUtilities=new AroundUtilities();
         theModel.addAttribute("provinces",provinceServices.findAll());
         theModel.addAttribute("categories",categoryServices.findAll());
         theModel.addAttribute("areatypes",areaTypeServices.findAll());
@@ -56,22 +57,27 @@ public class RealEstateController {
         theModel.addAttribute("directions",directionServices.findAll());
         theModel.addAttribute("legals",legalPaperServices.findAll());
         theModel.addAttribute("internalUtils",internalUtilities);
+        theModel.addAttribute("externalUtils",externalUtilities);
+        theModel.addAttribute("aroundUtils",aroundUtilities);
 
         return "create-real-estate";
     }
 
     @PostMapping("/create")
-    public String processCreateRealEstate(@ModelAttribute RealEstateDTO realEstateDTO,Model theModel,@RequestParam(value = "internals" , required = false) String[] internals){
+    public String processCreateRealEstate(@ModelAttribute RealEstateDTO realEstateDTO,Model theModel,@RequestParam(value = "internals" , required = false) String[] internals,@RequestParam(value="externals",required=false) String[] externals){
         InternalUtilities internalUtilities=new InternalUtilities();
-        for (int i=0;i< internals.length;i++){
-            RealEstateUtils.setInternalUtilities(internals[i],internalUtilities);
-        }
-//        internalServices.save(internalUtilities);
+        ExternalUtilities externalUtilities=new ExternalUtilities();
+        RealEstateUtils.loopForSetInternalUtilites(internals,internalUtilities);
+        RealEstateUtils.loopForSetExternalUtilites(externals,externalUtilities);
+
         realEstateDTO.setInternalUtilities(internalUtilities);
+        realEstateDTO.setExternalUtilities(externalUtilities);
+
         RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO);
         realEstateServices.save(realEstate);
-        theModel.addAttribute("realEstateDTO",realEstateDTO);
-        return "create-real-estate";
+//        theModel.addAttribute("realEstateDTO",realEstateDTO);
+//        return "create-real-estate";
+        return "create-success";
     }
 
     @GetMapping("/get-district")

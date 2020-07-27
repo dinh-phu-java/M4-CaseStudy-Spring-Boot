@@ -16,7 +16,6 @@ public class ExternalUtilities {
     @Column(name="garden")
     private boolean garden;
 
-
     @Column(name="balcony")
     private boolean balcony;
 
