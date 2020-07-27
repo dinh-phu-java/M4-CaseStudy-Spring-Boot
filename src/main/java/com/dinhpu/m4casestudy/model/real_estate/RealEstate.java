@@ -80,7 +80,7 @@ public class RealEstate {
     @JoinColumn(name="around_utilities_id")
     private AroundUtilities aroundUtilities;
 
-    @Column(name="real_estate_type_id")
+    @Column(name="real_estate_type")
     private String realEstateType;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})

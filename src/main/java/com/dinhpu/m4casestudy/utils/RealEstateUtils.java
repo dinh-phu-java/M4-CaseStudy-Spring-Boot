@@ -1,6 +1,7 @@
 package com.dinhpu.m4casestudy.utils;
 
 import com.dinhpu.m4casestudy.dto.real_estate.RealEstateDTO;
+import com.dinhpu.m4casestudy.model.real_estate.AroundUtilities;
 import com.dinhpu.m4casestudy.model.real_estate.ExternalUtilities;
 import com.dinhpu.m4casestudy.model.real_estate.InternalUtilities;
 import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
@@ -56,6 +57,31 @@ public class RealEstateUtils {
     public static void loopForSetExternalUtilites(String[] external,ExternalUtilities externalUtilities){
         for (int i=0;i< external.length;i++){
             RealEstateUtils.setExternalUtilities(external[i],externalUtilities);
+        }
+    }
+
+    public static void setAroundUtilities(String checkBoxValue, AroundUtilities aroundUtilities){
+        switch (checkBoxValue){
+            case "hospital":
+                aroundUtilities.setHospital(true);
+                break;
+            case "market":
+                aroundUtilities.setMarket(true);
+                break;
+            case "police":
+                aroundUtilities.setPolice(true);
+                break;
+            case "school":
+                aroundUtilities.setSchool(true);
+                break;
+
+        }
+    }
+
+
+    public static void loopForSetAroundUtilites(String[] arounds,AroundUtilities aroundUtilities){
+        for (int i=0;i< arounds.length;i++){
+            RealEstateUtils.setAroundUtilities(arounds[i],aroundUtilities);
         }
     }
 

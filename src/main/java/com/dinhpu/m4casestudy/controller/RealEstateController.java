@@ -64,15 +64,22 @@ public class RealEstateController {
     }
 
     @PostMapping("/create")
-    public String processCreateRealEstate(@ModelAttribute RealEstateDTO realEstateDTO,Model theModel,@RequestParam(value = "internals" , required = false) String[] internals,@RequestParam(value="externals",required=false) String[] externals){
+    public String processCreateRealEstate(@ModelAttribute RealEstateDTO realEstateDTO,
+                                          Model theModel,
+                                          @RequestParam(value = "internals" , required = false) String[] internals,
+                                          @RequestParam(value="externals",required=false) String[] externals,
+                                          @RequestParam(value="arounds",required=false) String[] arounds){
+
         InternalUtilities internalUtilities=new InternalUtilities();
         ExternalUtilities externalUtilities=new ExternalUtilities();
+        AroundUtilities aroundUtilities=new AroundUtilities();
         RealEstateUtils.loopForSetInternalUtilites(internals,internalUtilities);
         RealEstateUtils.loopForSetExternalUtilites(externals,externalUtilities);
+        RealEstateUtils.loopForSetAroundUtilites(externals,aroundUtilities);
 
         realEstateDTO.setInternalUtilities(internalUtilities);
         realEstateDTO.setExternalUtilities(externalUtilities);
-
+        realEstateDTO.setAroundUtilities(aroundUtilities);
         RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO);
         realEstateServices.save(realEstate);
 //        theModel.addAttribute("realEstateDTO",realEstateDTO);
