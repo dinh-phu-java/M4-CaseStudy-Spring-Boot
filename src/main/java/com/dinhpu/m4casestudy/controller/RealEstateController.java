@@ -7,18 +7,33 @@ import com.dinhpu.m4casestudy.services.real_estate.*;
 import com.dinhpu.m4casestudy.services.user.IUserServices;
 import com.dinhpu.m4casestudy.utils.RealEstateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/real-estate")
 public class RealEstateController {
+
+    @Value("${upload.path}")
+    private String uploadPath;
+
+    @Value("${my.resource.path}")
+    private String resourcePath;
 
     @Autowired
     private ICategoryServices categoryServices;
@@ -72,7 +87,8 @@ public class RealEstateController {
                                           @RequestParam(value = "internals" , required = false) String[] internals,
                                           @RequestParam(value="externals",required=false) String[] externals,
                                           @RequestParam(value="arounds",required=false) String[] arounds,
-                                          HttpSession session){
+                                          HttpSession session,
+                                          @RequestParam MultipartFile[] files){
 
         InternalUtilities internalUtilities=new InternalUtilities();
         ExternalUtilities externalUtilities=new ExternalUtilities();
@@ -87,8 +103,41 @@ public class RealEstateController {
 
         RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO);
 
+
         User loginUser=(User)session.getAttribute("loginUser");
         User ownUser=userServices.findUserByEmail(loginUser.getEmail()) ;
+
+        RealEstateImage realEstateImage=new RealEstateImage();
+        ArrayList<String> urlList=new ArrayList<>();
+        for (int i=0;i<files.length;i++){
+
+            String fileName=files[i].getOriginalFilename();
+            if (!fileName.equals("")){
+                String uploadDir=uploadPath + ownUser.getId()+"/real_estate/";
+
+                Path fileUploadPath= Paths.get(uploadDir);
+                boolean fileExist= Files.exists(fileUploadPath);
+                try {
+                    if (!fileExist){
+
+                            Files.createDirectories(fileUploadPath);
+
+                    }
+                    InputStream inputStream=files[i].getInputStream();
+
+                    Path imagePath=fileUploadPath.resolve(fileName);
+
+                    Files.copy(inputStream,imagePath, StandardCopyOption.REPLACE_EXISTING);
+
+                    String imageUrl=resourcePath+ownUser.getId()+"/"+"real_estate/"+fileName;
+
+                    urlList.add(imageUrl);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+            }
+        }
 
         realEstate.setUser(ownUser);
 
