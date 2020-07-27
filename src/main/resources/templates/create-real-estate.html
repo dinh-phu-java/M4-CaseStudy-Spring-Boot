@@ -143,7 +143,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Đơn vị</label>
-                                    <select class="form-control" name="donvi" id="donvi">
+                                    <select class="form-control" name="don-vi" id="donvi">
                                         <option value="tỷ">Tỷ</option>
                                         <option value="triệu">Triệu</option>
                                     </select>
@@ -161,7 +161,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Đơn giá</label>
-                                    <input class="form-control" type="text" value="VND/m2" name="dongia" id="dongia" readonly/>
+                                    <input class="form-control" type="text" value="triệu VND/m2" name="dongia" id="dongia" readonly/>
 
                                 </div>
                             </div>
@@ -232,11 +232,15 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Tiện ích bên trong: </label>
-                                    <input type="checkbox" name="internals" value="internet" th:checked="${internalUtils.internet}"> Internet
-                                    <input type="checkbox" name="internals" value="television" th:checked="${internalUtils.television}"> Television
-                                    <input type="checkbox" name="internals" value="toilet" th:checked="${internalUtils.toilet}"> Toilet
-                                    <input type="checkbox" name="internals" value="aircondition" th:checked="${internalUtils.airCondition}"> Air Condition
-                                    <input type="checkbox" name="internals" value="kitchen" th:checked="${internalUtils.kitchen}"> Kitchen
+                                    <input type="checkbox" id="internet" name="internals" value="internet" th:checked="${internalUtils.internet}"> <label for="internet">Internet</label>
+                                    <input type="checkbox" id="television" name="internals" value="television" th:checked="${internalUtils.television}">
+                                    <label for="television">Television</label>
+                                    <input type="checkbox" id="toilet" name="internals" value="toilet" th:checked="${internalUtils.toilet}">
+                                    <label for="toilet">Toilet</label>
+                                    <input type="checkbox" id="air-condition" name="internals" value="aircondition" th:checked="${internalUtils.airCondition}">
+                                    <label for="air-condition">Air Condition</label>
+                                    <input type="checkbox" id="kitchen" name="internals" value="kitchen" th:checked="${internalUtils.kitchen}">
+                                    <label for="kitchen">Kitchen</label>
 
                                 </div>
                             </div>
@@ -246,11 +250,16 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Tiện ích bên ngoài: </label>
-                                    <input type="checkbox" name="externals" value="balcony" th:checked="${externalUtils.balcony}"> Balcony
-                                    <input type="checkbox" name="externals" value="garden" th:checked="${externalUtils.garden}"> Garden
-                                    <input type="checkbox" name="externals" value="swimmingpool" th:checked="${externalUtils.swimmingPool}"> Swimming Pool
-                                    <input type="checkbox" name="externals" value="services" th:checked="${externalUtils.services}"> Services
-                                    <input type="checkbox" name="externals" value="security" th:checked="${externalUtils.security}"> Security
+                                    <input type="checkbox" id="balcony" name="externals" value="balcony" th:checked="${externalUtils.balcony}">
+                                    <label for="balcony">Balcony</label>
+                                    <input type="checkbox" id="garden" name="externals" value="garden" th:checked="${externalUtils.garden}">
+                                    <label for="garden">Garden</label>
+                                    <input type="checkbox" id="swimming" name="externals" value="swimmingpool" th:checked="${externalUtils.swimmingPool}">
+                                    <label for="swimming">Swimming Pool</label>
+                                    <input type="checkbox" name="externals" id="services" value="services" th:checked="${externalUtils.services}">
+                                    <label for="services">Services</label>
+                                    <input type="checkbox" name="externals" id="security" value="security" th:checked="${externalUtils.security}">
+                                    <label for="security">Security</label>
 
                                 </div>
                             </div>
@@ -260,10 +269,14 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Tiện ích xung quanh: </label>
-                                    <input type="checkbox" name="arounds" value="hospital" th:checked="${aroundUtils.hospital}"> Hospital
-                                    <input type="checkbox" name="arounds" value="market" th:checked="${aroundUtils.market}"> Market
-                                    <input type="checkbox" name="arounds" value="police" th:checked="${aroundUtils.police}"> Police
-                                    <input type="checkbox" name="arounds" value="school" th:checked="${aroundUtils.school}"> School
+                                    <input type="checkbox" name="arounds" value="hospital" id="hospital" th:checked="${aroundUtils.hospital}">
+                                    <label for="hospital">Hospital</label>
+                                    <input type="checkbox" name="arounds" id="market" value="market" th:checked="${aroundUtils.market}">
+                                    <label for="market">Market</label>
+                                    <input type="checkbox" name="arounds" value="police" id="police" th:checked="${aroundUtils.police}">
+                                    <label for="police">Police</label>
+                                    <input type="checkbox" name="arounds" value="school" th:checked="${aroundUtils.school}" id="school" >
+                                    <label for="school">School</label>
 
                                 </div>
                             </div>

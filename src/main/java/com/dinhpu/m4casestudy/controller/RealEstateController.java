@@ -65,6 +65,7 @@ public class RealEstateController {
     @GetMapping("/create")
     public String showRealEstateCreateForm(Model theModel){
         RealEstateDTO realEstateDTO =new RealEstateDTO();
+        realEstateDTO.setRealEstateType("Bán");
         InternalUtilities internalUtilities=new InternalUtilities();
         ExternalUtilities externalUtilities=new ExternalUtilities();
         AroundUtilities aroundUtilities=new AroundUtilities();
@@ -88,7 +89,8 @@ public class RealEstateController {
                                           @RequestParam(value="externals",required=false) String[] externals,
                                           @RequestParam(value="arounds",required=false) String[] arounds,
                                           HttpSession session,
-                                          @RequestParam MultipartFile[] files){
+                                          @RequestParam MultipartFile[] files,
+                                          @RequestParam("don-vi") String donVi){
 
         InternalUtilities internalUtilities=new InternalUtilities();
         ExternalUtilities externalUtilities=new ExternalUtilities();
@@ -101,7 +103,7 @@ public class RealEstateController {
         realEstateDTO.setExternalUtilities(externalUtilities);
         realEstateDTO.setAroundUtilities(aroundUtilities);
 
-        RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO);
+        RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO,donVi);
 
 
         User loginUser=(User)session.getAttribute("loginUser");
@@ -109,7 +111,7 @@ public class RealEstateController {
 
         realEstate.setUser(ownUser);
 
-        RealEstate createRealEstate=  realEstateServices.save(realEstate);
+        RealEstate createRealEstate = realEstateServices.save(realEstate);
 
 
         for (int i=0;i<files.length;i++){
@@ -145,9 +147,19 @@ public class RealEstateController {
         }
         realEstateServices.save(createRealEstate);
 
-        createRealEstate.getRealEstateImages().forEach(k-> System.out.println(k.getImage()));
+        realEstateDTO=RealEstateUtils.realEstateToRealEstateDTO(createRealEstate);
 
-        return "create-success";
+        theModel.addAttribute("provinces",provinceServices.findAll());
+        theModel.addAttribute("categories",categoryServices.findAll());
+        theModel.addAttribute("areatypes",areaTypeServices.findAll());
+        theModel.addAttribute("realEstateDTO",realEstateDTO);
+        theModel.addAttribute("directions",directionServices.findAll());
+        theModel.addAttribute("legals",legalPaperServices.findAll());
+        theModel.addAttribute("internalUtils",realEstateDTO.getInternalUtilities());
+        theModel.addAttribute("externalUtils",realEstateDTO.getExternalUtilities());
+        theModel.addAttribute("aroundUtils",realEstateDTO.getAroundUtilities());
+        return "create-real-estate";
+
     }
 
     @GetMapping("/get-district")

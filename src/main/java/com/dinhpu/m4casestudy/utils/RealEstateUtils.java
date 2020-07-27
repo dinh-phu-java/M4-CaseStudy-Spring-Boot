@@ -85,7 +85,7 @@ public class RealEstateUtils {
         }
     }
 
-    public static RealEstate realEstateDTOToRealEstate(RealEstateDTO realEstateDTO) {
+    public static RealEstate realEstateDTOToRealEstate(RealEstateDTO realEstateDTO, String donVi) {
         RealEstate realEstate=new RealEstate();
         realEstate.setAddress(realEstateDTO.getAddress());
         realEstate.setAreaType(realEstateDTO.getAreaType());
@@ -99,15 +99,42 @@ public class RealEstateUtils {
         realEstate.setExternalUtilities(realEstateDTO.getExternalUtilities());
         realEstate.setInternalUtilities(realEstateDTO.getInternalUtilities());
         realEstate.setLegalPaper(realEstateDTO.getLegalPaper());
-        realEstate.setPriceUnit(realEstateDTO.getPriceUnit());
+        realEstate.setPriceUnit(realEstateDTO.getPriceUnit()+" triệu VND/m2");
         realEstate.setProvince(realEstateDTO.getProvince());
 //        realEstate.setRealEstateImage(realEstateDTO.getRealEstateImage());
         realEstate.setRealEstateType(realEstateDTO.getRealEstateType());
         realEstate.setTitle(realEstateDTO.getTitle());
         realEstate.setTotalArea(realEstateDTO.getTotalArea());
-        realEstate.setTotalprice(realEstateDTO.getTotalprice());
+        realEstate.setTotalprice(realEstateDTO.getTotalprice()+" "+donVi);
         realEstate.setUser(realEstateDTO.getUser());
         realEstate.setWard(realEstateDTO.getWard());
         return realEstate;
+    }
+
+
+    public static RealEstateDTO realEstateToRealEstateDTO(RealEstate realEstate) {
+        RealEstateDTO realEstateDTO=new RealEstateDTO();
+        realEstateDTO.setAddress(realEstate.getAddress());
+        realEstateDTO.setAreaType(realEstate.getAreaType());
+        realEstateDTO.setBathRoomQuantity(realEstate.getBathRoomQuantity());
+        realEstateDTO.setBedRoomQuantity(realEstate.getBathRoomQuantity());
+        realEstateDTO.setCategory(realEstate.getCategory());
+        realEstateDTO.setDescription(realEstate.getDescription());
+        realEstateDTO.setDirection(realEstate.getDirection());
+        realEstateDTO.setDistrict(realEstate.getDistrict());
+        realEstateDTO.setAroundUtilities(realEstate.getAroundUtilities());
+        realEstateDTO.setExternalUtilities(realEstate.getExternalUtilities());
+        realEstateDTO.setInternalUtilities(realEstate.getInternalUtilities());
+        realEstateDTO.setLegalPaper(realEstate.getLegalPaper());
+        realEstateDTO.setPriceUnit(realEstate.getPriceUnit());
+        realEstateDTO.setProvince(realEstate.getProvince());
+
+        realEstateDTO.setRealEstateType(realEstate.getRealEstateType());
+        realEstateDTO.setTitle(realEstate.getTitle());
+        realEstateDTO.setTotalArea(realEstate.getTotalArea());
+        realEstateDTO.setTotalprice(realEstate.getTotalprice());
+        realEstateDTO.setUser(realEstate.getUser());
+        realEstateDTO.setWard(realEstate.getWard());
+        return realEstateDTO;
     }
 }
