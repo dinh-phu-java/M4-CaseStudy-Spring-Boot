@@ -16,13 +16,11 @@ public class RealEstateServices implements IRealEstateServices{
     private RealEstateDAO realEstateDAO;
 
     @Override
-    @Transactional
     public Page<RealEstate> findAll(Pageable pageable) {
         return realEstateDAO.findAll(pageable);
     }
 
     @Override
-    @Transactional
     public RealEstate findById(Long id) {
         Optional<RealEstate> optional=realEstateDAO.findById(id);
         RealEstate realEstate=null;
@@ -33,13 +31,11 @@ public class RealEstateServices implements IRealEstateServices{
     }
 
     @Override
-    @Transactional
     public RealEstate save(RealEstate model) {
         return realEstateDAO.save(model);
     }
 
     @Override
-    @Transactional
     public RealEstate remove(Long id) {
         RealEstate realEstate=findById(id);
 

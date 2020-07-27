@@ -3,7 +3,6 @@ package com.dinhpu.m4casestudy.dto.real_estate;
 import com.dinhpu.m4casestudy.model.real_estate.*;
 import com.dinhpu.m4casestudy.model.user.User;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -72,7 +71,7 @@ public class RealEstateDTO {
     private AroundUtilities aroundUtilities;
 
     @NotEmpty
-    private RealEstateType realEstateType;
+    private String realEstateType;
 
 
     private User user;
@@ -83,7 +82,7 @@ public class RealEstateDTO {
     public RealEstateDTO() {
     }
 
-    public RealEstateDTO(@NotEmpty String category, @NotEmpty String province, @NotEmpty String district, @NotEmpty String ward, @NotBlank String address, @NotBlank String title, @NotBlank String description, @NotBlank String priceUnit, @NotNull String totalprice, @NotBlank String totalArea, @NotEmpty String areaType, @NotEmpty String direction, @NotBlank String bedRoomQuantity, @NotBlank String bathRoomQuantity, @NotEmpty String legalPaper, @NotEmpty InternalUtilities internalUtilities, @NotEmpty ExternalUtilities externalUtilities, @NotEmpty AroundUtilities aroundUtilities, @NotEmpty RealEstateType realEstateType, User user, @NotEmpty RealEstateImage realEstateImage) {
+    public RealEstateDTO(@NotEmpty String category, @NotEmpty String province, @NotEmpty String district, @NotEmpty String ward, @NotBlank String address, @NotBlank String title, @NotBlank String description, @NotBlank String priceUnit, @NotNull String totalprice, @NotBlank String totalArea, @NotEmpty String areaType, @NotEmpty String direction, @NotBlank String bedRoomQuantity, @NotBlank String bathRoomQuantity, @NotEmpty String legalPaper, @NotEmpty InternalUtilities internalUtilities, @NotEmpty ExternalUtilities externalUtilities, @NotEmpty AroundUtilities aroundUtilities, String realEstateType, User user, @NotEmpty RealEstateImage realEstateImage) {
         this.category = category;
         this.province = province;
         this.district = district;
@@ -259,11 +258,11 @@ public class RealEstateDTO {
         this.aroundUtilities = aroundUtilities;
     }
 
-    public RealEstateType getRealEstateType() {
+    public String getRealEstateType() {
         return realEstateType;
     }
 
-    public void setRealEstateType(RealEstateType realEstateType) {
+    public void setRealEstateType(String realEstateType) {
         this.realEstateType = realEstateType;
     }
 

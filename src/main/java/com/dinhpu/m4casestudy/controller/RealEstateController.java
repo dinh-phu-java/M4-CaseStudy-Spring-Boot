@@ -41,6 +41,9 @@ public class RealEstateController {
     @Autowired
     private IInternalServices internalServices;
 
+    @Autowired
+    private IRealEstateServices realEstateServices;
+
     @GetMapping("/create")
     public String showRealEstateCreateForm(Model theModel){
         RealEstateDTO realEstateDTO =new RealEstateDTO();
@@ -63,7 +66,10 @@ public class RealEstateController {
         for (int i=0;i< internals.length;i++){
             RealEstateUtils.setInternalUtilities(internals[i],internalUtilities);
         }
+//        internalServices.save(internalUtilities);
         realEstateDTO.setInternalUtilities(internalUtilities);
+        RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO);
+        realEstateServices.save(realEstate);
         theModel.addAttribute("realEstateDTO",realEstateDTO);
         return "create-real-estate";
     }
