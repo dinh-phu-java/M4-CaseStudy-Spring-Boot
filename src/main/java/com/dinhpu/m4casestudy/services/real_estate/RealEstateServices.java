@@ -4,10 +4,13 @@ import com.dinhpu.m4casestudy.dao.real_estate.RealEstateDAO;
 import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,7 +19,8 @@ public class RealEstateServices implements IRealEstateServices{
     private RealEstateDAO realEstateDAO;
 
     @Override
-    public Page<RealEstate> findAll(Pageable pageable) {
+    public Page<RealEstate> findAll(int pageNo,int pageSize,Optional<String> sortBy) {
+        Pageable pageable= PageRequest.of(pageNo-1,pageSize, Sort.Direction.DESC,sortBy.orElse("id"));
         return realEstateDAO.findAll(pageable);
     }
 
@@ -45,4 +49,11 @@ public class RealEstateServices implements IRealEstateServices{
         //else nen throw ra loi
         return realEstate;
     }
+
+    @Override
+    public List<RealEstate> findAll() {
+        return realEstateDAO.findAll();
+    }
+
+
 }

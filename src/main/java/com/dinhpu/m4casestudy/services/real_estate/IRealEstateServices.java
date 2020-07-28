@@ -5,9 +5,13 @@ import com.dinhpu.m4casestudy.services.IServices;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface IRealEstateServices {
-    public Page<RealEstate> findAll(Pageable pageable);
+    public Page<RealEstate> findAll(int pageNo, int pageSize, Optional<String> sortBy);
     public RealEstate findById(Long id);
     public RealEstate save(RealEstate model);
     public RealEstate remove(Long id);
+    public List<RealEstate> findAll();
 }

@@ -8,12 +8,17 @@ import com.dinhpu.m4casestudy.services.user.IUserServices;
 import com.dinhpu.m4casestudy.utils.RealEstateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -22,8 +27,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/real-estate")
@@ -107,7 +114,7 @@ public class RealEstateController {
 
 
         User loginUser=(User)session.getAttribute("loginUser");
-        User ownUser=userServices.findUserByEmail(loginUser.getEmail()) ;
+        User ownUser=userServices.findUserByEmail(loginUser.getEmail());
 
         realEstate.setUser(ownUser);
 
@@ -176,7 +183,21 @@ public class RealEstateController {
         return new ResponseEntity<>(wards,HttpStatus.OK);
     }
 
-    @GetMapping("/manage-post")
-    
+    @GetMapping("/manage-post/{pageNo}")
+//    @RequestParam Optional<Integer> page,@RequestParam Optional<String> sortBy
+    public String showAllUserPost(@PathVariable("pageNo") int pageNo,Model theModel){
+        int pageSize=2;
+        Optional<String> sortBy= Optional.of("id");
+
+
+        Page<RealEstate> page=realEstateServices.findAll(pageNo,pageSize,sortBy);
+        List<RealEstate> realEstates=page.getContent();
+        theModel.addAttribute("currentPage",pageNo);
+        theModel.addAttribute("totalPages",page.getTotalPages());
+        theModel.addAttribute("totalItems",page.getTotalElements());
+        theModel.addAttribute("listRealEstate",realEstates);
+
+        return "user-all-post";
+    }
 
 }

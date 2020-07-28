@@ -7,7 +7,7 @@ import com.dinhpu.m4casestudy.model.user.User;
 public class UserUtils {
     public static CrmUpdateUser userToCrmUpdateUser(User theUser){
         CrmUpdateUser crmUser=new CrmUpdateUser();
-        System.out.println("user utils: user email: "+theUser.getEmail());
+
         crmUser.setId(theUser.getId());
         crmUser.setUserName(theUser.getUserName());
 
@@ -16,8 +16,7 @@ public class UserUtils {
         crmUser.setAddress(theUser.getAddress());
         crmUser.setMoneyAmount(theUser.getMoneyAmount());
         crmUser.setEmail(theUser.getEmail());
-        System.out.println("user utils user email: "+crmUser.getEmail());
-        System.out.println("user utils is : "+crmUser);
+
         return crmUser;
     }
 

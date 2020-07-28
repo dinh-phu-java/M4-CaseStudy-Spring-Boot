@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/head.html :: admin-head(~{ :: .admin-title })">
+
+    <title class="admin-title">User Profile</title>
+    <!-- Tell the browser to be responsive to screen width -->
+
+</head>
+<body class="hold-transition sidebar-mini">
+
+<div class="wrapper">
+    <!-- Navbar -->
+
+    <nav th:replace="fragments/admin/navbar-right.html :: navbar-right">
+    </nav>
+
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+
+    <aside th:replace="fragments/admin/menu-bar.html :: menu-bar">
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+
+        <!--        <section th:replace="fragments/admin/content-header.html :: content-header(~{:: .pageTitle},~{:: .my-content})">-->
+        <!--            <li class="pageTitle"><a href="#">Home</a></li>-->
+        <!--            <span class="my-content" th:text="'Profile: '+${session.loginUser.fullName}"></span>-->
+        <!--        </section>-->
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="card card-default" style="margin-top:15px;">
+                    <div class="card-header">
+                        <h3 class="card-title">Quản lý bài đăng</h3>
+
+                        <div class="card-tools">
+                            <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                                       aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Loại bất động sản</th>
+                                <th scope="col">Thành phố</th>
+                                <th scope="col">Tiêu đề</th>
+                                <th scope="col">Tổng giá</th>
+                                <th scope="col">Loại hình</th>
+                                <th scope="col" colspan="2" class="text-center">Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                                <th:block th:each="row : ${listRealEstate}">
+                                    <tr>
+                                        <td th:text="${row.category}"></td>
+                                        <td th:text="${row.province}"></td>
+                                        <td th:text="${row.title}"></td>
+                                        <td th:text="${row.totalprice}"></td>
+                                        <td th:text="${row.areaType}"></td>
+                                        <td><a th:href="@{__${row.id}__}">Chi tiết</a></td>
+                                        <td><a th:href="@{__${row.id}__}">Xóa</a></td>
+                                    </tr>
+                                </th:block>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <!-- /.card-body -->
+                    <nav aria-label="Page navigation example" class="card-footer">
+                        
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item">
+                                <a class="page-link" href="#" tabindex="-1">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Last</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+                <!-- /.card -->
+            </div>
+        </section>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer" th:replace="fragments/admin/footer.html :: footer">
+
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside th:replace="fragments/admin/footer.html :: control-sidebar">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<div id="foot-script" th:replace="fragments/admin/foot-script.html :: foot-script">
+</div>
+
+</body>
+</html>
