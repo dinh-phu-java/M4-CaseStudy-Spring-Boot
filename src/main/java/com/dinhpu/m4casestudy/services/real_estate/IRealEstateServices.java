@@ -14,4 +14,5 @@ public interface IRealEstateServices {
     public RealEstate save(RealEstate model);
     public RealEstate remove(Long id);
     public List<RealEstate> findAll();
+    Page<RealEstate> findAllRealEstateByUserId(int id,Pageable pageable);
 }

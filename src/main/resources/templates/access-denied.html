@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Access Denied</title>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/home/head.html :: my-head(~{ :: .my-own-title})">
+
+    <title class="my-own-title">Home Page Title</title>
+
 </head>
 <body>
-    You dont have permission to access this page
+<div class="page home-page">
+    <!--*********************************************************************************************************-->
+    <!--************ HERO ***************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <header class="hero has-dark-background">
+        <div class="hero-wrapper">
+
+            <!--============ Secondary Navigation ===============================================================-->
+            <div class="secondary-navigation" th:replace="fragments/home/secondary-navigation.html :: secondary-navigation">
+            </div>
+            <!--============ End Secondary Navigation ===========================================================-->
+
+            <!--============ Main Navigation ====================================================================-->
+            <div class="main-navigation" th:replace="fragments/home/main-navigation.html :: main-navigation">
+            </div>
+            <!--============ End Main Navigation ================================================================-->
+
+            <!--============ Page Title =========================================================================-->
+            <div class="page-title" th:replace="fragments/home/page-title.html :: page-title">
+            </div>
+            <!--============ End Page Title =====================================================================-->
+
+            <!--============ Hero Form ==========================================================================-->
+            <form class="hero-form form" th:replace="fragments/home/hero-form.html :: hero-form">
+            </form>
+            <!--============ End Hero Form ======================================================================-->
+            <div class="background" th:replace="fragments/home/header-background.html :: header-background">
+            </div>
+            <!--end background-->
+        </div>
+        <!--end hero-wrapper-->
+    </header>
+    <!--end hero-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ CONTENT ************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <section class="content">
+
+        You dont have permission to access this page
+        <a th:href="@{/}">Go Back home</a>
+
+    </section>
+    <!--end content-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <footer class="footer" th:replace="fragments/home/footer.html :: footer">
+    </footer>
+    <!--end footer-->
+</div>
+<!--end page-->
+
+<div id="foot-script" th:replace="fragments/home/foot-script.html :: foot-script">
+</div>
+
+
+
 </body>
 </html>

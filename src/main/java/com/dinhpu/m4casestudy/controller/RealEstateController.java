@@ -185,13 +185,19 @@ public class RealEstateController {
 
     @GetMapping("/manage-post/{pageNo}")
 //    @RequestParam Optional<Integer> page,@RequestParam Optional<String> sortBy
-    public String showAllUserPost(@PathVariable("pageNo") int pageNo,Model theModel){
+    public String showAllUserPost(@PathVariable("pageNo") int pageNo,Model theModel,HttpSession session){
         int pageSize=2;
         Optional<String> sortBy= Optional.of("id");
+        Pageable pageable= PageRequest.of(pageNo-1,pageSize,Sort.Direction.DESC,sortBy.orElse("id"));
 
+        User loginUSer= (User)session.getAttribute("loginUser");
+        int loginId = loginUSer.getId().intValue();
 
-        Page<RealEstate> page=realEstateServices.findAll(pageNo,pageSize,sortBy);
+        Page<RealEstate> page=realEstateServices.findAllRealEstateByUserId(loginId,pageable);
         List<RealEstate> realEstates=page.getContent();
+
+//        Page<RealEstate> page=realEstateServices.findAll(pageNo,pageSize,sortBy);
+//        List<RealEstate> realEstates=page.getContent();
         theModel.addAttribute("currentPage",pageNo);
         theModel.addAttribute("totalPages",page.getTotalPages());
         theModel.addAttribute("totalItems",page.getTotalElements());
@@ -199,5 +205,14 @@ public class RealEstateController {
 
         return "user-all-post";
     }
+
+
+    @GetMapping("/detail/{id}")
+    public ModelAndView showDetail(){
+
+
+        return null;
+    }
+
 
 }

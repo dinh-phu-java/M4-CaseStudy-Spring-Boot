@@ -55,5 +55,10 @@ public class RealEstateServices implements IRealEstateServices{
         return realEstateDAO.findAll();
     }
 
+    @Override
+    public Page<RealEstate> findAllRealEstateByUserId(int id, Pageable pageable) {
+        return realEstateDAO.findAllRealEstateByUserId(id,pageable);
+    }
+
 
 }

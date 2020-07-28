@@ -12,6 +12,8 @@ import java.security.Principal;
 @Controller
 public class LoginController {
 
+
+
 	@GetMapping("/loginPage")
 	public String showMyLoginPage() {
 		return "login-page";
