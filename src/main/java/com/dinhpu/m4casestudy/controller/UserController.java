@@ -61,7 +61,7 @@ public class UserController {
 
         theModel.addAttribute("crmUser", theCrmUSer);
 
-        return "user-profile";
+        return "new-profile-page";
     }
 
     @PostMapping(value = "/updateUser", consumes = {"multipart/form-data"},

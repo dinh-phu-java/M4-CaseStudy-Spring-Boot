@@ -46,8 +46,8 @@
 
                             <!-- form start -->
                             <form role="form" th:object="${crmUser}" th:method="post" th:action="@{/updateUser}" enctype="multipart/form-data">
-                                <input type="hidden" th:field="*{id}">
-                                <input type="hidden" th:field="*{userName}">
+                                <input type="hidden" th:field="*{id}">      <!--ok-->
+                                <input type="hidden" th:field="*{userName}"> <!--ok-->
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label >Full Name</label>

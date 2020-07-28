@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/home/head.html :: my-head(~{ :: .my-own-title})">
+
+    <title class="my-own-title">Home Page Title</title>
+
+</head>
+<body>
+<div class="page home-page">
+    <!--*********************************************************************************************************-->
+    <!--************ HERO ***************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <header class="hero has-dark-background">
+        <div class="hero-wrapper">
+
+            <!--============ Secondary Navigation ===============================================================-->
+            <div class="secondary-navigation" th:replace="fragments/home/secondary-navigation.html :: secondary-navigation">
+            </div>
+            <!--============ End Secondary Navigation ===========================================================-->
+
+            <div class="background" th:replace="fragments/home/header-background.html :: header-background">
+            </div>
+            <!--end background-->
+        </div>
+        <!--end hero-wrapper-->
+    </header>
+    <!--end hero-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ CONTENT ************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <section class="content">
+    <section class="block">
+        <div class="container">
+            <div class="row">
+                <div th:replace="fragments/home/user-menu-bar.html :: user-menu-bar">
+
+                </div>
+                <!--end col-md-3-->
+                <div class="col-md-9">
+                    <form role="form" th:object="${crmUser}" th:method="post" th:action="@{/updateUser}" enctype="multipart/form-data">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{userName}">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h2 th:text="${session.loginUser.fullName}"></h2>
+
+                                <section>
+<!--                                            <div class="form-group">-->
+<!--                                                <label for="title" class="col-form-label">Title</label>-->
+<!--                                                <select name="title" id="title" data-placeholder="Title">-->
+<!--                                                    <option value="">Title</option>-->
+<!--                                                    <option value="1" selected>Mrs</option>-->
+<!--                                                    <option value="2">Mr</option>-->
+<!--                                                </select>-->
+<!--                                            </div>-->
+                                            <!--end form-group-->
+                                            <div class="form-group">
+                                                <label class="col-form-label required">Họ Tên</label>
+                                                <input type="text" class="form-control" th:field="*{fullName}" placeholder="Enter Full Name" required>
+                                            </div>
+                                            <div th:if="${#fields.hasErrors('fullName')}"
+                                                 style="margin-bottom: 25px" class="text-danger">
+                                                <ul>
+                                                    <li th:each="err : ${#fields.errors('fullName')}" th:text="'Full Name ' + ${err}" />
+                                                </ul>
+                                            </div>
+                                            <!--end form-group-->
+
+
+
+                                        <!--end col-md-8-->
+                                        <div class="form-group">
+                                            <label >Địa chỉ</label>
+                                            <input type="text" class="form-control" th:field="*{address}" placeholder="Address" required>
+                                        </div>
+
+                                        <div th:if="${#fields.hasErrors('address')}"
+                                             style="margin-bottom: 25px" class="text-danger">
+                                            <ul>
+                                                <li th:each="err : ${#fields.errors('address')}" th:text="'Address ' + ${err}" />
+                                            </ul>
+                                        </div>
+
+                                </section>
+
+                                <section>
+                                    <h2>Liên hệ</h2>
+
+                                    <!--end form-group-->
+
+                                    <div class="form-group">
+                                        <label >Số điện thoại</label>
+                                        <input type="text" class="form-control" th:field="*{phoneNumber}" placeholder="Phone Number" required>
+                                    </div>
+
+                                    <div th:if="${#fields.hasErrors('phoneNumber')}"
+                                         style="margin-bottom: 25px" class="text-danger">
+                                        <ul>
+                                            <li th:each="err : ${#fields.errors('phoneNumber')}" th:text="'Phone Number ' + ${err}" />
+                                        </ul>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-form-label required">Địa chỉ Email</label>
+                                        <input type="email"  class="form-control" th:field="*{email}" placeholder="Enter email" readonly>
+                                    </div>
+                                    <div th:if="${#fields.hasErrors('email')}"
+                                         style="margin-bottom: 25px" class="text-danger">
+                                        <ul>
+                                            <li th:each="err : ${#fields.errors('email')}" th:text="'Email ' + ${err}" />
+                                        </ul>
+                                    </div>
+
+                                    <!--end form-group-->
+                                </section>
+
+                                <section>
+                                    <h2>Tài khoản</h2>
+
+                                    <!--end form-group-->
+
+                                    <div class="form-group">
+                                        <label >Số dư tài khoản</label>
+                                        <input type="text" readonly class="form-control" th:field="*{moneyAmount}" placeholder="Money Amount" >
+                                    </div>
+
+                                    <!--end form-group-->
+                                </section>
+
+
+                                <section class="clearfix">
+                                    <button type="submit" class="btn btn-primary float-right">Save Changes</button>
+                                </section>
+
+                            </div>
+                            <!--end col-md-8-->
+                            <div class="col-md-4">
+                                <div class="profile-image">
+                                    <div class="image background-image">
+<!--                                        <img th:src="@{/session.loginUser.getLogoUrl()}" alt="">-->
+                                        <img th:src="${session.loginUser.getLogoUrl()}"  alt="">
+                                    </div>
+                                    <div class="single-file-input">
+                                        <input type="file" id="user_image" name="logoFile" accept="image/png, image/jpeg">
+                                        <div class="btn btn-framed btn-primary small">Tải ảnh đại diện</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--end col-md-3-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </section>
+    <!--end block-->
+    </section>
+    <!--end content-->
+
+
+
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <footer class="footer" th:replace="fragments/home/footer.html :: footer">
+    </footer>
+    <!--end footer-->
+</div>
+<!--end page-->
+
+<div id="foot-script" th:replace="fragments/home/foot-script.html :: foot-script">
+</div>
+
+
+
+</body>
+</html>
