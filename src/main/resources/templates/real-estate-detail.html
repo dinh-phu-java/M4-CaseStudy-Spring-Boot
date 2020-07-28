@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/home/head.html :: my-head(~{ :: .my-own-title})">
+
+    <title class="my-own-title">Home Page Title</title>
+
+</head>
+<body>
+<div class="page home-page">
+    <!--*********************************************************************************************************-->
+    <!--************ HERO ***************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <header class="hero has-dark-background">
+        <div class="hero-wrapper">
+
+            <!--============ Secondary Navigation ===============================================================-->
+            <div class="secondary-navigation" th:replace="fragments/home/secondary-navigation.html :: secondary-navigation">
+            </div>
+            <!--============ End Secondary Navigation ===========================================================-->
+
+            <div class="background" th:replace="fragments/home/header-background.html :: header-background">
+            </div>
+            <!--end background-->
+        </div>
+        <!--end hero-wrapper-->
+    </header>
+    <!--end hero-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ CONTENT ************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <section class="content">
+        <section class="block">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <form class="form clearfix" method="post" th:action="@{/authenticateTheUser}">
+
+                            <div class="form-group">
+                                <div class="col-xs-15">
+                                    <div>
+
+                                        <!-- Check for login error -->
+                                        <div th:if="${param.error}" class="alert alert-danger col-xs-offset-1 col-xs-10">
+                                            Invalid username and password.
+                                        </div>
+
+                                        <!-- Check for logout -->
+                                        <div th:if="${param.logout}"class="alert alert-success col-xs-offset-1 col-xs-10">
+                                            You have been logged out.
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="col-form-label required">Email</label>
+                                <input name="username" type="email" class="form-control" id="email" placeholder="Your Email" required>
+                            </div>
+                            <!--end form-group-->
+                            <div class="form-group">
+                                <label for="password" class="col-form-label required">Password</label>
+                                <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
+                            </div>
+                            <!--end form-group-->
+                            <div class="d-flex justify-content-between align-items-baseline">
+                                <label>
+                                    <input type="checkbox" name="remember" value="1">
+                                    Remember Me
+                                </label>
+                                <button type="submit" class="btn btn-primary">Sign In</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <p>
+                            Troubles with signing? <a href="#" class="link">Click here.</a>
+                        </p>
+                        <hr>
+                        <div>
+                            <a th:href="@{/register}" class="btn-lg btn-outline-danger" role="button" aria-pressed="true">Register New User</a>
+                        </div>
+                    </div>
+                    <!--end col-md-6-->
+
+                </div>
+                <!--end row-->
+
+            </div>
+            <!--end container-->
+        </section>
+        <!--end block-->
+    </section>
+    <!--end content-->
+
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <footer class="footer" th:replace="fragments/home/footer.html :: footer">
+    </footer>
+    <!--end footer-->
+</div>
+<!--end page-->
+
+<div id="foot-script" th:replace="fragments/home/foot-script.html :: foot-script">
+</div>
+
+
+
+</body>
+</html>
