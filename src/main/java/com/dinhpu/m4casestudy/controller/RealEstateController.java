@@ -176,4 +176,7 @@ public class RealEstateController {
         return new ResponseEntity<>(wards,HttpStatus.OK);
     }
 
+    @GetMapping("/manage-post")
+    
+
 }

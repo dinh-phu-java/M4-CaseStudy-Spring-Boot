@@ -48,8 +48,7 @@
                             <li th:text="${message}" />
                         </ul>
                     </div>
-<!--                    th:object="${realEstateDTO}"-->
-<!--                    th:action="@{/real-estate/create}"-->
+
                     <form  method="post" th:object="${realEstateDTO}" th:action="@{/real-estate/create}" enctype="multipart/form-data" id="create-estate-form">
 
                         <div class="form-check form-check-inline">
