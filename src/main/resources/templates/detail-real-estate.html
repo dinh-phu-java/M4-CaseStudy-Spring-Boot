@@ -54,10 +54,17 @@
                         <section>
 
                             <h2 th:text="${realEstates.title}"></h2>
-                            <h4><i class="fa fa-street-view"></i>: <span th:text="${realEstates.district}"></span> <span th:text="${realEstates.ward}"></span></h4>
-                            <h5><i class="fa fa-dollar"></i>: <span th:text="${realEstates.totalprice}"></span></h5>
-                            <h5><i class="fa fa-money"></i>: <span th:text="${realEstates.priceUnit}"></span></h5>
-                            <h5><i class="fa fa-location-arrow"></i>: <span th:text="${realEstates.totalArea}"></span> m<sup>2</sup></h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3><i class="fa fa-street-view"></i> : <span th:text="${realEstates.district}"></span> <span th:text="${realEstates.ward}"></span></h3>
+                                    <h3><i class="fa fa-dollar"></i> : <span th:text="${realEstates.totalprice}"></span></h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3><i class="fa fa-money"></i> : <span th:text="${realEstates.priceUnit}"></span></h3>
+                                    <h3><i class="fa fa-location-arrow"></i> : <span th:text="${realEstates.totalArea}"></span>m<sup>2</sup></h3>
+                                </div>
+                            </div>
+
                             <hr>
 
                             <p th:utext="${realEstates.description}"></p>
@@ -67,76 +74,129 @@
                         <!--Details & Location-->
                         <section>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <h2>Details</h2>
+                                <div class="col-md-12">
+                                    <h2>Thông tin cơ bản</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
                                     <dl>
-                                        <dt>Date Added</dt>
-                                        <dd>05.04.2017</dd>
-                                        <dt>Type</dt>
-                                        <dd>Offer</dd>
-                                        <dt>Status</dt>
-                                        <dd>Used</dd>
-                                        <dt>First Owner</dt>
-                                        <dd>Yes</dd>
-                                        <dt>Material</dt>
-                                        <dd>Wood, Leather</dd>
-                                        <dt>Color</dt>
-                                        <dd>White, Grey</dd>
-                                        <dt>Height</dt>
-                                        <dd>47cm</dd>
-                                        <dt>Width</dt>
-                                        <dd>203cm</dd>
-                                        <dt>Length</dt>
-                                        <dd>54cm</dd>
+                                        <dt>Loại bất động sản</dt>
+                                        <dd th:text="${realEstates.category}"></dd>
+                                        <dt>Loại diện tích</dt>
+                                        <dd th:text="${realEstates.areaType}"></dd>
+                                        <dt>Hướng</dt>
+                                        <dd th:text="${realEstates.district}"></dd>
+                                        <dt>Pháp lý</dt>
+                                        <dd th:text="${realEstates.legalPaper}"></dd>
+
                                     </dl>
                                 </div>
-                                <div class="col-md-8">
-                                    <h2>Location</h2>
-                                    <div class="map height-300px" id="map-small"></div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Hình thức:</dt>
+                                        <dd th:text="${realEstates.realEstateType}"></dd>
+                                        <dt>Tổng diện tích</dt>
+                                        <dd th:text="${realEstates.totalArea}"></dd>
+                                        <dt>Tổng giá:</dt>
+                                        <dd th:text="${realEstates.totalprice}"></dd>
+                                        <dt>Đơn giá:</dt>
+                                        <dd th:text="${realEstates.priceUnit}"></dd>
+                                    </dl>
                                 </div>
                             </div>
                         </section>
                         <!--end Details and Locations-->
                         <!--Features-->
                         <section>
-                            <h2>Features</h2>
+                            <h2>Tiện tích bên trong: </h2>
                             <ul class="features-checkboxes columns-3">
-                                <li>Quality Wood</li>
-                                <li>Brushed Alluminium Handles</li>
-                                <li>Foam mattress</li>
-                                <li>Detachable chaise section</li>
-                                <li>3 fold pull out mechanism</li>
+                                <th:block th:if="${realEstates.internalUtilities.kitchen==true}">
+                                    <li >Nhà bếp</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.internalUtilities.airCondition==true}">
+                                    <li >Điều hòa</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.internalUtilities.television==true}">
+                                    <li >Tivi</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.internalUtilities.internet==true}">
+                                    <li >Internet</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.internalUtilities.toilet==true}">
+                                    <li>Toilet</li>
+                                </th:block>
                             </ul>
                         </section>
                         <!--end Features-->
-                        <!--Author-->
+
                         <section>
-                            <h2>Author</h2>
+                            <h2>Tiện tích bên ngoài: </h2>
+                            <ul class="features-checkboxes columns-3">
+                                <th:block th:if="${realEstates.externalUtilities.security==true}">
+                                    <li>An Ninh</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.externalUtilities.services==true}">
+                                    <li>Dịch vụ</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.externalUtilities.swimmingPool==true}">
+                                    <li >Bể bơi</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.externalUtilities.garden==true}">
+                                    <li >Vườn</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.externalUtilities.balcony==true}">
+                                    <li >Ban công</li>
+                                </th:block>
+                            </ul>
+                        </section>
+
+                        <section>
+                            <h2>Tiện tích xung quanh: </h2>
+                            <ul class="features-checkboxes columns-3">
+                                <th:block th:if="${realEstates.aroundUtilities.school==true}">
+                                    <li>Trường học</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.aroundUtilities.police==true}">
+                                    <li >Cảnh sát</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.aroundUtilities.market==true}">
+                                    <li >Siêu thị</li>
+                                </th:block>
+                                <th:block th:if="${realEstates.aroundUtilities.hospital==true}">
+                                    <li >Bệnh viện</li>
+                                </th:block>
+                            </ul>
+                        </section>
+                        <!--Author-->
+
+                        <section>
+                            <h2>Chủ sở hữu</h2>
                             <div class="box">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="author">
                                             <div class="author-image">
                                                 <div class="background-image">
-                                                    <img src="assets/img/author-01.jpg" alt="">
+                                                    <img th:src="@{${session.loginUser.getLogoUrl()}}" alt="">
                                                 </div>
                                             </div>
                                             <!--end author-image-->
                                             <div class="author-description">
-                                                <h3>Jane Doe</h3>
+                                                <h3 th:text="${session.loginUser.fullName}"></h3>
                                                 <div class="rating" data-rating="4"></div>
-                                                <a href="seller-detail-1.html" class="text-uppercase">Show My Listings
-                                                    <span class="appendix">(12)</span>
+                                                <a href="seller-detail-1.html" class="text-uppercase">Danh sách bất động sản
+                                                    <span class="appendix">([[${size}]])</span>
                                                 </a>
                                             </div>
                                             <!--end author-description-->
                                         </div>
                                         <hr>
                                         <dl>
-                                            <dt>Phone</dt>
-                                            <dd>830-247-0930</dd>
+                                            <dt>Điện thoại</dt>
+                                            <dd th:text="${session.loginUser.getPhoneNumber()}"></dd>
                                             <dt>Email</dt>
-                                            <dd>hijane@example.com</dd>
+                                            <dd th:text="${session.loginUser.getEmail()}"></dd>
                                         </dl>
                                         <!--end author-->
                                     </div>

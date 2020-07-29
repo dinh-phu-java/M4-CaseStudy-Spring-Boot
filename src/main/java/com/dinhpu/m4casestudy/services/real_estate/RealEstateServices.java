@@ -2,6 +2,7 @@ package com.dinhpu.m4casestudy.services.real_estate;
 
 import com.dinhpu.m4casestudy.dao.real_estate.RealEstateDAO;
 import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
+import com.dinhpu.m4casestudy.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,6 +59,11 @@ public class RealEstateServices implements IRealEstateServices{
     @Override
     public Page<RealEstate> findAllRealEstateByUserId(int id, Pageable pageable) {
         return realEstateDAO.findAllRealEstateByUserId(id,pageable);
+    }
+
+    @Override
+    public List<RealEstate> findAllByUser(User loginUser) {
+        return realEstateDAO.findAllByUser(loginUser);
     }
 
 

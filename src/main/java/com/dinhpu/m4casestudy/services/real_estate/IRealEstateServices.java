@@ -1,6 +1,7 @@
 package com.dinhpu.m4casestudy.services.real_estate;
 
 import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
+import com.dinhpu.m4casestudy.model.user.User;
 import com.dinhpu.m4casestudy.services.IServices;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +16,5 @@ public interface IRealEstateServices {
     public RealEstate remove(Long id);
     public List<RealEstate> findAll();
     Page<RealEstate> findAllRealEstateByUserId(int id,Pageable pageable);
+    public List<RealEstate> findAllByUser(User loginUser);
 }

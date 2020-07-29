@@ -207,10 +207,17 @@ public class RealEstateController {
 
 
     @GetMapping("/detail/{id}")
-    public ModelAndView showDetail(@PathVariable Long id){
+    public ModelAndView showDetail(@PathVariable Long id,HttpSession session){
+        User loginUser= (User) session.getAttribute("loginUser");
         RealEstate realEstates=realEstateServices.findById(id);
+
+
+        List<RealEstate> listRealEstate=realEstateServices.findAllByUser(loginUser);
+        int size=listRealEstate.size();
+
         ModelAndView modelAndView=new ModelAndView("detail-real-estate");
         modelAndView.addObject("realEstates",realEstates);
+        modelAndView.addObject("size",size);
         return modelAndView;
     }
 
