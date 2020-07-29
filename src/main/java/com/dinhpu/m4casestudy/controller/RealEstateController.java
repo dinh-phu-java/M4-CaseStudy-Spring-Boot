@@ -208,9 +208,10 @@ public class RealEstateController {
 
     @GetMapping("/detail/{id}")
     public ModelAndView showDetail(@PathVariable Long id){
-        RealEstate realEstate=realEstateServices.findById(id);
+        RealEstate realEstates=realEstateServices.findById(id);
         ModelAndView modelAndView=new ModelAndView("detail-real-estate");
-        return null;
+        modelAndView.addObject("realEstates",realEstates);
+        return modelAndView;
     }
 
 
