@@ -86,7 +86,7 @@ public class RealEstateController {
         theModel.addAttribute("externalUtils",externalUtilities);
         theModel.addAttribute("aroundUtils",aroundUtilities);
         theModel.addAttribute("message",null);
-        return "create-real-estate";
+        return "create-real-estate-new";
     }
 
     @PostMapping("/create")
@@ -166,7 +166,7 @@ public class RealEstateController {
         theModel.addAttribute("externalUtils",realEstateDTO.getExternalUtilities());
         theModel.addAttribute("aroundUtils",realEstateDTO.getAroundUtilities());
         theModel.addAttribute("message","Thêm thành công");
-        return "create-real-estate";
+        return "create-real-estate-new";
 
     }
 
