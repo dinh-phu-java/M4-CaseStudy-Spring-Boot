@@ -161,12 +161,12 @@ public class UserController {
         theModel.addAttribute("message", null);
         theModel.addAttribute("crmUser", theCrmUSer);
 
-        return "change-password";
+        return "change-password-new";
 
     }
 
     @PostMapping("/changePasswordProcess")
-    public String changePasswordProcess(Model theModel, @Valid @ModelAttribute CrmChangePasswordUser crmUser, @RequestParam String current_password, HttpSession session, BindingResult theBinding) {
+    public String changePasswordProcess(Model theModel,@ModelAttribute CrmChangePasswordUser crmUser, @RequestParam String current_password, HttpSession session, BindingResult theBinding) {
         Long userId = crmUser.getId();
         User loginUser = userServices.findById(userId);
 
@@ -177,25 +177,27 @@ public class UserController {
 
         } else {
 
-            if (theBinding.hasErrors()) {
-                return "change-password";
+            if ( (!crmUser.getPassword().equals(crmUser.getMatchingPassword())) || crmUser.getPassword().isEmpty() ) {
+                message="Password is not matching!";
+            }else{
+                String newPassword = crmUser.getPassword();
+                newPassword = passwordEncoder.encode(newPassword);
+
+                loginUser.setPassword(newPassword);
+
+                userServices.save(loginUser);
+
+                message = "Change password successful";
+
+                session.setAttribute("loginUser", loginUser);
             }
-            String newPassword = crmUser.getPassword();
-            newPassword = passwordEncoder.encode(newPassword);
 
-            loginUser.setPassword(newPassword);
-
-            userServices.save(loginUser);
-
-            message = "Change password successful";
-
-            session.setAttribute("loginUser", loginUser);
         }
 
         theModel.addAttribute("message", message);
         CrmChangePasswordUser theCrmUSer = UserUtils.userToCrmChangePasswordUser(loginUser);
         theModel.addAttribute("crmUser", theCrmUSer);
-        return "change-password";
+        return "change-password-new";
     }
 
 }
