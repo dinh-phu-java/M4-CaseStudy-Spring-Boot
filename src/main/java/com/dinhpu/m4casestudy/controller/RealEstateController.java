@@ -196,14 +196,16 @@ public class RealEstateController {
         Page<RealEstate> page=realEstateServices.findAllRealEstateByUserId(loginId,pageable);
         List<RealEstate> realEstates=page.getContent();
 
-//        Page<RealEstate> page=realEstateServices.findAll(pageNo,pageSize,sortBy);
-//        List<RealEstate> realEstates=page.getContent();
+//        for (RealEstate realEstate : realEstates){
+//            realEstate.setDescription(realEstate.getDescription().substring(0,30));
+//        }
+
         theModel.addAttribute("currentPage",pageNo);
         theModel.addAttribute("totalPages",page.getTotalPages());
         theModel.addAttribute("totalItems",page.getTotalElements());
         theModel.addAttribute("listRealEstate",realEstates);
 
-        return "user-all-post";
+        return "user-all-post-new";
     }
 
 

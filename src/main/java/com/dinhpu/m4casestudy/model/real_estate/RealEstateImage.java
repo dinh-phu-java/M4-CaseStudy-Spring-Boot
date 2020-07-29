@@ -1,5 +1,7 @@
 package com.dinhpu.m4casestudy.model.real_estate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class RealEstateImage {
 
     @Column(name="image1")
     private String image;
+
 
     @ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name="real_estate_id")

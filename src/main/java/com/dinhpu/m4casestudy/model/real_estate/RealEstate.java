@@ -1,6 +1,7 @@
 package com.dinhpu.m4casestudy.model.real_estate;
 
 import com.dinhpu.m4casestudy.model.user.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -88,6 +89,7 @@ public class RealEstate {
     @ManyToOne(fetch = FetchType.LAZY,cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name="user_id")
     private User user;
+
 
     @OneToMany(fetch=FetchType.LAZY,mappedBy = "realEstate",cascade ={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<RealEstateImage> realEstateImages;
