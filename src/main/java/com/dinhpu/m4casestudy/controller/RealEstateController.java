@@ -196,9 +196,6 @@ public class RealEstateController {
         Page<RealEstate> page=realEstateServices.findAllRealEstateByUserId(loginId,pageable);
         List<RealEstate> realEstates=page.getContent();
 
-//        for (RealEstate realEstate : realEstates){
-//            realEstate.setDescription(realEstate.getDescription().substring(0,30));
-//        }
 
         theModel.addAttribute("currentPage",pageNo);
         theModel.addAttribute("totalPages",page.getTotalPages());
@@ -210,9 +207,9 @@ public class RealEstateController {
 
 
     @GetMapping("/detail/{id}")
-    public ModelAndView showDetail(){
-
-
+    public ModelAndView showDetail(@PathVariable Long id){
+        RealEstate realEstate=realEstateServices.findById(id);
+        ModelAndView modelAndView=new ModelAndView("detail-real-estate");
         return null;
     }
 

@@ -36,11 +36,5 @@ public class AreaType {
         this.areaName = areaName;
     }
 
-    @Override
-    public String toString() {
-        return "AreaType{" +
-                "id=" + id +
-                ", areaName='" + areaName + '\'' +
-                '}';
-    }
+
 }

@@ -72,12 +72,5 @@ public class District {
         this.province = province;
     }
 
-    @Override
-    public String toString() {
-        return "District{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", province=" + province +
-                '}';
-    }
+
 }

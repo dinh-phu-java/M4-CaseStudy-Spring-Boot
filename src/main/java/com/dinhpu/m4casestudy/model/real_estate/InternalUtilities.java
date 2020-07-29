@@ -95,15 +95,5 @@ public class InternalUtilities {
         this.kitchen = kitchen;
     }
 
-    @Override
-    public String toString() {
-        return "InternalUtilities{" +
-                "id=" + id +
-                ", internet=" + internet +
-                ", television=" + television +
-                ", toilet=" + toilet +
-                ", airCondition=" + airCondition +
-                ", kitchen=" + kitchen +
-                '}';
-    }
+
 }

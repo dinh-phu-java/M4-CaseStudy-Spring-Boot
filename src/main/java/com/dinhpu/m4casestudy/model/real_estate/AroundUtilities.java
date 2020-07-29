@@ -83,14 +83,5 @@ public class AroundUtilities {
         this.police = police;
     }
 
-    @Override
-    public String toString() {
-        return "AroundUtilities{" +
-                "id=" + id +
-                ", market=" + market +
-                ", school=" + school +
-                ", hospital=" + hospital +
-                ", police=" + police +
-                '}';
-    }
+
 }

@@ -56,14 +56,7 @@ public class RealEstateImage {
         this.realEstate = realEstate;
     }
 
-    @Override
-    public String toString() {
-        return "RealEstateImage{" +
-                "id=" + id +
-                ", image='" + image + '\'' +
-                ", realEstate=" + realEstate +
-                '}';
-    }
+
 }
 
 

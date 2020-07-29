@@ -95,15 +95,5 @@ public class ExternalUtilities {
         this.security = security;
     }
 
-    @Override
-    public String toString() {
-        return "ExternalUtilities{" +
-                "id=" + id +
-                ", services=" + services +
-                ", garden=" + garden +
-                ", balcony=" + balcony +
-                ", swimmingPool=" + swimmingPool +
-                ", security=" + security +
-                '}';
-    }
+
 }

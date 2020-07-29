@@ -303,31 +303,4 @@ public class RealEstate {
         this.realEstateImages = realEstateImages;
     }
 
-    @Override
-    public String toString() {
-        return "RealEstate{" +
-                "id=" + id +
-                ", category='" + category + '\'' +
-                ", province='" + province + '\'' +
-                ", district='" + district + '\'' +
-                ", ward='" + ward + '\'' +
-                ", address='" + address + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", priceUnit='" + priceUnit + '\'' +
-                ", totalprice='" + totalprice + '\'' +
-                ", totalArea='" + totalArea + '\'' +
-                ", areaType='" + areaType + '\'' +
-                ", direction='" + direction + '\'' +
-                ", bedRoomQuantity='" + bedRoomQuantity + '\'' +
-                ", bathRoomQuantity='" + bathRoomQuantity + '\'' +
-                ", legalPaper='" + legalPaper + '\'' +
-                ", internalUtilities=" + internalUtilities +
-                ", externalUtilities=" + externalUtilities +
-                ", aroundUtilities=" + aroundUtilities +
-                ", realEstateType='" + realEstateType + '\'' +
-                ", user=" + user +
-                ", realEstateImages=" + realEstateImages +
-                '}';
-    }
 }

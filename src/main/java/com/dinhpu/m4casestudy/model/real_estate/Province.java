@@ -54,12 +54,5 @@ public class Province {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Province{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }
+
 }

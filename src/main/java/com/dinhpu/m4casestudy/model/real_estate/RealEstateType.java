@@ -36,11 +36,5 @@ public class RealEstateType {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "RealEstateType{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                '}';
-    }
+
 }

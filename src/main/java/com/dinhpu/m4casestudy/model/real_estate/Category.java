@@ -36,11 +36,5 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
-                '}';
-    }
+
 }

@@ -36,11 +36,5 @@ public class LegalPaper {
         this.legalPaperName = legalPaperName;
     }
 
-    @Override
-    public String toString() {
-        return "LegalPaper{" +
-                "id=" + id +
-                ", legalPaperName='" + legalPaperName + '\'' +
-                '}';
-    }
+
 }
