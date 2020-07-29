@@ -52,14 +52,15 @@
                         <!--end Gallery Carousel-->
                         <!--Description-->
                         <section>
-                            <h2>Description</h2>
-                            <h3 th:text="${realEstates.title}"></h3>
-                            <h4>[[${realEstates.district}]], [[${realEstates.ward}]]</h4>
-                            <h5 th:text="${realEstates.totalprice}"></h5>
-                            <h5 th:text="${realEstates.priceUnit}"></h5>
+
+                            <h2 th:text="${realEstates.title}"></h2>
+                            <h4><i class="fa fa-street-view"></i>: <span th:text="${realEstates.district}"></span> <span th:text="${realEstates.ward}"></span></h4>
+                            <h5><i class="fa fa-dollar"></i>: <span th:text="${realEstates.totalprice}"></span></h5>
+                            <h5><i class="fa fa-money"></i>: <span th:text="${realEstates.priceUnit}"></span></h5>
+                            <h5><i class="fa fa-location-arrow"></i>: <span th:text="${realEstates.totalArea}"></span> m<sup>2</sup></h5>
                             <hr>
 
-                            [[${realEstates.description}]]
+                            <p th:utext="${realEstates.description}"></p>
 
                         </section>
                         <!--end Description-->
