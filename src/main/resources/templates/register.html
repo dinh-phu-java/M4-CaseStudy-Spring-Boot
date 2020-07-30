@@ -38,19 +38,19 @@
 
                         <form class="form" th:method="post"  th:action="@{/register}" th:object="${crmUser}">
                             <div class="form-group">
-                                <label  class="col-form-label required">Your Name</label>
-                                <input  type="text" class="form-control" th:field="*{fullName}" placeholder="Your Name"  required>
+                                <label  class="col-form-label required">Họ tên</label>
+                                <input  type="text" class="form-control" th:field="*{fullName}" placeholder="Họ tên"  required>
                             </div>
                             <div th:if="${#fields.hasErrors('fullName')}"
                                  style="margin-bottom: 25px" class="text-danger">
                                 <ul>
-                                    <li th:each="err : ${#fields.errors('fullName')}" th:text="'Full Name ' + ${err}" />
+                                    <li th:each="err : ${#fields.errors('fullName')}" th:text="'Họ tên ' + ${err}" />
                                 </ul>
                             </div>
                             <!--end form-group-->
                             <div class="form-group">
                                 <label class="col-form-label required">Email</label>
-                                <input  type="email" class="form-control" th:field="*{email}" placeholder="Your Email" required>
+                                <input  type="email" class="form-control" th:field="*{email}" placeholder="Email" required>
                             </div>
                             <div th:if="${#fields.hasErrors('email')}"
                                  style="margin-bottom: 25px" class="text-danger">
@@ -63,28 +63,47 @@
                             </div>
                             <!--end form-group-->
                             <div class="form-group">
-                                <label  class="col-form-label required">Phone Number</label>
-                                <input  type="text" class="form-control" th:field="*{phoneNumber}" placeholder="Phone Number" required>
+                                <label  class="col-form-label required">Số điện thoại</label>
+                                <input  type="text" class="form-control" th:field="*{phoneNumber}" placeholder="Số điện thoại" required>
                             </div>
                             <div th:if="${#fields.hasErrors('phoneNumber')}"
                                  style="margin-bottom: 25px" class="text-danger">
                                 <ul>
-                                    <li th:each="err : ${#fields.errors('phoneNumber')}" th:text="'Phone Number ' + ${err}" />
+                                    <li th:each="err : ${#fields.errors('phoneNumber')}" th:text="'Số điện thoại ' + ${err}" />
                                 </ul>
                             </div>
                             <!--end form-group-->
                             <div class="form-group">
-                                <label  class="col-form-label required">Address</label>
+                                <label  class="col-form-label required">Địa chỉ</label>
                                 <input  type="text" class="form-control" th:field="*{address}" placeholder="Address" required>
                             </div>
                             <div th:if="${#fields.hasErrors('address')}"
                                  style="margin-bottom: 25px" class="text-danger">
                                 <ul>
-                                    <li th:each="err : ${#fields.errors('address')}" th:text="'Address ' + ${err}" />
+                                    <li th:each="err : ${#fields.errors('address')}" th:text="'Địa chỉ ' + ${err}" />
                                 </ul>
                             </div>
                             <!--end form-group-->
+                            <div class="form-group">
+                                <label  class="col-form-label required">Mật khẩu</label>
+                                <input  type="password" class="form-control" th:field="*{password}" placeholder="mật khẩu" required>
+                            </div>
+                            <div th:if="${#fields.hasErrors('password')}"
+                                 style="margin-bottom: 25px" class="text-danger">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('password')}" th:text="'Mật khẩu ' + ${err}" />
+                                </ul>
+                            </div>
 
+                            <div class="form-group">
+                                <label  class="col-form-label required">Xác Nhận Mật Khẩu</label>
+                                <input  type="password" class="form-control" th:field="*{matchingPassword}" placeholder="Mật khẩu" required>
+                            </div>
+                            <div th:if="${#fields.hasErrors('matchingPassword')}">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('matchingPassword')}" th:text="'Mật khẩu' + ${err}"></li>
+                                </ul>
+                            </div>
                             <!--end form-group-->
                             <div class="d-flex justify-content-between align-items-baseline">
                                 <label>

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @FieldMatch.List({
-        @FieldMatch(first = "password", second = "matchingPassword", message = "The password fields must match")
+        @FieldMatch(first = "password", second = "matchingPassword", message = " không khớp")
 })
 public class CrmUser {
     private Long id;
@@ -16,25 +16,25 @@ public class CrmUser {
 //    @Size(min = 1, message = "is required")
     private String userName;
 
-    @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "không để trống")
+    @Size(min = 1, message = "nhiều hơn 1 ký tự")
     private String password;
 
-    @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "không để trống")
+    @Size(min = 1, message = "nhiều hơn 1 ký tự")
     private String matchingPassword;
 
-    @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "không để trống")
+    @Size(min = 1, message = "nhiều hơn 1 ký tự")
     private String fullName;
 
-    @ValidPhoneNumber(value={"0", "+84"}, message="phone number must start with 0 or +84")
+    @ValidPhoneNumber(value={"0", "+84"}, message="số điện thoại phải bắt đầu với 0 hoặc +84")
     @NotNull(message = "is required")
-    @Size(min = 9,max=11, message = "phone length must be between 9 ~ 11")
+    @Size(min = 9,max=11, message = "số điện thoại không đúng định dạng")
     private String phoneNumber;
 
-    @NotNull(message = "is required")
-    @Size(min = 2, message = "is required")
+    @NotNull(message = "không để trống")
+    @Size(min = 2, message = "không đúng định dạng ")
     private String address;
 
     private MultipartFile logoFile;
@@ -42,8 +42,7 @@ public class CrmUser {
     private double moneyAmount;
 
     @ValidEmail
-    @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "không để trống")
     private String email;
 
     public CrmUser() {

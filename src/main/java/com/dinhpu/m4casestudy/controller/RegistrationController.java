@@ -40,8 +40,6 @@ public class RegistrationController {
 	public ModelAndView showRegisterPage() {
 		ModelAndView modelAndView=new ModelAndView("register");
 		modelAndView.addObject("crmUser",new CrmUser());
-		modelAndView.addObject("message","my message phu");
-		System.out.println("access show form");
 		return modelAndView;
 	}
 
@@ -67,7 +65,7 @@ public class RegistrationController {
 			newCrmUser.setPassword("");
 			newCrmUser.setMatchingPassword("");
         	theModel.addAttribute("crmUser", newCrmUser);
-			theModel.addAttribute("registrationError", "Email already exists.");
+			theModel.addAttribute("registrationError", "Email đã tồn tại.");
 
 			logger.warning("User name already exists.");
         	return "register";

@@ -70,7 +70,7 @@ public class UserController {
 
         if (theBinding.hasErrors()) {
 
-            return "user-profile";
+            return "new-profile-page";
 
         }
 
