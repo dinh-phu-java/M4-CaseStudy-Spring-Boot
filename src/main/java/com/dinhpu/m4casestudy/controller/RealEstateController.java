@@ -156,6 +156,7 @@ public class RealEstateController {
                 List<RealEstateImage> realEstateImage=realEstateImageServices.findAllByRealEstate(createRealEstate);
 
 
+
                 List<Path> listImagePath=new ArrayList<>();
                 for (RealEstateImage imageObj:realEstateImage){
                     listImagePath.add( Paths.get("./"+imageObj.getImage()));
@@ -293,6 +294,13 @@ public class RealEstateController {
         RealEstate realEstate=realEstateServices.findById(id);
 
         RealEstateDTO realEstateDTO =RealEstateUtils.realEstateToRealEstateDTO(realEstate);
+
+        String[] totalPrice=realEstateDTO.getTotalprice().split(" ");
+        realEstateDTO.setTotalprice(totalPrice[0]);
+
+        String[] priceUnit=realEstateDTO.getPriceUnit().split("");
+        realEstateDTO.setPriceUnit(priceUnit[0]);
+
 
         theModel.addAttribute("provinces",provinceServices.findAll());
         theModel.addAttribute("categories",categoryServices.findAll());
