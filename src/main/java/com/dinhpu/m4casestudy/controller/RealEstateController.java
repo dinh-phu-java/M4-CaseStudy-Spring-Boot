@@ -5,6 +5,7 @@ import com.dinhpu.m4casestudy.model.real_estate.*;
 import com.dinhpu.m4casestudy.model.user.User;
 import com.dinhpu.m4casestudy.services.real_estate.*;
 import com.dinhpu.m4casestudy.services.user.IUserServices;
+import com.dinhpu.m4casestudy.utils.FileUtils;
 import com.dinhpu.m4casestudy.utils.RealEstateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -100,6 +101,7 @@ public class RealEstateController {
                                           @RequestParam("don-vi") String donVi){
 
         InternalUtilities internalUtilities=new InternalUtilities();
+        boolean fileCheckEmpty=FileUtils.isFileEmpty(files);
         ExternalUtilities externalUtilities=new ExternalUtilities();
         AroundUtilities aroundUtilities=new AroundUtilities();
         RealEstateUtils.loopForSetInternalUtilites(internals,internalUtilities);
@@ -118,7 +120,7 @@ public class RealEstateController {
 
         realEstate.setUser(ownUser);
 
-        RealEstate createRealEstate = realEstateServices.save(realEstate);
+//        RealEstate createRealEstate = realEstateServices.save(realEstate);
 
 
         for (int i=0;i<files.length;i++){
@@ -140,22 +142,22 @@ public class RealEstateController {
 
                     Path imagePath=fileUploadPath.resolve(fileName);
 
-                    Files.copy(inputStream,imagePath, StandardCopyOption.REPLACE_EXISTING);
+//                    Files.copy(inputStream,imagePath, StandardCopyOption.REPLACE_EXISTING);
 
                     String imageUrl=resourcePath+ownUser.getId()+"/"+"real_estate/"+fileName;
 
-                    RealEstateImage realEstateImage= new RealEstateImage(imageUrl,createRealEstate);
+//                    RealEstateImage realEstateImage= new RealEstateImage(imageUrl,createRealEstate);
 
-                    createRealEstate.addRealEstateImage(realEstateImage);
+//                    createRealEstate.addRealEstateImage(realEstateImage);
 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
             }
         }
-        realEstateServices.save(createRealEstate);
+//        realEstateServices.save(createRealEstate);
 
-        realEstateDTO=RealEstateUtils.realEstateToRealEstateDTO(createRealEstate);
+//        realEstateDTO=RealEstateUtils.realEstateToRealEstateDTO(createRealEstate);
 
         theModel.addAttribute("provinces",provinceServices.findAll());
         theModel.addAttribute("categories",categoryServices.findAll());
