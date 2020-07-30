@@ -128,13 +128,14 @@ public class RealEstateController {
                 String uploadDir=uploadPath + ownUser.getId()+"/real_estate/";
 
                 Path fileUploadPath= Paths.get(uploadDir);
+
                 boolean fileExist= Files.exists(fileUploadPath);
+
                 try {
                     if (!fileExist){
-
                             Files.createDirectories(fileUploadPath);
-
                     }
+
                     InputStream inputStream=files[i].getInputStream();
 
                     Path imagePath=fileUploadPath.resolve(fileName);
@@ -196,9 +197,7 @@ public class RealEstateController {
         Page<RealEstate> page=realEstateServices.findAllRealEstateByUserId(loginId,pageable);
         List<RealEstate> realEstates=page.getContent();
 
-
         theModel.addAttribute("currentPage",pageNo);
-
         theModel.addAttribute("totalPages",page.getTotalPages());
         theModel.addAttribute("totalItems",page.getTotalElements());
         theModel.addAttribute("listRealEstate",realEstates);
@@ -211,13 +210,14 @@ public class RealEstateController {
     public ModelAndView showDetail(@PathVariable Long id,HttpSession session){
         User loginUser= (User) session.getAttribute("loginUser");
         RealEstate realEstates=realEstateServices.findById(id);
+        List<RealEstate> totalRealEstates=realEstateServices.findAll();
 
         Optional<String> sortBy=Optional.of("id");
         Pageable pageable=PageRequest.of(0,3,Sort.Direction.DESC,sortBy.orElse("id"));
         List<RealEstate> listRealEstate=realEstateServices
                 .findAllRealEstateByUserId(loginUser.getId().intValue(),pageable)
                 .getContent();
-        int size=listRealEstate.size();
+        int size=totalRealEstates.size();
 
         ModelAndView modelAndView=new ModelAndView("detail-real-estate");
         modelAndView.addObject("realEstates",realEstates);
