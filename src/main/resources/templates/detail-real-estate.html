@@ -243,9 +243,10 @@
                     <div class="col-md-3">
                         <aside class="sidebar">
                             <section>
-                                <h2>Similar Ads</h2>
+                                <h2>Cùng chủ đề</h2>
                                 <div class="items compact">
-                                    <th:block th:each="row : ${list}">
+                                    <th:block th:each="row : ${list}" >
+                                        <th:block th:if="${row.id != realEstates.id}">
                                         <div class="item">
                                             <div class="ribbon-featured">Sales</div>
                                             <!--end ribbon-->
@@ -279,12 +280,13 @@
                                             <!--end wrapper-->
                                         </div>
                                         <!--end item-->
+                                        </th:block>
                                     </th:block>
                                 </div>
 
                             </section>
                             <section>
-                                <h2>Search Ads</h2>
+                                <h2>Tìm kiếm</h2>
                                 <!--============ Side Bar Search Form ===========================================-->
                                 <form class="sidebar-form form">
                                     <div class="form-group">
