@@ -155,7 +155,6 @@ public class RealEstateController {
             if (existId!=null){
                 List<RealEstateImage> realEstateImage=realEstateImageServices.findAllByRealEstate(createRealEstate);
 
-                realEstateImageServices.removeAllByRealEstate(createRealEstate);
 
                 List<Path> listImagePath=new ArrayList<>();
                 for (RealEstateImage imageObj:realEstateImage){
@@ -169,6 +168,9 @@ public class RealEstateController {
                         e.printStackTrace();
                     }
                 }
+
+                //có dòng này bị lỗi transaction
+                realEstateImageServices.removeAllByRealEstate(createRealEstate);
 
             }
 

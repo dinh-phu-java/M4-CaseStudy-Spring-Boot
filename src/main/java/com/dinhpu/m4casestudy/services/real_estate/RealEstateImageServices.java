@@ -15,21 +15,25 @@ public class RealEstateImageServices implements IRealEstateImage{
     private RealEstateImageDAO realEstateImageDAO;
 
     @Override
+    @Transactional
     public List<RealEstateImage> findAll() {
         return null;
     }
 
     @Override
+    @Transactional
     public RealEstateImage findById(Long id) {
         return null;
     }
 
     @Override
+    @Transactional
     public RealEstateImage save(RealEstateImage model) {
         return null;
     }
 
     @Override
+    @Transactional
     public RealEstateImage remove(Long id) {
         return null;
     }
