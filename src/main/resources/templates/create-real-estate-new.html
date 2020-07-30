@@ -191,13 +191,19 @@
                                                 <div class="form-group">
                                                     <label>Đơn vị</label>
                                                     <select  name="don-vi" id="donvi">
-                                                        <option value="tỷ">Tỷ</option>
-                                                        <option value="triệu">Triệu</option>
+                                                        <th:block th:if="${don_vi==true}">
+                                                            <option value="tỷ" selected>Tỷ</option>
+                                                            <option value="triệu">Triệu</option>
+                                                        </th:block>
+                                                        <th:block th:unless="${don_vi==true}">
+                                                            <option value="tỷ">Tỷ</option>
+                                                            <option value="triệu" selected>Triệu</option>
+                                                        </th:block>
+
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-
 
                                     </section>
 

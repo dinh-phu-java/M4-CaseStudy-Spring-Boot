@@ -301,6 +301,11 @@ public class RealEstateController {
         String[] priceUnit=realEstateDTO.getPriceUnit().split("");
         realEstateDTO.setPriceUnit(priceUnit[0]);
 
+        if (totalPrice[1].equals("tỷ")){
+            theModel.addAttribute("don_vi",true);
+        }else{
+            theModel.addAttribute("don_vi",false);
+        }
 
         theModel.addAttribute("provinces",provinceServices.findAll());
         theModel.addAttribute("categories",categoryServices.findAll());
@@ -311,6 +316,7 @@ public class RealEstateController {
         theModel.addAttribute("internalUtils",realEstateDTO.getInternalUtilities());
         theModel.addAttribute("externalUtils",realEstateDTO.getExternalUtilities());
         theModel.addAttribute("aroundUtils",realEstateDTO.getAroundUtilities());
+
         theModel.addAttribute("message",null);
         return "create-real-estate-new";
 
