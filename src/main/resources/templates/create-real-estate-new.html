@@ -116,7 +116,12 @@
                                             <select  id="province-option" style="width: 100%;" th:field="*{province}" >
                                                 <option value="" >Chọn thành phố</option>
                                                 <th:block th:each="pro : ${provinces}">
-                                                    <option th:value="${pro.name}" th:text="${pro.name}"></option>
+                                                    <th:block th:unless="${pro.name == realEstateDTO.province}">
+                                                        <option th:value="${pro.name}" th:text="${pro.name}"></option>
+                                                    </th:block>
+                                                    <th:block th:if="${pro.name == realEstateDTO.province}">
+                                                        <option th:value="${pro.name}" th:text="${pro.name}" selected></option>
+                                                    </th:block>
                                                 </th:block>
                                             </select>
                                         </div>
@@ -125,7 +130,10 @@
                                                 <div class="form-group">
                                                     <label>Quận Huyện *</label>
 
-                                                    <select  id="district-option" style="width: 100%;" th:field="*{district}"  >
+                                                    <select  id="district-option" style="width: 100%;" th:field="*{district}">
+                                                        <th:block th:if="${realEstateDTO.district !=null}">
+                                                            <option th:value="${realEstateDTO.district}" th:text="${realEstateDTO.district}" selected></option>
+                                                        </th:block>
                                                     </select>
                                                 </div>
                                             </div>
@@ -133,6 +141,9 @@
                                                 <div class="form-group">
                                                     <label>Phường xã *</label>
                                                     <select  id="ward-option" style="width: 100%;"  th:field="*{ward}" >
+                                                        <th:block th:if="${realEstateDTO.ward !=null}">
+                                                            <option th:value="${realEstateDTO.ward}" th:text="${realEstateDTO.ward}" selected></option>
+                                                        </th:block>
                                                     </select>
                                                 </div>
                                             </div>
