@@ -29,6 +29,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,13 +71,23 @@ public class RealEstateController {
     @Autowired
     private IRealEstateServices realEstateServices;
 
+    @Autowired
+    private IRealEstateImage realEstateImageServices;
+
     @GetMapping("/create")
-    public String showRealEstateCreateForm(Model theModel){
+    public String showRealEstateCreateForm(Model theModel, HttpSession session){
         RealEstateDTO realEstateDTO =new RealEstateDTO();
         realEstateDTO.setRealEstateType("Bán");
         InternalUtilities internalUtilities=new InternalUtilities();
         ExternalUtilities externalUtilities=new ExternalUtilities();
         AroundUtilities aroundUtilities=new AroundUtilities();
+
+        String message=null;
+        if (session.getAttribute("message")!=null){
+            message=(String)session.getAttribute("message");
+            session.removeAttribute("message");
+        }
+
         theModel.addAttribute("provinces",provinceServices.findAll());
         theModel.addAttribute("categories",categoryServices.findAll());
         theModel.addAttribute("areatypes",areaTypeServices.findAll());
@@ -86,7 +97,7 @@ public class RealEstateController {
         theModel.addAttribute("internalUtils",internalUtilities);
         theModel.addAttribute("externalUtils",externalUtilities);
         theModel.addAttribute("aroundUtils",aroundUtilities);
-        theModel.addAttribute("message",null);
+        theModel.addAttribute("message",message);
         return "create-real-estate-new";
     }
 
@@ -100,8 +111,14 @@ public class RealEstateController {
                                           @RequestParam MultipartFile[] files,
                                           @RequestParam("don-vi") String donVi){
 
+        Long existId=realEstateDTO.getId();
+
+        if ( (existId == null && FileUtils.isFileEmpty(files)) ){
+            session.setAttribute("message","File không được để trống");
+           return "redirect:/real-estate/create";
+        }
+
         InternalUtilities internalUtilities=new InternalUtilities();
-        boolean fileCheckEmpty=FileUtils.isFileEmpty(files);
         ExternalUtilities externalUtilities=new ExternalUtilities();
         AroundUtilities aroundUtilities=new AroundUtilities();
         RealEstateUtils.loopForSetInternalUtilites(internals,internalUtilities);
@@ -120,44 +137,84 @@ public class RealEstateController {
 
         realEstate.setUser(ownUser);
 
-//        RealEstate createRealEstate = realEstateServices.save(realEstate);
+        RealEstate createRealEstate = realEstateServices.save(realEstate);
+        String message=null;
 
+        if (FileUtils.isFileEmpty(files)){
 
-        for (int i=0;i<files.length;i++){
+            if (existId != null){
 
-            String fileName=files[i].getOriginalFilename();
-            if (!fileName.equals("")){
-                String uploadDir=uploadPath + ownUser.getId()+"/real_estate/";
+                RealEstate dbRealEstate=realEstateServices.findById(existId);
 
-                Path fileUploadPath= Paths.get(uploadDir);
+                createRealEstate.setRealEstateImages(dbRealEstate.getRealEstateImages());
 
-                boolean fileExist= Files.exists(fileUploadPath);
+            }
 
-                try {
-                    if (!fileExist){
-                            Files.createDirectories(fileUploadPath);
+        }else{
+            //xóa file cũ
+            if (existId!=null){
+                List<RealEstateImage> realEstateImage=realEstateImageServices.findAllByRealEstate(createRealEstate);
+
+                realEstateImageServices.removeAllByRealEstate(createRealEstate);
+
+                List<Path> listImagePath=new ArrayList<>();
+                for (RealEstateImage imageObj:realEstateImage){
+                    listImagePath.add( Paths.get("./"+imageObj.getImage()));
+                }
+
+                for (int i=0;i<listImagePath.size();i++){
+                    try {
+                        Files.delete(listImagePath.get(i));
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                }
 
-                    InputStream inputStream=files[i].getInputStream();
+            }
 
-                    Path imagePath=fileUploadPath.resolve(fileName);
+            for (int i=0;i<files.length;i++){
 
-//                    Files.copy(inputStream,imagePath, StandardCopyOption.REPLACE_EXISTING);
+                String fileName=files[i].getOriginalFilename();
+                if (!fileName.equals("")){
+                    String uploadDir=uploadPath + ownUser.getId()+"/real_estate/";
 
-                    String imageUrl=resourcePath+ownUser.getId()+"/"+"real_estate/"+fileName;
+                    Path fileUploadPath= Paths.get(uploadDir);
 
-//                    RealEstateImage realEstateImage= new RealEstateImage(imageUrl,createRealEstate);
+                    boolean fileExist= Files.exists(fileUploadPath);
 
-//                    createRealEstate.addRealEstateImage(realEstateImage);
+                    try {
+                        if (!fileExist){
+                            Files.createDirectories(fileUploadPath);
+                        }
+
+                        InputStream inputStream=files[i].getInputStream();
+
+                        Path imagePath=fileUploadPath.resolve(fileName);
+
+                    Files.copy(inputStream,imagePath, StandardCopyOption.REPLACE_EXISTING);
+
+                        String imageUrl=resourcePath+ownUser.getId()+"/"+"real_estate/"+fileName;
+
+                    RealEstateImage realEstateImage= new RealEstateImage(imageUrl,createRealEstate);
+
+                    createRealEstate.addRealEstateImage(realEstateImage);
 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-            }
-        }
-//        realEstateServices.save(createRealEstate);
+                }
 
-//        realEstateDTO=RealEstateUtils.realEstateToRealEstateDTO(createRealEstate);
+            }
+
+
+        }
+
+        if ( !(existId == null && FileUtils.isFileEmpty(files)) ){
+            realEstateServices.save(createRealEstate);
+            realEstateDTO=RealEstateUtils.realEstateToRealEstateDTO(createRealEstate);
+            message="Thêm thành công";
+        }
+
 
         theModel.addAttribute("provinces",provinceServices.findAll());
         theModel.addAttribute("categories",categoryServices.findAll());
@@ -168,7 +225,7 @@ public class RealEstateController {
         theModel.addAttribute("internalUtils",realEstateDTO.getInternalUtilities());
         theModel.addAttribute("externalUtils",realEstateDTO.getExternalUtilities());
         theModel.addAttribute("aroundUtils",realEstateDTO.getAroundUtilities());
-        theModel.addAttribute("message","Thêm thành công");
+        theModel.addAttribute("message",message);
         return "create-real-estate-new";
 
     }
