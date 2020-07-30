@@ -65,6 +65,15 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-primary float-left">Liên hệ</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-secondary float-left">Theo dõi</a>
+                                </div>
+                            </div>
+
                             <hr>
 
                             <p th:utext="${realEstates.description}"></p>
@@ -236,105 +245,41 @@
                             <section>
                                 <h2>Similar Ads</h2>
                                 <div class="items compact">
-                                    <div class="item">
-                                        <div class="ribbon-featured">Featured</div>
-                                        <!--end ribbon-->
-                                        <div class="wrapper">
-                                            <div class="image">
-                                                <h3>
-                                                    <a href="#" class="tag category">Home & Decor</a>
-                                                    <a href="single-listing-1.html" class="title">Furniture for sale</a>
-                                                    <span class="tag">Offer</span>
-                                                </h3>
-                                                <a href="single-listing-1.html" class="image-wrapper background-image">
-                                                    <img src="assets/img/image-01.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <!--end image-->
-                                            <h4 class="location">
-                                                <a href="#">Manhattan, NY</a>
-                                            </h4>
-                                            <div class="price">$80</div>
-                                            <div class="meta">
-                                                <figure>
-                                                    <i class="fa fa-calendar-o"></i>02.05.2017
-                                                </figure>
-                                                <figure>
-                                                    <a href="#">
-                                                        <i class="fa fa-user"></i>Jane Doe
+                                    <th:block th:each="row : ${list}">
+                                        <div class="item">
+                                            <div class="ribbon-featured">Sales</div>
+                                            <!--end ribbon-->
+                                            <div class="wrapper">
+                                                <div class="image">
+                                                    <h3>
+                                                        <a href="#" class="tag category" th:text="${row.category}">Home & Decor</a>
+                                                        <span class="tag">Offer</span>
+                                                    </h3>
+                                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                                        <img th:src="@{${row.realEstateImages[0].image}}" alt="">
                                                     </a>
-                                                </figure>
+                                                </div>
+                                                <!--end image-->
+                                                <h4 class="location">
+                                                    <a href="#" th:text="${row.location}"></a>
+                                                </h4>
+                                                <div class="price">$80</div>
+                                                <div class="meta">
+                                                    <figure>
+                                                        <i class="fa fa-calendar-o"></i>02.05.2017
+                                                    </figure>
+                                                    <figure>
+                                                        <a href="#">
+                                                            <i class="fa fa-user"></i>Jane Doe
+                                                        </a>
+                                                    </figure>
+                                                </div>
+                                                <!--end meta-->
                                             </div>
-                                            <!--end meta-->
+                                            <!--end wrapper-->
                                         </div>
-                                        <!--end wrapper-->
-                                    </div>
-                                    <!--end item-->
-
-                                    <div class="item">
-                                        <div class="wrapper">
-                                            <div class="image">
-                                                <h3>
-                                                    <a href="#" class="tag category">Education</a>
-                                                    <a href="single-listing-1.html" class="title">Creative Course</a>
-                                                    <span class="tag">Offer</span>
-                                                </h3>
-                                                <a href="single-listing-1.html" class="image-wrapper background-image">
-                                                    <img src="assets/img/image-02.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <!--end image-->
-                                            <h4 class="location">
-                                                <a href="#">Nashville, TN</a>
-                                            </h4>
-                                            <div class="price">$125</div>
-                                            <div class="meta">
-                                                <figure>
-                                                    <i class="fa fa-calendar-o"></i>28.04.2017
-                                                </figure>
-                                                <figure>
-                                                    <a href="#">
-                                                        <i class="fa fa-user"></i>Peter Browner
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <!--end meta-->
-                                        </div>
-                                        <!--end wrapper-->
-                                    </div>
-                                    <!--end item-->
-
-                                    <div class="item">
-                                        <div class="wrapper">
-                                            <div class="image">
-                                                <h3>
-                                                    <a href="#" class="tag category">Adventure</a>
-                                                    <a href="single-listing-1.html" class="title">Into The Wild</a>
-                                                    <span class="tag">Ad</span>
-                                                </h3>
-                                                <a href="single-listing-1.html" class="image-wrapper background-image">
-                                                    <img src="assets/img/image-03.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <!--end image-->
-                                            <h4 class="location">
-                                                <a href="#">Seattle, WA</a>
-                                            </h4>
-                                            <div class="price">$1,560</div>
-                                            <div class="meta">
-                                                <figure>
-                                                    <i class="fa fa-calendar-o"></i>21.04.2017
-                                                </figure>
-                                                <figure>
-                                                    <a href="#">
-                                                        <i class="fa fa-user"></i>Peak Agency
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <!--end meta-->
-                                        </div>
-                                    </div>
-                                    <!--end item-->
+                                        <!--end item-->
+                                    </th:block>
                                 </div>
 
                             </section>

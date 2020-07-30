@@ -211,13 +211,17 @@ public class RealEstateController {
         User loginUser= (User) session.getAttribute("loginUser");
         RealEstate realEstates=realEstateServices.findById(id);
 
-
-        List<RealEstate> listRealEstate=realEstateServices.findAllByUser(loginUser);
+        Optional<String> sortBy=Optional.of("id");
+        Pageable pageable=PageRequest.of(0,3,Sort.Direction.DESC,sortBy.orElse("id"));
+        List<RealEstate> listRealEstate=realEstateServices
+                .findAllRealEstateByUserId(loginUser.getId().intValue(),pageable)
+                .getContent();
         int size=listRealEstate.size();
 
         ModelAndView modelAndView=new ModelAndView("detail-real-estate");
         modelAndView.addObject("realEstates",realEstates);
         modelAndView.addObject("size",size);
+        modelAndView.addObject("list",listRealEstate);
         return modelAndView;
     }
 
