@@ -261,16 +261,16 @@
                                                 </div>
                                                 <!--end image-->
                                                 <h4 class="location">
-                                                    <a href="#" th:text="${row.location}"></a>
+                                                    <a href="#" th:text="${row.province}"></a>
                                                 </h4>
-                                                <div class="price">$80</div>
+                                                <div class="price" th:text="${row.totalprice}"></div>
                                                 <div class="meta">
                                                     <figure>
-                                                        <i class="fa fa-calendar-o"></i>02.05.2017
+                                                        <i class="fa fa-location-arrow"></i> [[${row.totalArea}]]m<sup>2</sup>
                                                     </figure>
                                                     <figure>
                                                         <a href="#">
-                                                            <i class="fa fa-user"></i>Jane Doe
+                                                            <i class="fa fa-user"></i> [[${session.loginUser.fullName}]]
                                                         </a>
                                                     </figure>
                                                 </div>
