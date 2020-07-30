@@ -91,7 +91,8 @@ public class RealEstate {
     private User user;
 
 
-    @OneToMany(fetch=FetchType.LAZY,mappedBy = "realEstate",cascade ={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+//    @OneToMany(fetch=FetchType.LAZY,mappedBy = "realEstate",cascade ={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToMany(fetch=FetchType.LAZY,mappedBy = "realEstate",cascade =CascadeType.ALL)
     private List<RealEstateImage> realEstateImages;
 
     public void addRealEstateImage(RealEstateImage realEstateImage){

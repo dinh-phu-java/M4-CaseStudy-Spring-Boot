@@ -247,7 +247,6 @@ public class RealEstateController {
     }
 
     @GetMapping("/manage-post/{pageNo}")
-//    @RequestParam Optional<Integer> page,@RequestParam Optional<String> sortBy
     public String showAllUserPost(@PathVariable("pageNo") int pageNo,Model theModel,HttpSession session){
         int pageSize=2;
         Optional<String> sortBy= Optional.of("id");
@@ -322,4 +321,11 @@ public class RealEstateController {
 
     }
 
+    @GetMapping("/remove/{id}")
+    public String removeRealEstate(@PathVariable Long id){
+
+        realEstateServices.remove(id);
+
+        return "redirect:/real-estate/manage-post/1";
+    }
 }
