@@ -79,7 +79,7 @@
                     <div class="col-md-9">
 <!--                        <form role="form" th:object="${crmUser}" th:method="post" th:action="@{/updateUser}" enctype="multipart/form-data">-->
                         <form  method="post" th:object="${realEstateDTO}" th:action="@{/real-estate/create}" enctype="multipart/form-data" id="create-estate-form">
-
+                            <input type="hidden" th:field="*{id}">
                             <div class="row">
                                 <div class="col-md-12">
 

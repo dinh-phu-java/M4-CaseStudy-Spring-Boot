@@ -87,6 +87,7 @@ public class RealEstateUtils {
 
     public static RealEstate realEstateDTOToRealEstate(RealEstateDTO realEstateDTO, String donVi) {
         RealEstate realEstate=new RealEstate();
+        realEstate.setId(realEstateDTO.getId());
         realEstate.setAddress(realEstateDTO.getAddress());
         realEstate.setAreaType(realEstateDTO.getAreaType());
         realEstate.setBathRoomQuantity(realEstateDTO.getBathRoomQuantity());
@@ -114,6 +115,7 @@ public class RealEstateUtils {
 
     public static RealEstateDTO realEstateToRealEstateDTO(RealEstate realEstate) {
         RealEstateDTO realEstateDTO=new RealEstateDTO();
+        realEstateDTO.setId(realEstate.getId());
         realEstateDTO.setAddress(realEstate.getAddress());
         realEstateDTO.setAreaType(realEstate.getAreaType());
         realEstateDTO.setBathRoomQuantity(realEstate.getBathRoomQuantity());

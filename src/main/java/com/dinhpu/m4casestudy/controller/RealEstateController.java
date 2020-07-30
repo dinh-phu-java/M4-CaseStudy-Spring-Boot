@@ -198,6 +198,7 @@ public class RealEstateController {
 
 
         theModel.addAttribute("currentPage",pageNo);
+
         theModel.addAttribute("totalPages",page.getTotalPages());
         theModel.addAttribute("totalItems",page.getTotalElements());
         theModel.addAttribute("listRealEstate",realEstates);
