@@ -226,4 +226,24 @@ public class RealEstateController {
     }
 
 
+    @GetMapping("/edit/{id}")
+    public String showEdit(@PathVariable Long id,Model theModel){
+        RealEstate realEstate=realEstateServices.findById(id);
+
+        RealEstateDTO realEstateDTO =RealEstateUtils.realEstateToRealEstateDTO(realEstate);
+
+        theModel.addAttribute("provinces",provinceServices.findAll());
+        theModel.addAttribute("categories",categoryServices.findAll());
+        theModel.addAttribute("areatypes",areaTypeServices.findAll());
+        theModel.addAttribute("realEstateDTO",realEstateDTO);
+        theModel.addAttribute("directions",directionServices.findAll());
+        theModel.addAttribute("legals",legalPaperServices.findAll());
+        theModel.addAttribute("internalUtils",realEstateDTO.getInternalUtilities());
+        theModel.addAttribute("externalUtils",realEstateDTO.getExternalUtilities());
+        theModel.addAttribute("aroundUtils",realEstateDTO.getAroundUtilities());
+        theModel.addAttribute("message",null);
+        return "create-real-estate-new";
+
+    }
+
 }

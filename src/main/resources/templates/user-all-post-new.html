@@ -85,7 +85,7 @@
                                         </h4>
                                         <div class="price" th:text="${row.totalprice}"></div>
                                         <div class="admin-controls">
-                                            <a href="edit-ad.html">
+                                            <a th:href="@{/real-estate/edit/__${row.id}__}">
                                                 <i class="fa fa-pencil"></i>Edit
                                             </a>
 
