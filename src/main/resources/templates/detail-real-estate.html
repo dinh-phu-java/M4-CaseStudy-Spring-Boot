@@ -65,17 +65,43 @@
                                 </div>
                             </div>
 
+                            <th:block th:if="${session.loginUser !=null}" >
 
-<!--                            <th:block th:if="${session.loginUser.id != realEstates.id}">-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <a th:href="@{/real-estate/contact/__${realEstates.id}__}" class="btn btn-primary float-left">Liên hệ</a>
+
+                                <th:block th:if="${session.loginUser.id != realEstates.user.id}">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a th:href="@{/real-estate/contact/__${realEstates.id}__}" class="btn btn-primary float-left">Liên hệ</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="#" class="btn btn-secondary float-left">Theo dõi</a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <a href="#" class="btn btn-secondary float-left">Theo dõi</a>
+                                </th:block>
+                                <th:block th:unless="${session.loginUser.id != realEstates.user.id}">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a th:href="@{/real-estate/edit/__${realEstates.id}__}" class="btn btn-primary float-left">Sửa thông tin</a>
+                                        </div>
+
                                     </div>
-                                </div>
-<!--                            </th:block>-->
+                                </th:block>
+
+                            </th:block>
+
+                            <th:block th:unless="${session.loginUser !=null}" >
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a th:href="@{/real-estate/contact/__${realEstates.id}__}" class="btn btn-primary float-left">Liên hệ</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="#" class="btn btn-secondary float-left">Theo dõi</a>
+                                        </div>
+                                    </div>
+
+                            </th:block>
+
                             <hr>
 
                             <p th:utext="${realEstates.description}"></p>
