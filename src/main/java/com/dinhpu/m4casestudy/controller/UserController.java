@@ -4,6 +4,7 @@ import com.dinhpu.m4casestudy.dto.user.CrmChangePasswordUser;
 import com.dinhpu.m4casestudy.dto.user.CrmUpdateUser;
 import com.dinhpu.m4casestudy.model.user.User;
 import com.dinhpu.m4casestudy.services.user.IUserServices;
+import com.dinhpu.m4casestudy.utils.ImageUtils;
 import com.dinhpu.m4casestudy.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -78,7 +79,7 @@ public class UserController {
 
         System.out.println("file is: " + file);
 
-        String fileName = file.getOriginalFilename();
+        String fileName = ImageUtils.hashFileName(file.getOriginalFilename());
 
         System.out.println("file Name is " + fileName);
 
@@ -120,10 +121,10 @@ public class UserController {
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 
                 Path deletePath = Paths.get("./" + loginUser.getLogoUrl());
-                System.out.println("deleting file!!!");
-                Files.delete(deletePath);
+                if (Files.exists(deletePath)){
+                    Files.delete(deletePath);
+                }
 
-                System.out.println("delete path is: " + deletePath.toAbsolutePath());
                 logoUrl = resourcePath + crmUser.getId() + "/" + fileName;
 
             } catch (IOException e) {

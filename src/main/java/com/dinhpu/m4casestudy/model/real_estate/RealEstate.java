@@ -90,10 +90,12 @@ public class RealEstate {
     @JoinColumn(name="user_id")
     private User user;
 
-
 //    @OneToMany(fetch=FetchType.LAZY,mappedBy = "realEstate",cascade ={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @OneToMany(fetch=FetchType.LAZY,mappedBy = "realEstate",cascade =CascadeType.ALL)
     private List<RealEstateImage> realEstateImages;
+
+    @Column(name="advertise")
+    private boolean advertise;
 
     public void addRealEstateImage(RealEstateImage realEstateImage){
         if (realEstateImages==null){

@@ -1,0 +1,37 @@
+package com.dinhpu.m4casestudy.utils;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class ImageUtils {
+    public static String hashFileName(String fileName){
+        String postFix=fileName.substring(fileName.indexOf('.'));
+
+        StringBuilder sb=null;
+        try {
+
+            MessageDigest md =MessageDigest.getInstance("SHA-256");
+            md.update(fileName.getBytes());
+            byte[] mdArray= md.digest();
+            sb= new StringBuilder(mdArray.length*2);
+
+            for (byte b: mdArray){
+                int v= b & 0xff;
+                if (v < 16){
+                    sb.append('0');
+                }
+                sb.append(Integer.toHexString(v));
+            }
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return sb.toString()+postFix;
+
+    }
+
+//    public static void main(String[] args) {
+//        System.out.println(ImageUtils.hashFileName("abc)43((.jpg"));
+//    }
+}
