@@ -273,8 +273,11 @@ public class RealEstateController {
 
 
     @GetMapping("/detail/{id}")
-    public ModelAndView showDetail(@PathVariable Long id){
+    public ModelAndView showDetail(@PathVariable Long id,HttpSession session){
 //        User loginUser= (User) session.getAttribute("loginUser");
+        if (session.getAttribute("loginUser")==null){
+            session.setAttribute("loginUser",null);
+        }
         RealEstate realEstates=realEstateServices.findById(id);
         User ownUser=realEstates.getUser();
         List<RealEstate> totalRealEstates=realEstateServices.findAll();
@@ -333,5 +336,17 @@ public class RealEstateController {
         realEstateServices.remove(id);
 
         return "redirect:/real-estate/manage-post/1";
+    }
+
+    @GetMapping("/contact/{id}")
+    public String contactHandler(@PathVariable Long id,Model theModel,HttpSession session){
+        if (session.getAttribute("loginUser") == null){
+            session.setAttribute("detailId",id);
+            return "redirect:/loginPage";
+        }else{
+
+            return "";
+        }
+
     }
 }
