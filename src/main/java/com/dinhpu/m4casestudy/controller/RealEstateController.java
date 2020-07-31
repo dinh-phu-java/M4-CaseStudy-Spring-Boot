@@ -6,6 +6,7 @@ import com.dinhpu.m4casestudy.model.user.User;
 import com.dinhpu.m4casestudy.services.real_estate.*;
 import com.dinhpu.m4casestudy.services.user.IUserServices;
 import com.dinhpu.m4casestudy.utils.FileUtils;
+import com.dinhpu.m4casestudy.utils.ImageUtils;
 import com.dinhpu.m4casestudy.utils.RealEstateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -164,7 +165,10 @@ public class RealEstateController {
 
                 for (int i=0;i<listImagePath.size();i++){
                     try {
-                        Files.delete(listImagePath.get(i));
+                        if (Files.exists(listImagePath.get(i))){
+                            Files.delete(listImagePath.get(i));
+                        }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -177,7 +181,8 @@ public class RealEstateController {
 
             for (int i=0;i<files.length;i++){
 
-                String fileName=files[i].getOriginalFilename();
+                String fileName= files[i].getOriginalFilename();
+
                 if (!fileName.equals("")){
                     String uploadDir=uploadPath + ownUser.getId()+"/real_estate/";
 
