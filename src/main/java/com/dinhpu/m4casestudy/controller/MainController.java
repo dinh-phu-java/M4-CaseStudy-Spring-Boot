@@ -23,10 +23,13 @@ public class MainController {
 	@GetMapping("/")
 	public String showHome(Model theModel) {
 		Optional<String> sortBy=Optional.of("id");
-		Pageable pageable= PageRequest.of(0,3, Sort.Direction.ASC,sortBy.orElse("id"));
-		List<RealEstate> listAdRealEstate=realEstateServices.findAllByAdvertise(true,pageable);
+		Pageable pageableAdvertise= PageRequest.of(0,3, Sort.Direction.ASC,sortBy.orElse("id"));
+		List<RealEstate> listAdRealEstate=realEstateServices.findAllByAdvertise(true,pageableAdvertise);
+
+		List<RealEstate> listRecentReal=realEstateServices.findAllRecent();
 
 		theModel.addAttribute("listRealAdvertise",listAdRealEstate);
+		theModel.addAttribute("listRecentReal",listRecentReal);
 		return "index";
 	}
 	

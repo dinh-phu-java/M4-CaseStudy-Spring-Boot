@@ -71,5 +71,11 @@ public class RealEstateServices implements IRealEstateServices{
         return realEstateDAO.findAllByAdvertise(ad,pageable);
     }
 
+    @Override
+    public List<RealEstate> findAllRecent() {
+        Pageable pageable=PageRequest.of(0,8, Sort.Direction.ASC,"id");
+        return realEstateDAO.findAllRecent(pageable);
+    }
+
 
 }

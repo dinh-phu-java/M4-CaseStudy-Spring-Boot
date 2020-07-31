@@ -24,4 +24,10 @@ public interface RealEstateDAO extends JpaRepository<RealEstate,Long> {
             nativeQuery=true)
     public Page<RealEstate> findAllRealEstateByUserId(int id,Pageable pageable);
     public List<RealEstate> findAllByUser(User user);
+
+    @Query(value="select * from real_estate where advertise=false"
+    ,countQuery="select count(*) from real_estate where advertise=false"
+            ,nativeQuery=true
+    )
+    List<RealEstate> findAllRecent(Pageable pageable);
 }

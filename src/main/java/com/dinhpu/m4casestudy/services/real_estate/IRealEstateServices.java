@@ -18,4 +18,6 @@ public interface IRealEstateServices {
     Page<RealEstate> findAllRealEstateByUserId(int id,Pageable pageable);
     public List<RealEstate> findAllByUser(User loginUser);
     public List<RealEstate> findAllByAdvertise(boolean ad,Pageable pageble);
+
+    List<RealEstate> findAllRecent();
 }
