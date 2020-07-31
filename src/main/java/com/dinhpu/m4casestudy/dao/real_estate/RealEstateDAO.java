@@ -14,6 +14,11 @@ import java.util.List;
 @Repository
 public interface RealEstateDAO extends JpaRepository<RealEstate,Long> {
 
+    @Query(value="select * from real_estate where advertise=?1"
+            ,countQuery="select count(*) from real_estate where advertise=?1"
+            ,nativeQuery=true)
+    public List<RealEstate> findAllByAdvertise(boolean ad,Pageable pageable);
+
     @Query(value="select * from real_estate where user_id =?1",
         countQuery="select count(*) from real_estate where user_id=?1",
             nativeQuery=true)

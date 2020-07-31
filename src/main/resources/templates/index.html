@@ -2,91 +2,140 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/home/head.html :: my-head(~{ :: .my-own-title})">
 
-	<title class="my-own-title">Home Page Title</title>
+    <title class="my-own-title">Home Page Title</title>
 
 </head>
 <body>
-    <div class="page home-page">
-        <!--*********************************************************************************************************-->
-        <!--************ HERO ***************************************************************************************-->
-        <!--*********************************************************************************************************-->
-        <header class="hero has-dark-background">
-            <div class="hero-wrapper">
+<div class="page home-page">
+    <!--*********************************************************************************************************-->
+    <!--************ HERO ***************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <header class="hero has-dark-background">
+        <div class="hero-wrapper">
 
-                <!--============ Secondary Navigation ===============================================================-->
-                <div class="secondary-navigation" th:replace="fragments/home/secondary-navigation.html :: secondary-navigation">
-                </div>
-                <!--============ End Secondary Navigation ===========================================================-->
-
-                <!--============ Main Navigation ====================================================================-->
-                <div class="main-navigation" th:replace="fragments/home/main-navigation.html :: main-navigation">
-                </div>
-                <!--============ End Main Navigation ================================================================-->
-
-                <!--============ Page Title =========================================================================-->
-                <div class="page-title" th:replace="fragments/home/page-title.html :: page-title">
-                </div>
-                <!--============ End Page Title =====================================================================-->
-
-                <!--============ Hero Form ==========================================================================-->
-                <form class="hero-form form" th:replace="fragments/home/hero-form.html :: hero-form">
-                </form>
-                <!--============ End Hero Form ======================================================================-->
-                <div class="background" th:replace="fragments/home/header-background.html :: header-background">
-                </div>
-                <!--end background-->
+            <!--============ Secondary Navigation ===============================================================-->
+            <div class="secondary-navigation"
+                 th:replace="fragments/home/secondary-navigation.html :: secondary-navigation">
             </div>
-            <!--end hero-wrapper-->
-        </header>
-        <!--end hero-->
+            <!--============ End Secondary Navigation ===========================================================-->
 
-        <!--*********************************************************************************************************-->
-        <!--************ CONTENT ************************************************************************************-->
-        <!--*********************************************************************************************************-->
-        <section class="content">
+            <!--============ Main Navigation ====================================================================-->
+            <div class="main-navigation" th:replace="fragments/home/main-navigation.html :: main-navigation">
+            </div>
+            <!--============ End Main Navigation ================================================================-->
 
-            <!--============ Featured Ads ===========================================================================-->
-            <section class="block" th:replace="fragments/home/feature-ad.html :: feature-ad">
+            <!--============ Page Title =========================================================================-->
+            <div class="page-title" th:replace="fragments/home/page-title.html :: page-title">
+            </div>
+            <!--============ End Page Title =====================================================================-->
 
-            </section>
+            <!--============ Hero Form ==========================================================================-->
+            <form class="hero-form form" th:replace="fragments/home/hero-form.html :: hero-form">
+            </form>
+            <!--============ End Hero Form ======================================================================-->
+            <div class="background" th:replace="fragments/home/header-background.html :: header-background">
+            </div>
+            <!--end background-->
+        </div>
+        <!--end hero-wrapper-->
+    </header>
+    <!--end hero-->
 
-            <!--============ End Featured Ads =======================================================================-->
+    <!--*********************************************************************************************************-->
+    <!--************ CONTENT ************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <section class="content">
 
-            <!--============ Features Steps =========================================================================-->
-            <section class="block" th:replace="fragments/home/feature-step.html :: feature-step">
-            </section>
-            <!--end block-->
-            <!--============ End Features Steps =====================================================================-->
+        <!--============ Featured Ads ===========================================================================-->
+        <!--            <section class="block" th:replace="fragments/home/feature-ad.html :: feature-ad">-->
 
-            <!--============ Recent Ads =============================================================================-->
-            <section class="block" th:replace="fragments/home/recent-ad.html :: recent-ad">
-            </section>
-            <!--end block-->
-            <!--============ End Recent Ads =========================================================================-->
+        <!--            </section>-->
 
-            <!--============ Newsletter =============================================================================-->
-            <section class="block" th:replace="fragments/home/newsletter.html :: newsletter">
-            </section>
-            <!--end block-->
+        <section class="block" th:fragment="feature-ad">
+            <div class="container">
+                <h2>Featured Ads</h2>
+                <div class="items grid grid-xl-3-items grid-lg-3-items grid-md-2-items">
+                    <th:block th:each="row : ${listRealAdvertise}">
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category" th:text="${row.category}"></a>
+<!--                                        <a href="single-listing-1.html" class="title" th:text="${row.title}"></a>-->
+                                        <span class="tag" th:text="${row.realEstateType}"></span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img th:src="@{${row.realEstateImages[0].image}}" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#" th:text="${row.province}"></a>
+                                </h4>
+                                <div class="price" th:text="${row.totalprice}"></div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-location-arrow"></i> [[${row.totalArea}]]m<sup>2</sup>
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i> <span th:text="${row.user.fullName}"></span>
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+<!--                                    <p>[[${row.direction}]] [[${row.legalPaper}]] [[${row.realEstateType}]] [[${row.areaType}]]</p>-->
+                                        <p th:text="${row.title}"></p>
+                                </div>
+                                <!--end description-->
+                                <a th:href="@{/real-estate/detail/__${row.id}__}" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+                    </th:block>
 
-            <section class="block" th:replace="fragments/home/newsletter.html :: vendor">
-            </section>
-
+                </div>
+            </div>
         </section>
-        <!--end content-->
 
-        <!--*********************************************************************************************************-->
-        <!--************ FOOTER *************************************************************************************-->
-        <!--*********************************************************************************************************-->
-        <footer class="footer" th:replace="fragments/home/footer.html :: footer">
-        </footer>
-        <!--end footer-->
-    </div>
-    <!--end page-->
 
-    <div id="foot-script" th:replace="fragments/home/foot-script.html :: foot-script">
-    </div>
+        <!--============ End Featured Ads =======================================================================-->
 
+        <!--============ Features Steps =========================================================================-->
+        <section class="block" th:replace="fragments/home/feature-step.html :: feature-step">
+        </section>
+        <!--end block-->
+        <!--============ End Features Steps =====================================================================-->
+
+        <!--============ Recent Ads =============================================================================-->
+        <section class="block" th:replace="fragments/home/recent-ad.html :: recent-ad">
+        </section>
+        <!--end block-->
+        <!--============ End Recent Ads =========================================================================-->
+
+        <!--============ Newsletter =============================================================================-->
+        <section class="block" th:replace="fragments/home/newsletter.html :: newsletter">
+        </section>
+        <!--end block-->
+
+        <section class="block" th:replace="fragments/home/newsletter.html :: vendor">
+        </section>
+
+    </section>
+    <!--end content-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <footer class="footer" th:replace="fragments/home/footer.html :: footer">
+    </footer>
+    <!--end footer-->
+</div>
+<!--end page-->
+
+<div id="foot-script" th:replace="fragments/home/foot-script.html :: foot-script">
+</div>
 
 
 </body>
