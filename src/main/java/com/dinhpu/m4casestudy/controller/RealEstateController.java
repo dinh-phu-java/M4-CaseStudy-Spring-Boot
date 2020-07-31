@@ -273,15 +273,16 @@ public class RealEstateController {
 
 
     @GetMapping("/detail/{id}")
-    public ModelAndView showDetail(@PathVariable Long id,HttpSession session){
-        User loginUser= (User) session.getAttribute("loginUser");
+    public ModelAndView showDetail(@PathVariable Long id){
+//        User loginUser= (User) session.getAttribute("loginUser");
         RealEstate realEstates=realEstateServices.findById(id);
+        User ownUser=realEstates.getUser();
         List<RealEstate> totalRealEstates=realEstateServices.findAll();
 
         Optional<String> sortBy=Optional.of("id");
         Pageable pageable=PageRequest.of(0,3,Sort.Direction.DESC,sortBy.orElse("id"));
         List<RealEstate> listRealEstate=realEstateServices
-                .findAllRealEstateByUserId(loginUser.getId().intValue(),pageable)
+                .findAllRealEstateByUserId(ownUser.getId().intValue(),pageable)
                 .getContent();
         int size=totalRealEstates.size();
 

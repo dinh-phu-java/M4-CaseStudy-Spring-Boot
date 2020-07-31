@@ -187,12 +187,14 @@
                                         <div class="author">
                                             <div class="author-image">
                                                 <div class="background-image">
-                                                    <img th:src="@{${session.loginUser.getLogoUrl()}}" alt="">
+<!--                                                    <img th:src="@{${session.loginUser.getLogoUrl()}}" alt="">-->
+                                                    <img th:src="@{${realEstates.user.getLogoUrl()}}" alt="">
                                                 </div>
                                             </div>
                                             <!--end author-image-->
                                             <div class="author-description">
-                                                <h3 th:text="${session.loginUser.fullName}"></h3>
+<!--                                                <h3 th:text="${session.loginUser.fullName}"></h3>-->
+                                                <h3 th:text="${realEstates.user.fullName}"></h3>
                                                 <div class="rating" data-rating="4"></div>
                                                 <a href="seller-detail-1.html" class="text-uppercase">Danh sách bất động sản
                                                     <span class="appendix">([[${size}]])</span>
@@ -203,9 +205,11 @@
                                         <hr>
                                         <dl>
                                             <dt>Điện thoại</dt>
-                                            <dd th:text="${session.loginUser.getPhoneNumber()}"></dd>
+<!--                                            <dd th:text="${session.loginUser.getPhoneNumber()}"></dd>-->
+                                            <dd th:text="${realEstates.user.getPhoneNumber()}"></dd>
                                             <dt>Email</dt>
-                                            <dd th:text="${session.loginUser.getEmail()}"></dd>
+<!--                                            <dd th:text="${session.loginUser.getEmail()}"></dd>-->
+                                            <dd th:text="${realEstates.user.getEmail()}"></dd>
                                         </dl>
                                         <!--end author-->
                                     </div>
@@ -271,7 +275,7 @@
                                                     </figure>
                                                     <figure>
                                                         <a href="#">
-                                                            <i class="fa fa-user"></i> [[${session.loginUser.fullName}]]
+                                                            <i class="fa fa-user"></i> [[${realEstates.user.fullName}]]
                                                         </a>
                                                     </figure>
                                                 </div>

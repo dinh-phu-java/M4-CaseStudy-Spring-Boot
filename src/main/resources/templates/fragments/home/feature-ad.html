@@ -10,8 +10,8 @@
                         <div class="image">
                             <h3>
                                 <a href="#" class="tag category" th:text="${row.category}"></a>
-                                <a href="single-listing-1.html" class="title" th:text="${row.title}"></a>
-                                <span class="tag">Offer</span>
+                                <!--                                        <a href="single-listing-1.html" class="title" th:text="${row.title}"></a>-->
+                                <span class="tag" th:text="${row.realEstateType}"></span>
                             </h3>
                             <a href="single-listing-1.html" class="image-wrapper background-image">
                                 <img th:src="@{${row.realEstateImages[0].image}}" alt="">
@@ -19,25 +19,26 @@
                         </div>
                         <!--end image-->
                         <h4 class="location">
-                            <a href="#">Manhattan, NY</a>
+                            <a href="#" th:text="${row.province}"></a>
                         </h4>
-                        <div class="price">$80</div>
+                        <div class="price" th:text="${row.totalprice}"></div>
                         <div class="meta">
                             <figure>
-                                <i class="fa fa-calendar-o"></i>02.05.2017
+                                <i class="fa fa-location-arrow"></i> [[${row.totalArea}]]m<sup>2</sup>
                             </figure>
                             <figure>
                                 <a href="#">
-                                    <i class="fa fa-user"></i>Jane Doe
+                                    <i class="fa fa-user"></i> <span th:text="${row.user.fullName}"></span>
                                 </a>
                             </figure>
                         </div>
                         <!--end meta-->
                         <div class="description">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis lobortis</p>
+                            <!--                                    <p>[[${row.direction}]] [[${row.legalPaper}]] [[${row.realEstateType}]] [[${row.areaType}]]</p>-->
+                            <p th:text="${row.title}"></p>
                         </div>
                         <!--end description-->
-                        <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                        <a th:href="@{/real-estate/detail/__${row.id}__}" class="detail text-caps underline">Detail</a>
                     </div>
                 </div>
                 <!--end item-->
