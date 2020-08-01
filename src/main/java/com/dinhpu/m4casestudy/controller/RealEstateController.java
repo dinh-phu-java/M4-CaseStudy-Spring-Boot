@@ -424,4 +424,24 @@ public class RealEstateController {
 
         return "redirect:/real-estate/contact-post/1";
     }
+
+    @GetMapping("/list-customer/{pageNo}")
+    public String showListCustomer(@PathVariable int pageNo,Model theModel,HttpSession session){
+
+        Optional<String> sortBy= Optional.of("id");
+        Pageable pageable= PageRequest.of(pageNo-1,PAGE_SIZE,Sort.Direction.DESC,sortBy.orElse("id"));
+
+        User loginUSer= (User)session.getAttribute("loginUser");
+        int loginId = loginUSer.getId().intValue();
+
+        Page<Customers> page=customerServices.findAllByOwnerUSer(loginId,pageable);
+        List<Customers> customers=page.getContent();
+
+        theModel.addAttribute("currentPage",pageNo);
+        theModel.addAttribute("totalPages",page.getTotalPages());
+        theModel.addAttribute("totalItems",page.getTotalElements());
+        theModel.addAttribute("customers",customers);
+
+        return "list-customer";
+    }
 }

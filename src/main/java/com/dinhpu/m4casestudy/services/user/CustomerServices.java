@@ -61,4 +61,9 @@ public class CustomerServices implements ICustomerServices{
     public void deleteCustomersByBuyerAndRealEstateCustom(int buyer_id, int real_estate_id) {
         customersDAO.deleteCustomersByBuyerAndRealEstateCustom(buyer_id,real_estate_id);
     }
+
+    @Override
+    public Page<Customers> findAllByOwnerUSer(int owner_id, Pageable pageable) {
+        return customersDAO.findAllByOwnerUSer(owner_id,pageable);
+    }
 }
