@@ -66,4 +66,10 @@ public class CustomerServices implements ICustomerServices{
     public Page<Customers> findAllByOwnerUSer(int owner_id, Pageable pageable) {
         return customersDAO.findAllByOwnerUSer(owner_id,pageable);
     }
+
+    @Override
+    @Transactional
+    public void changeStatus(int id) {
+        customersDAO.changeStatus(id);
+    }
 }

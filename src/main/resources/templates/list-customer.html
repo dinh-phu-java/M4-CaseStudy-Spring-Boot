@@ -31,6 +31,7 @@
     <!--*********************************************************************************************************-->
 
     <section class="content">
+        <section class="block"></section>
         <div class="container-fluid">
             <div class="row">
                 <div th:replace="fragments/home/user-menu-bar.html :: user-menu-bar">
@@ -60,7 +61,7 @@
                                 <th scope="col">Tên bất động sản</th>
                                 <th scope="col">Tổng giá</th>
                                 <th scope="col">Trạng thái</th>
-                                <th scope="col" colspan="2" class="text-center">Thao tác</th>
+                                <th scope="col" class="text-center">Thao tác</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -72,9 +73,19 @@
                                     <td th:text="${row.buyer.email}"></td>
                                     <td th:text="${row.realEstate.title}"></td>
                                     <td th:text="${row.realEstate.totalprice}"></td>
-                                    <td >Chưa liên hệ</td>
-                                    <td><a >Liên hệ</a></td>
-                                    <td><a >Xóa</a></td>
+
+                                    <th:block th:if="${row.status == true}">
+                                        <td >Đã liên hệ</td>
+                                    </th:block>
+                                    <th:block th:unless="${row.status == true}">
+                                        <td >Chưa liên hệ</td>
+                                    </th:block>
+                                    <th:block th:if="${row.status==false}">
+                                        <td><a th:href="@{/real-estate/change-status/__${row.id}__/__${currentPage}__}">Liên hệ</a></td>
+                                    </th:block>
+                                    <th:block th:unless="${row.status==false}">
+                                        <td><a>Liên hệ</a></td>
+                                    </th:block>
                                 </tr>
                             </th:block>
 
@@ -134,6 +145,7 @@
             <!-- /.card -->
             </div>
         </div>
+    </section>
     </section>
     <!--end content-->
 

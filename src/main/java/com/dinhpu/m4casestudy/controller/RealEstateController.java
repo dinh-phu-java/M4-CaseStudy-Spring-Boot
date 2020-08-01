@@ -444,4 +444,25 @@ public class RealEstateController {
 
         return "list-customer";
     }
+
+    @GetMapping("change-status/{id}/{pageNo}")
+    public String changeStatus(@PathVariable int id,@PathVariable int pageNo,Model theModel,HttpSession session){
+        customerServices.changeStatus(id);
+
+        Optional<String> sortBy= Optional.of("id");
+        Pageable pageable= PageRequest.of(pageNo-1,PAGE_SIZE,Sort.Direction.DESC,sortBy.orElse("id"));
+
+        User loginUSer= (User)session.getAttribute("loginUser");
+        int loginId = loginUSer.getId().intValue();
+
+        Page<Customers> page=customerServices.findAllByOwnerUSer(loginId,pageable);
+        List<Customers> customers=page.getContent();
+
+        theModel.addAttribute("currentPage",pageNo);
+        theModel.addAttribute("totalPages",page.getTotalPages());
+        theModel.addAttribute("totalItems",page.getTotalElements());
+        theModel.addAttribute("customers",customers);
+
+        return "list-customer";
+    }
 }

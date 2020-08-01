@@ -12,6 +12,9 @@ public class Customers {
     @Column(name="id")
     private Long id;
 
+    @Column(name="status")
+    private boolean status;
+
     @ManyToOne
     @JoinColumn(name="buyer_id")
     private User buyer;
@@ -25,9 +28,17 @@ public class Customers {
     private User owner;
 
     public Customers() {
+        this.status=false;
     }
 
     public Customers(User buyer, RealEstate realEstate, User owner) {
+        this.buyer = buyer;
+        this.realEstate = realEstate;
+        this.owner = owner;
+    }
+
+    public Customers(boolean status, User buyer, RealEstate realEstate, User owner) {
+        this.status = status;
         this.buyer = buyer;
         this.realEstate = realEstate;
         this.owner = owner;
@@ -63,5 +74,13 @@ public class Customers {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

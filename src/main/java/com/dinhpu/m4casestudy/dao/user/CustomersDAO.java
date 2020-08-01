@@ -30,4 +30,8 @@ public interface CustomersDAO extends JpaRepository<Customers,Long> {
             nativeQuery=true)
     Page<Customers> findAllByOwnerUSer(int owner_id,Pageable pageable);
 
+    @Modifying
+    @Query(value="update customers set status=true where id=?1",
+    nativeQuery=true)
+    void changeStatus(int id);
 }
