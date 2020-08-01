@@ -23,6 +23,7 @@ public interface RealEstateDAO extends JpaRepository<RealEstate,Long> {
         countQuery="select count(*) from real_estate where user_id=?1",
             nativeQuery=true)
     public Page<RealEstate> findAllRealEstateByUserId(int id,Pageable pageable);
+
     public List<RealEstate> findAllByUser(User user);
 
     @Query(value="select * from real_estate where advertise=false"

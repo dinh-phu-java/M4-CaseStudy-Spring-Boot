@@ -1,9 +1,15 @@
 package com.dinhpu.m4casestudy.services.user;
 
 import com.dinhpu.m4casestudy.dao.user.CustomersDAO;
+import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
 import com.dinhpu.m4casestudy.model.user.Customers;
+import com.dinhpu.m4casestudy.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,5 +44,21 @@ public class CustomerServices implements ICustomerServices{
         Customers removeObj=findById(id);
         customersDAO.deleteById(id);
         return removeObj;
+    }
+
+    @Override
+    public List<Customers> findAllByBuyer(User buyer) {
+        return customersDAO.findAllByBuyer(buyer);
+    }
+
+    @Override
+    public Page<Customers> findAllRealEstateByBuyer(int buyer_id, Pageable pageable) {
+        return customersDAO.findAllRealEstateByBuyer(buyer_id,pageable);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCustomersByBuyerAndRealEstateCustom(int buyer_id, int real_estate_id) {
+        customersDAO.deleteCustomersByBuyerAndRealEstateCustom(buyer_id,real_estate_id);
     }
 }

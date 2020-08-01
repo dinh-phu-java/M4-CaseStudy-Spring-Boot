@@ -45,7 +45,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
 		session.setAttribute("loginUser", theUser);
 
-		List<Customers> allCustomers =customerServices.findAll();
+		List<Customers> allCustomers =customerServices.findAllByBuyer(theUser);
 		List<Long> listIdContact=new ArrayList<>();
 		for (Customers row : allCustomers){
 			listIdContact.add(row.getRealEstate().getId());

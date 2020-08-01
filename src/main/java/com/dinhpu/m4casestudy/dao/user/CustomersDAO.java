@@ -1,7 +1,31 @@
 package com.dinhpu.m4casestudy.dao.user;
 
+import com.dinhpu.m4casestudy.model.real_estate.RealEstate;
 import com.dinhpu.m4casestudy.model.user.Customers;
+import com.dinhpu.m4casestudy.model.user.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface CustomersDAO extends JpaRepository<Customers,Long> {
+    List<Customers> findAllByBuyer(User buyer);
+
+    @Query(value="select * from customers  where buyer_id=?1",
+    countQuery="select count(*) from customers where buyer_id=?1",
+    nativeQuery=true)
+    Page<Customers> findAllRealEstateByBuyer(int buyer_id, Pageable pageable);
+
+    @Modifying
+    @Query(value="delete from customers where buyer_id=?1 and real_estate_id=?2",
+    nativeQuery=true)
+    void deleteCustomersByBuyerAndRealEstateCustom(int buyer_id,int real_estate_id );
+
+//    @Query(value="select * from real_estate where user_id =?1",
+//            countQuery="select count(*) from real_estate where user_id=?1",
+//            nativeQuery=true)
+//    public Page<RealEstate> findAllRealEstateByUserId(int id,Pageable pageable);
 }

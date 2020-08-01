@@ -41,6 +41,8 @@ import java.util.Optional;
 @RequestMapping("/real-estate")
 public class RealEstateController {
 
+    private int PAGE_SIZE=2;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -258,9 +260,9 @@ public class RealEstateController {
 
     @GetMapping("/manage-post/{pageNo}")
     public String showAllUserPost(@PathVariable("pageNo") int pageNo,Model theModel,HttpSession session){
-        int pageSize=2;
+
         Optional<String> sortBy= Optional.of("id");
-        Pageable pageable= PageRequest.of(pageNo-1,pageSize,Sort.Direction.DESC,sortBy.orElse("id"));
+        Pageable pageable= PageRequest.of(pageNo-1,PAGE_SIZE,Sort.Direction.DESC,sortBy.orElse("id"));
 
         User loginUSer= (User)session.getAttribute("loginUser");
         int loginId = loginUSer.getId().intValue();
@@ -274,6 +276,32 @@ public class RealEstateController {
         theModel.addAttribute("listRealEstate",realEstates);
 
         return "user-all-post-new";
+    }
+
+    @GetMapping("/contact-post/{pageNo}")
+    public String showPostContact(@PathVariable("pageNo") int pageNo,Model theModel,HttpSession session){
+
+        Optional<String> sortBy= Optional.of("id");
+        Pageable pageable= PageRequest.of(pageNo-1,PAGE_SIZE,Sort.Direction.DESC,sortBy.orElse("id"));
+
+        User loginUSer= (User)session.getAttribute("loginUser");
+        int loginId = loginUSer.getId().intValue();
+
+        Page<Customers> page=customerServices.findAllRealEstateByBuyer(loginId,pageable);
+        List<Customers> listCustomers=page.getContent();
+        List<RealEstate> realEstates=new ArrayList<>();
+
+        listCustomers.forEach(k->{
+            realEstates.add(k.getRealEstate());
+        });
+
+        theModel.addAttribute("currentPage",pageNo);
+        theModel.addAttribute("totalPages",page.getTotalPages());
+        theModel.addAttribute("totalItems",page.getTotalElements());
+        theModel.addAttribute("listRealEstate",realEstates);
+
+
+        return "contact-post";
     }
 
 
@@ -377,8 +405,23 @@ public class RealEstateController {
             List<Long> listIdContact=(List<Long>) session.getAttribute("listIdContact");
             listIdContact.add(id);
             session.setAttribute("listIdContact",listIdContact);
-            return "redirect:/";
+            return "redirect:/real-estate/detail/"+id;
         }
+    }
 
+    @GetMapping("/remove-contact/{id}")
+    public String removeContactId(@PathVariable Long id,HttpSession session){
+
+        List<Long> listIdContact=(List<Long>) session.getAttribute("listIdContact");
+        listIdContact.remove(id);
+        session.setAttribute("listIdContact",listIdContact);
+
+        User buyer=(User)session.getAttribute("loginUser");
+        int real_estate_id= id.intValue();
+        int buyer_id=buyer.getId().intValue();
+
+        customerServices.deleteCustomersByBuyerAndRealEstateCustom(buyer_id,real_estate_id);
+
+        return "redirect:/real-estate/contact-post/1";
     }
 }
