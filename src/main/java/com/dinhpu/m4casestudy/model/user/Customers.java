@@ -24,6 +24,9 @@ public class Customers {
     @JoinColumn(name="owner_id")
     private User owner;
 
+    public Customers() {
+    }
+
     public Customers(User buyer, RealEstate realEstate, User owner) {
         this.buyer = buyer;
         this.realEstate = realEstate;

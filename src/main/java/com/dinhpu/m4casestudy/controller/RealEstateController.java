@@ -2,8 +2,10 @@ package com.dinhpu.m4casestudy.controller;
 
 import com.dinhpu.m4casestudy.dto.real_estate.RealEstateDTO;
 import com.dinhpu.m4casestudy.model.real_estate.*;
+import com.dinhpu.m4casestudy.model.user.Customers;
 import com.dinhpu.m4casestudy.model.user.User;
 import com.dinhpu.m4casestudy.services.real_estate.*;
+import com.dinhpu.m4casestudy.services.user.ICustomerServices;
 import com.dinhpu.m4casestudy.services.user.IUserServices;
 import com.dinhpu.m4casestudy.utils.FileUtils;
 import com.dinhpu.m4casestudy.utils.ImageUtils;
@@ -74,6 +76,9 @@ public class RealEstateController {
 
     @Autowired
     private IRealEstateImage realEstateImageServices;
+
+    @Autowired
+    private ICustomerServices customerServices;
 
     @GetMapping("/create")
     public String showRealEstateCreateForm(Model theModel, HttpSession session){
@@ -344,8 +349,21 @@ public class RealEstateController {
             session.setAttribute("detailId",id);
             return "redirect:/loginPage";
         }else{
+            RealEstate realEstate=realEstateServices.findById(id);
+            User buyer= (User)session.getAttribute("loginUser");
+            User owner=realEstate.getUser();
 
-            return "";
+            Customers customers=new Customers();
+            customers.setBuyer(buyer);
+            customers.setRealEstate(realEstate);
+            customers.setOwner(owner);
+
+            customerServices.save(customers);
+
+            List<Long> listIdContact=(List<Long>) session.getAttribute("listIdContact");
+            listIdContact.add(id);
+            session.setAttribute("listIdContact",listIdContact);
+            return "redirect:/";
         }
 
     }
