@@ -293,17 +293,19 @@ public class RealEstateController {
                 .findAllRealEstateByUserId(ownUser.getId().intValue(),pageable)
                 .getContent();
         int size=totalRealEstates.size();
-
-        List<Long> listIdContact=(List<Long>) session.getAttribute("listIdContact");
-
         boolean isContact=false;
 
-        for (int i=0;i<listIdContact.size();i++){
-            if (listIdContact.get(i) == id){
-                isContact=true;
-                break;
+        if (session.getAttribute("listIdContact") != null){
+            List<Long> listIdContact=(List<Long>) session.getAttribute("listIdContact");
+
+            for (int i=0;i<listIdContact.size();i++){
+                if (listIdContact.get(i) == id){
+                    isContact=true;
+                    break;
+                }
             }
         }
+
 
         ModelAndView modelAndView=new ModelAndView("detail-real-estate");
         modelAndView.addObject("realEstates",realEstates);
