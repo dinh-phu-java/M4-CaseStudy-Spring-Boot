@@ -294,10 +294,22 @@ public class RealEstateController {
                 .getContent();
         int size=totalRealEstates.size();
 
+        List<Long> listIdContact=(List<Long>) session.getAttribute("listIdContact");
+
+        boolean isContact=false;
+
+        for (int i=0;i<listIdContact.size();i++){
+            if (listIdContact.get(i) == id){
+                isContact=true;
+                break;
+            }
+        }
+
         ModelAndView modelAndView=new ModelAndView("detail-real-estate");
         modelAndView.addObject("realEstates",realEstates);
         modelAndView.addObject("size",size);
         modelAndView.addObject("list",listRealEstate);
+        modelAndView.addObject("isContact",isContact);
         return modelAndView;
     }
 
