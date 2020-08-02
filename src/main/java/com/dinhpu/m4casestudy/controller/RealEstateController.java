@@ -49,6 +49,9 @@ public class RealEstateController {
     @Value("${my.resource.path}")
     private String resourcePath;
 
+    @Value("${delete.path}")
+    private String envDeletePath;
+
     @Autowired
     private ICategoryServices categoryServices;
 
@@ -167,7 +170,7 @@ public class RealEstateController {
 
                 List<Path> listImagePath=new ArrayList<>();
                 for (RealEstateImage imageObj:realEstateImage){
-                    listImagePath.add( Paths.get("./"+imageObj.getImage()));
+                    listImagePath.add( Paths.get(envDeletePath+imageObj.getImage()));
                 }
 
                 for (int i=0;i<listImagePath.size();i++){

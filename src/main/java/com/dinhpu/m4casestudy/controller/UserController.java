@@ -39,6 +39,9 @@ public class UserController {
     @Value("${my.resource.path}")
     private String resourcePath;
 
+    @Value("${delete.path}")
+    private String envDeletePath;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -120,7 +123,8 @@ public class UserController {
 
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 
-                Path deletePath = Paths.get("./" + loginUser.getLogoUrl());
+
+                Path deletePath = Paths.get(envDeletePath + loginUser.getLogoUrl());
                 if (Files.exists(deletePath)){
                     Files.delete(deletePath);
                 }

@@ -83,6 +83,9 @@ public class MainController {
 		Page<RealEstate> page=realEstateServices.searchQuery(province,price,real_estate_type,category_type,direction,pageable);
 		List<RealEstate> listRealEstate=page.getContent();
 
+		theModel.addAttribute("provinces",provinceServices.findAll());
+		theModel.addAttribute("categories",categoryServices.findAll());
+		theModel.addAttribute("directions",directionServices.findAll());
 		theModel.addAttribute("province",province);
 		theModel.addAttribute("price",price);
 		theModel.addAttribute("real_estate_type",real_estate_type);
