@@ -380,7 +380,10 @@ public class RealEstateController {
     @GetMapping("/remove/{id}")
     public String removeRealEstate(@PathVariable Long id){
 
+        customerServices.deleteCustomersByRealEstateId(id.intValue());
+
         realEstateServices.remove(id);
+
 
         return "redirect:/real-estate/manage-post/1";
     }

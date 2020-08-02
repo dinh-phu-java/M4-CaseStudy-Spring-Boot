@@ -24,6 +24,10 @@ public interface CustomersDAO extends JpaRepository<Customers,Long> {
     nativeQuery=true)
     void deleteCustomersByBuyerAndRealEstateCustom(int buyer_id,int real_estate_id );
 
+    @Modifying
+    @Query(value="delete from customers where real_estate_id=?1",nativeQuery=true)
+    void deleteCustomersByRealEstateId(int id);
+
     @Query(
             value="select * from customers where owner_id=?1",
             countQuery="select count(*) from customers where owner_id=?1",

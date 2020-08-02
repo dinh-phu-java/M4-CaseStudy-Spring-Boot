@@ -22,4 +22,5 @@ public interface IRealEstateServices {
     List<RealEstate> findAllRecent();
 
     Page<RealEstate> searchQuery(String province,String price,String realEstateType,String category,String direction, Pageable pageable);
+
 }

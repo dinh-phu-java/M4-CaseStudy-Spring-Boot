@@ -15,4 +15,5 @@ public interface ICustomerServices extends IServices<Customers> {
     void deleteCustomersByBuyerAndRealEstateCustom(int buyer_id,int real_estate_id );
     Page<Customers> findAllByOwnerUSer(int owner_id,Pageable pageable);
     void changeStatus(int id);
+    void deleteCustomersByRealEstateId(int id);
 }

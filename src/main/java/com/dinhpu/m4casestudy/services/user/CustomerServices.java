@@ -72,4 +72,10 @@ public class CustomerServices implements ICustomerServices{
     public void changeStatus(int id) {
         customersDAO.changeStatus(id);
     }
+
+    @Override
+    @Transactional
+    public void deleteCustomersByRealEstateId(int id) {
+        customersDAO.deleteCustomersByRealEstateId(id);
+    }
 }
