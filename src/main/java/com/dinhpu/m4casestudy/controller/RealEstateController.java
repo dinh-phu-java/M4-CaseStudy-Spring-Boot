@@ -336,6 +336,9 @@ public class RealEstateController {
 
 
         ModelAndView modelAndView=new ModelAndView("detail-real-estate");
+        modelAndView.addObject("provinces",provinceServices.findAll());
+        modelAndView.addObject("categories",categoryServices.findAll());
+        modelAndView.addObject("directions",directionServices.findAll());
         modelAndView.addObject("realEstates",realEstates);
         modelAndView.addObject("size",size);
         modelAndView.addObject("list",listRealEstate);
