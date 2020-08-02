@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.OneToOne;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class MainController {
 
 	@Autowired
 	private IDirectionServices directionServices;
-	private int PAGE_SIZE=5;
+	private int PAGE_SIZE=2;
 
 	@GetMapping("/")
 	public String showHome(Model theModel) {
@@ -68,10 +69,30 @@ public class MainController {
 	}
 
 	@GetMapping("/search/{pageNo}")
-	public String searchPost(@RequestParam Optional<String> province,@PathVariable int pageNo){
-		System.out.println(province);
-//		System.out.println(pageNo);
-		return "";
+	public String searchPost(@RequestParam String province,
+							 @RequestParam String price,
+							 @RequestParam String real_estate_type,
+							 @RequestParam String category_type,
+							 @RequestParam String direction,
+							 @PathVariable int pageNo,
+							 Model theModel){
+		Optional<String> sortBy=Optional.of("id");
+		Pageable pageable=PageRequest.of(pageNo-1,PAGE_SIZE, Sort.Direction.DESC,sortBy.orElse("id"));
+//		province = "%"+province+"%";
+
+		Page<RealEstate> page=realEstateServices.searchQuery(province,price,real_estate_type,category_type,direction,pageable);
+		List<RealEstate> listRealEstate=page.getContent();
+
+		theModel.addAttribute("province",province);
+		theModel.addAttribute("price",price);
+		theModel.addAttribute("real_estate_type",real_estate_type);
+		theModel.addAttribute("category_type",category_type);
+		theModel.addAttribute("direction",direction);
+		theModel.addAttribute("currentPage",pageNo);
+		theModel.addAttribute("totalPages",page.getTotalPages());
+		theModel.addAttribute("totalItems",page.getTotalElements());
+		theModel.addAttribute("listRealEstate",listRealEstate);
+		return "search-post";
 	}
 
 }

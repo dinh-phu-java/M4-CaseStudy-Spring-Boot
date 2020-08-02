@@ -128,7 +128,7 @@
                                         <th:block th:unless="${currentPage<2}">
 
                                             <li class="page-item">
-                                                <a class="page-link" th:href="@{/all-post/1}" aria-label="Previous">
+                                                <a class="page-link" th:href="@{'/search/1/?real_estate_type='+${real_estate_type}+'&province='+${province}+'&category_type='+${category_type}+'&price='+${price}+'&direction='+${direction}}" aria-label="Previous">
                                         <span aria-hidden="true">
                                             <i class="fa fa-chevron-left"></i>
                                             <i class="fa fa-chevron-left"></i>
@@ -137,7 +137,8 @@
                                                 </a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" th:href="@{/all-post/__${currentPage-1}__}" aria-label="Previous">
+
+                                                <a class="page-link" th:href="@{/search/__${currentPage-1}__/?real_estate_type=__${real_estate_type}__&province=__${province}__&category_type=__${category_type}__&price=__${price}__&direction=__${direction}__}" aria-label="Previous">
                                         <span aria-hidden="true">
                                             <i class="fa fa-chevron-left"></i>
                                         </span>
@@ -148,13 +149,13 @@
 
                                         <th:block th:if="${currentPage-2 >= 1}">
                                             <li class="page-item" >
-                                                <a class="page-link" th:href="@{/all-post/__${currentPage-2}__}">[[${currentPage-2}]]</a>
+                                                <a class="page-link" th:href="@{/search/__${currentPage-2}__/?real_estate_type=__${real_estate_type}__&province=__${province}__&category_type=__${category_type}__&price=__${price}__&direction=__${direction}__}">[[${currentPage-2}]]</a>
                                             </li>
                                         </th:block>
 
                                         <th:block th:if="${currentPage-1 >= 1}">
                                             <li class="page-item" >
-                                                <a class="page-link" th:href="@{/all-post/__${currentPage-1}__}">[[${currentPage-1}]]</a>
+                                                <a class="page-link" th:href="@{/search/__${currentPage-1}__/?real_estate_type=__${real_estate_type}__&province=__${province}__&category_type=__${category_type}__&price=__${price}__&direction=__${direction}__}">[[${currentPage-1}]]</a>
                                             </li>
                                         </th:block>
 
@@ -168,12 +169,12 @@
 
                                         <th:block  th:if="${currentPage+1 <= totalPages}">
                                             <li class="page-item" >
-                                                <a class="page-link" th:href="@{/all-post/__${currentPage+1}__}">[[${currentPage+1}]]</a>
+                                                <a class="page-link" th:href="@{/search/__${currentPage+1}__/?real_estate_type=__${real_estate_type}__&province=__${province}__&category_type=__${category_type}__&price=__${price}__&direction=__${direction}__}">[[${currentPage+1}]]</a>
                                             </li>
                                         </th:block>
                                         <th:block  th:if="${currentPage+2 <= totalPages}">
                                             <li class="page-item" >
-                                                <a class="page-link" th:href="@{/all-post/__${currentPage+2}__}">[[${currentPage+2}]]</a>
+                                                <a class="page-link" th:href="@{/search/__${currentPage+2}__/?real_estate_type=__${real_estate_type}__&province=__${province}__&category_type=__${category_type}__&price=__${price}__&direction=__${direction}__}">[[${currentPage+2}]]</a>
                                             </li>
                                         </th:block>
 
@@ -181,7 +182,7 @@
                                         <th:block th:unless="${currentPage == totalPages}">
 
                                             <li class="page-item">
-                                                <a class="page-link" th:href="@{/all-post/__${currentPage+1}__}" aria-label="Next">
+                                                <a class="page-link" th:href="@{/search/__${currentPage+1}__/?real_estate_type=__${real_estate_type}__&province=__${province}__&category_type=__${category_type}__&price=__${price}__&direction=__${direction}__}" aria-label="Next">
                                         <span aria-hidden="true">
                                             <i class="fa fa-chevron-right"></i>
                                         </span>
@@ -190,7 +191,7 @@
                                             </li>
 
                                             <li class="page-item">
-                                                <a class="page-link" th:href="@{/all-post/__${totalPages}__}" aria-label="Next">
+                                                <a class="page-link" th:href="@{/search/__${totalPages}__/?real_estate_type=__${real_estate_type}__&province=__${province}__&category_type=__${category_type}__&price=__${price}__&direction=__${direction}__}" aria-label="Next">
                                         <span aria-hidden="true">
                                             <i class="fa fa-chevron-right"></i>
                                             <i class="fa fa-chevron-right"></i>

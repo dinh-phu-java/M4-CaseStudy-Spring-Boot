@@ -78,5 +78,10 @@ public class RealEstateServices implements IRealEstateServices{
         return realEstateDAO.findAllRecent(pageable);
     }
 
+    @Override
+    public Page<RealEstate> searchQuery(String province,String price,String realEstateType,String category,String direction, Pageable pageable) {
+        return realEstateDAO.searchQuery(province,price,realEstateType,category,direction,pageable);
+    }
+
 
 }
