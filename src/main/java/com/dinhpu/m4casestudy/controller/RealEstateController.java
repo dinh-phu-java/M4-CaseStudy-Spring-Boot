@@ -323,7 +323,8 @@ public class RealEstateController {
         List<RealEstate> listRealEstate=realEstateServices
                 .findAllRealEstateByUserId(ownUser.getId().intValue(),pageable)
                 .getContent();
-        int size=totalRealEstates.size();
+
+        int size=listRealEstate.size();
         boolean isContact=false;
 
         if (session.getAttribute("listIdContact") != null){
