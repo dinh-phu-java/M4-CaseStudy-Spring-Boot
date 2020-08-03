@@ -359,6 +359,9 @@ public class RealEstateController {
     @GetMapping("/edit/{id}")
     public String showEdit(@PathVariable Long id,Model theModel){
         RealEstate realEstate=realEstateServices.findById(id);
+        if (realEstate==null){
+            throw new RealEstateException("Không tìm thấy bất động sản với id: "+id);
+        }
 
         RealEstateDTO realEstateDTO =RealEstateUtils.realEstateToRealEstateDTO(realEstate);
 
@@ -392,6 +395,11 @@ public class RealEstateController {
     @GetMapping("/remove/{id}")
     public String removeRealEstate(@PathVariable Long id){
 
+        RealEstate realEstate=realEstateServices.findById(id);
+        if (realEstate==null){
+            throw new RealEstateException("Không tìm thấy bất động sản với id: "+id);
+        }
+
         customerServices.deleteCustomersByRealEstateId(id.intValue());
 
         realEstateServices.remove(id);
@@ -407,6 +415,9 @@ public class RealEstateController {
             return "redirect:/loginPage";
         }else{
             RealEstate realEstate=realEstateServices.findById(id);
+            if (realEstate==null){
+                throw new RealEstateException("Không tìm thấy bất động sản với id: "+id);
+            }
             User buyer= (User)session.getAttribute("loginUser");
             User owner=realEstate.getUser();
 
