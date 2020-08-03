@@ -306,4 +306,11 @@ public class RealEstate {
         this.realEstateImages = realEstateImages;
     }
 
+    public boolean isAdvertise() {
+        return advertise;
+    }
+
+    public void setAdvertise(boolean advertise) {
+        this.advertise = advertise;
+    }
 }

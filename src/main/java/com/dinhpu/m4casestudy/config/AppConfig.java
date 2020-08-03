@@ -15,7 +15,6 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        Path uploadDir= Paths.get("./upload_file");
         Path uploadDir= Paths.get(evnUploadPath);
         String uploadPath=uploadDir.toFile().getAbsolutePath();
         registry.addResourceHandler("/upload_file/**").addResourceLocations("file:/"+uploadPath+"/");

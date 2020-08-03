@@ -83,7 +83,15 @@ public class RealEstateServices implements IRealEstateServices{
         return realEstateDAO.searchQuery(province,price,realEstateType,category,direction,pageable);
     }
 
+    @Override
+    public Page<RealEstate> findAllByAdvertise(Pageable pageable) {
+        return realEstateDAO.findAllByAdvertise(pageable);
+    }
 
+    @Override
+    public void removeAdvertise(Long id) {
+        realEstateDAO.removeAdvertise(id);
+    }
 
 
 }
