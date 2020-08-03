@@ -33,6 +33,10 @@ public class MainController {
 
 	@Autowired
 	private IDirectionServices directionServices;
+
+	@Autowired
+	private ILegalPaperServices legalPaperServices;
+
 	private int PAGE_SIZE=2;
 
 	@GetMapping("/")
@@ -43,6 +47,7 @@ public class MainController {
 
 		List<RealEstate> listRecentReal=realEstateServices.findAllRecent();
 
+		theModel.addAttribute("legals",legalPaperServices.findAll());
 		theModel.addAttribute("provinces",provinceServices.findAll());
 		theModel.addAttribute("categories",categoryServices.findAll());
 		theModel.addAttribute("directions",directionServices.findAll());

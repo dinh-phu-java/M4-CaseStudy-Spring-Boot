@@ -228,7 +228,8 @@
 <!--                                                <h3 th:text="${session.loginUser.fullName}"></h3>-->
                                                 <h3 th:text="${realEstates.user.fullName}"></h3>
                                                 <div class="rating" data-rating="4"></div>
-                                                <a href="seller-detail-1.html" class="text-uppercase">Danh sách bất động sản
+
+                                                <a th:href="@{/search-user/__${realEstates.user.id}__/1}" class="text-uppercase">Danh sách bất động sản
                                                     <span class="appendix">([[${size}]])</span>
                                                 </a>
                                             </div>

@@ -72,10 +72,9 @@
                                     <div class="form-group">
                                         <select name="price" id="">
                                             <option value=""> Chọn</option>
-                                            <option value="1">1 tỷ ~ 2 tỷ</option>
-                                            <option value="2">2 tỷ ~ 3 tỷ</option>
-                                            <option value="3">3 tỷ~ 4 tỷ</option>
-                                            <option value="4">~ 4 tỷ</option>
+                                            <th:block th:each="row : ${legals}">
+                                                <option th:value="${row.legalPaperName}" th:text="${row.legalPaperName}"></option>
+                                            </th:block>
                                         </select>
 <!--                                        <input name="min_price" type="text" class="form-control small" id="min-price" placeholder="Minimal Price">-->
 
