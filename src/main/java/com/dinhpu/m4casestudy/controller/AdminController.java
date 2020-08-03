@@ -22,7 +22,7 @@ public class AdminController {
     @Autowired
     private IRealEstateServices realEstateServices;
 
-    private int PAGE_SIZE=2;
+    private int PAGE_SIZE=10;
 
     @GetMapping("/manage-ads/{pageNo}")
     public String createAdvertise(@PathVariable int pageNo, Model theModel){
@@ -56,4 +56,36 @@ public class AdminController {
         return "manage-ads-page";
     }
 
+    @GetMapping("/create-ads/{pageNo}")
+    public String createAdvertisePage(@PathVariable int pageNo,Model theModel){
+
+
+        Optional<String> sortBy=Optional.of("id");
+
+        Page<RealEstate> page=realEstateServices.findAll(pageNo,PAGE_SIZE,sortBy);
+        List<RealEstate> realEstates=page.getContent();
+
+        theModel.addAttribute("currentPage",pageNo);
+        theModel.addAttribute("totalPages",page.getTotalPages());
+        theModel.addAttribute("totalItems",page.getTotalElements());
+        theModel.addAttribute("listRealEstate",realEstates);
+        return "create-ads-page";
+    }
+
+    @GetMapping("/upadte-ads/{id}")
+    public String updateAdvertise(@PathVariable Long id,Model theModel){
+
+        realEstateServices.updateAdvertise(id);
+
+        Optional<String> sortBy=Optional.of("id");
+
+        Page<RealEstate> page=realEstateServices.findAll(1,PAGE_SIZE,sortBy);
+        List<RealEstate> realEstates=page.getContent();
+
+        theModel.addAttribute("currentPage",1);
+        theModel.addAttribute("totalPages",page.getTotalPages());
+        theModel.addAttribute("totalItems",page.getTotalElements());
+        theModel.addAttribute("listRealEstate",realEstates);
+        return "create-ads-page";
+    }
 }

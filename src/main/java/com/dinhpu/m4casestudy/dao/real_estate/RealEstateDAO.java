@@ -47,4 +47,8 @@ public interface RealEstateDAO extends JpaRepository<RealEstate,Long> {
     @Modifying
     @Query(value="update real_estate set advertise=false where id=?1",nativeQuery=true)
     void removeAdvertise(Long id);
+
+    @Modifying
+    @Query(value="update real_estate set advertise=true where id=?1",nativeQuery = true)
+    void updateAdvertise(Long id);
 }

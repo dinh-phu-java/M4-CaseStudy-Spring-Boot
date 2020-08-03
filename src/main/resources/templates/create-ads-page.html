@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/home/head.html :: my-head(~{ :: .my-own-title})">
+
+    <title class="my-own-title">Home Page Title</title>
+
+</head>
+<body>
+<div class="page home-page">
+    <!--*********************************************************************************************************-->
+    <!--************ HERO ***************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <header class="hero has-dark-background">
+        <div class="hero-wrapper">
+
+            <!--============ Secondary Navigation ===============================================================-->
+            <div class="secondary-navigation" th:replace="fragments/home/secondary-navigation.html :: secondary-navigation">
+            </div>
+            <!--============ End Secondary Navigation ===========================================================-->
+
+            <div class="background" th:replace="fragments/home/header-background.html :: header-background">
+            </div>
+            <!--end background-->
+        </div>
+        <!--end hero-wrapper-->
+    </header>
+    <!--end hero-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ CONTENT ************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <section class="content">
+        <section class="block"></section>
+        <div class="container-fluid">
+            <div class="row">
+                <div th:replace="fragments/home/user-menu-bar.html :: user-menu-bar">
+
+                </div>
+                <div class="col-md-9">
+                    <div class="card card-default" style="margin-top:15px;">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách khách hàng</h3>
+
+                            <!--                        <div class="card-tools">-->
+                            <!--                            <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">-->
+                            <!--                                <i class="fas fa-search" aria-hidden="true"></i>-->
+                            <!--                                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"-->
+                            <!--                                       aria-label="Search">-->
+                            <!--                            </form>-->
+                            <!--                        </div>-->
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Tiêu đề</th>
+                                    <th scope="col">Loại hình</th>
+                                    <th scope="col">Người sở hữu</th>
+                                    <th scope="col">Danh mục</th>
+                                    <th scope="col">Tổng giá</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col" class="text-center">Thao tác</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <th:block th:each="row : ${listRealEstate}">
+                                    <th:block th:if="${row.advertise==false}">
+                                        <tr>
+                                            <td th:text="${row.title}"></td>
+                                            <td th:text="${row.realEstateType}"></td>
+                                            <td th:text="${row.user.fullName}"></td>
+                                            <td th:text="${row.category}"></td>
+                                            <td th:text="${row.totalprice}"></td>
+                                            <td th:text="${row.advertise}"></td>
+                                            <td><a th:href="@{/admin/upadte-ads/__${row.id}__}">Tạo quảng cáo</a> </td>
+                                        </tr>
+                                    </th:block>
+                                </th:block>
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+
+                        <!-- /.card-body -->
+                        <th:block th:if="${totalPages >= 1}">
+                            <nav aria-label="Page navigation example" class="card-footer">
+
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item">
+                                        <span class="page-link">
+                                            Số kết quả: [[${totalPages}]]
+                                          </span>
+                                    </li>
+                                    <th:block th:unless="${currentPage<2}">
+                                        <li class="page-item">
+                                            <a class="page-link" th:href="@{/admin/create-ads/1}" tabindex="-1">First</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" th:href="@{/admin/create-ads/__${currentPage-1}__}" tabindex="-1">Previous</a>
+                                        </li>
+                                    </th:block>
+
+
+                                    <th:block th:each="i: ${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item" th:if="${currentPage !=i}"><a class="page-link" th:href="@{/admin/create-ads/__${i}__}">[[${i}]]</a></li>
+                                        <li class="page-item active" th:unless="${currentPage !=i}">
+                                            <span class="page-link">
+                                            [[${i}]]
+                                            <span class="sr-only">(current)</span>
+                                          </span>
+                                        </li>
+                                    </th:block>
+
+
+                                    <th:block th:unless="${currentPage == totalPages}">
+                                        <li class="page-item">
+                                            <a class="page-link" th:href="@{/admin/create-ads/__${currentPage+1}__}">Next</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" th:href="@{/admin/create-ads/__${totalPages}__}">Last</a>
+                                        </li>
+                                    </th:block>
+                                </ul>
+                            </nav>
+                        </th:block>
+                        <th:block th:unless="${totalPages >=1}">
+                            <p class="text-center">Bạn không có sản phẩm nào</p>
+                        </th:block>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </section>
+    </section>
+    <!--end content-->
+
+
+
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <footer class="footer" th:replace="fragments/home/footer.html :: footer">
+    </footer>
+    <!--end footer-->
+</div>
+<!--end page-->
+
+<div id="foot-script" th:replace="fragments/home/foot-script.html :: foot-script">
+</div>
+
+
+
+</body>
+</html>
