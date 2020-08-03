@@ -98,6 +98,29 @@ public class MainController {
 		return "search-post";
 	}
 
+
+	@GetMapping("/search-user/{userId}/{pageNo}")
+	public String searchUserPost(
+							@PathVariable Long userId,
+							 @PathVariable int pageNo,
+							 Model theModel){
+		Optional<String> sortBy=Optional.of("id");
+		Pageable pageable=PageRequest.of(pageNo-1,PAGE_SIZE, Sort.Direction.DESC,sortBy.orElse("id"));
+//		province = "%"+province+"%";
+
+		Page<RealEstate> page=realEstateServices.findAllBySelectUser(userId.intValue(),pageable);
+		List<RealEstate> listRealEstate=page.getContent();
+
+		theModel.addAttribute("provinces",provinceServices.findAll());
+		theModel.addAttribute("categories",categoryServices.findAll());
+		theModel.addAttribute("directions",directionServices.findAll());
+		theModel.addAttribute("owner_id",userId.intValue());
+		theModel.addAttribute("currentPage",pageNo);
+		theModel.addAttribute("totalPages",page.getTotalPages());
+		theModel.addAttribute("totalItems",page.getTotalElements());
+		theModel.addAttribute("listRealEstate",listRealEstate);
+		return "find-by-user";
+	}
 }
 
 

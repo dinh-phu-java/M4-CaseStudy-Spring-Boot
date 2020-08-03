@@ -51,4 +51,10 @@ public interface RealEstateDAO extends JpaRepository<RealEstate,Long> {
     @Modifying
     @Query(value="update real_estate set advertise=true where id=?1",nativeQuery = true)
     void updateAdvertise(Long id);
+
+
+    @Query(value="select * from real_estate where user_id=?1"
+            ,countQuery="select count(*) from real_estate where user_id=?1"
+            ,nativeQuery=true)
+    Page<RealEstate> findAllBySelectUser(int id,Pageable pageable);
 }

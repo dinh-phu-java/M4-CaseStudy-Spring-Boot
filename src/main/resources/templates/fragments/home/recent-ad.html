@@ -27,7 +27,7 @@
                                 <i class="fa fa-location-arrow"></i> [[${row.totalArea}]]m<sup>2</sup>
                             </figure>
                             <figure>
-                                <a href="#">
+                                <a th:href="@{/search-user/__${row.user.id}__/1}">
                                     <i class="fa fa-user"></i> <span th:text="${row.user.getFullName()}"></span>
                                 </a>
                             </figure>

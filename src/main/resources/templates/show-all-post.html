@@ -82,7 +82,7 @@
                                             <i class="fa fa-mail-forward"></i> [[${row.user.email}]]
                                         </figure>
                                         <figure>
-                                            <a href="#">
+                                            <a th:href="@{/search-user/__${row.user.id}__/1}">
                                                 <i class="fa fa-user"></i> <span th:text="${row.user.fullName}"></span>
                                             </a>
                                         </figure>

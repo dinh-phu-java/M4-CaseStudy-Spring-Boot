@@ -100,5 +100,10 @@ public class RealEstateServices implements IRealEstateServices{
         realEstateDAO.updateAdvertise(id);
     }
 
+    @Override
+    public Page<RealEstate> findAllBySelectUser(int id,Pageable pageable) {
+        return realEstateDAO.findAllBySelectUser(id,pageable);
+    }
+
 
 }

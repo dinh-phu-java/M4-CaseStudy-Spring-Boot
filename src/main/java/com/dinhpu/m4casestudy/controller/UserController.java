@@ -82,11 +82,9 @@ public class UserController {
 
         MultipartFile file = crmUser.getLogoFile();
 
-        System.out.println("file is: " + file);
 
         String fileName = ImageUtils.hashFileName(file.getOriginalFilename());
 
-        System.out.println("file Name is " + fileName);
 
         String uploadDir = uploadPath + crmUser.getId();
 

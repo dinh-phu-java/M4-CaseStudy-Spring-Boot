@@ -25,4 +25,5 @@ public interface IRealEstateServices {
     Page<RealEstate> findAllByAdvertise(Pageable pageable);
     void removeAdvertise(Long id);
     void updateAdvertise(Long id);
+    Page<RealEstate> findAllBySelectUser(int id,Pageable pageable);
 }
