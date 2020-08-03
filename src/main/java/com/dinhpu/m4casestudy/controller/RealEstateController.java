@@ -1,6 +1,7 @@
 package com.dinhpu.m4casestudy.controller;
 
 import com.dinhpu.m4casestudy.dto.real_estate.RealEstateDTO;
+import com.dinhpu.m4casestudy.exception.RealEstateException;
 import com.dinhpu.m4casestudy.model.real_estate.*;
 import com.dinhpu.m4casestudy.model.user.Customers;
 import com.dinhpu.m4casestudy.model.user.User;
@@ -315,6 +316,10 @@ public class RealEstateController {
             session.setAttribute("loginUser",null);
         }
         RealEstate realEstates=realEstateServices.findById(id);
+        if (realEstates==null){
+            throw new RealEstateException("Không tìm thấy bất động sản với id: "+id);
+        }
+
         User ownUser=realEstates.getUser();
         List<RealEstate> totalRealEstates=realEstateServices.findAll();
 

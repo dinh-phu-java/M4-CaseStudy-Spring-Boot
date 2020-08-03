@@ -34,7 +34,7 @@ public interface RealEstateDAO extends JpaRepository<RealEstate,Long> {
     List<RealEstate> findAllRecent(Pageable pageable);
 
 
-    @Query(value="select * from real_estate where province like %?1% and total_price like ?2% and real_estate_type like %?3% and category like %?4% and direction like %?5%",
+    @Query(value="select * from real_estate where province like %?1% and total_price like ?2.% and real_estate_type like %?3% and category like %?4% and direction like %?5%",
     countQuery="select count(*) from real_estate where province like %?1% and total_price like ?2% and real_estate_type like %?3% and category like %?4% and direction like %?5",
     nativeQuery=true)
     Page<RealEstate> searchQuery(String province,String price,String realEstateType,String category,String direction, Pageable pageable);

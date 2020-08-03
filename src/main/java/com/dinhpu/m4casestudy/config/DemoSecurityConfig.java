@@ -17,7 +17,6 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableOAuth2Sso
 @EnableGlobalMethodSecurity(
 		prePostEnabled = true,
 		securedEnabled = true,
@@ -44,6 +43,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
+			.antMatchers("/real-estate/detail/**").permitAll()
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/real-estate/**").authenticated()
 			.and()
