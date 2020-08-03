@@ -6,7 +6,7 @@
         <ul class="left">
             <li>
                 <span>
-                   <a th:href="@{/}" style="margin: 0;padding: 0;"> <i class="fa fa-home"></i> Home</a>
+                   <a th:href="@{/}" style="margin: 0;padding: 0;"> <i class="fa fa-home"></i> Trang chủ</a>
                 </span>
             </li>
         </ul>
@@ -19,12 +19,12 @@
             <th:block th:if="${session.loginUser == null}">
                 <li>
                     <a th:href="@{/loginPage}">
-                        <i class="fa fa-sign-in"></i>Sign In
+                        <i class="fa fa-sign-in"></i>Đăng nhập
                     </a>
                 </li>
                 <li>
                     <a th:href="@{/register}">
-                        <i class="fa fa-pencil-square-o"></i>Register
+                        <i class="fa fa-pencil-square-o"></i>Đăng ký
                     </a>
                 </li>
             </th:block>
@@ -45,7 +45,7 @@
 <!--                    </a>-->
                     <form th:action="@{/logout}" method="post" style="margin: 0;padding: 0;">
                         <a >
-                            <i class="fa fa-sign-out"></i>  <button style="padding: 0;margin: 0;border: none;background-color: rgb(54, 54, 54);color: rgb(255, 255, 255);">Logout</button>
+                            <i class="fa fa-sign-out"></i>  <button style="padding: 0;margin: 0;border: none;background-color: rgb(54, 54, 54);color: rgb(255, 255, 255);">Đăng xuất</button>
                         </a>
                     </form>
                 </li>

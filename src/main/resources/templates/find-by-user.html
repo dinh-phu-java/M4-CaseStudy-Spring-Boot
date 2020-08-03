@@ -64,17 +64,17 @@
                                     <div class="wrapper">
                                         <div class="image">
                                             <h3>
-                                                <a href="#" class="tag category" th:text="${row.category}"></a>
+                                                <a th:href="@{/real-estate/detail/__${row.id}__}" class="tag category" th:text="${row.category}"></a>
                                                 <!--                                            <a href="single-listing-1.html" class="title" th:text="${row.title}"></a>-->
                                                 <span class="tag" th:text="${row.realEstateType}">Offer</span>
                                             </h3>
-                                            <a href="single-listing-1.html" class="image-wrapper background-image">
+                                            <a th:href="@{/real-estate/detail/__${row.id}__}" class="image-wrapper background-image">
                                                 <img th:src="@{${row.realEstateImages[0].image}}" alt="">
                                             </a>
                                         </div>
                                         <!--end image-->
                                         <h4 class="location">
-                                            <a href="#" th:text="${row.province}"></a>
+                                            <a th:href="@{/real-estate/detail/__${row.id}__}" th:text="${row.province}"></a>
                                         </h4>
                                         <div class="price" th:text="${row.totalprice}">$125</div>
                                         <div class="meta">

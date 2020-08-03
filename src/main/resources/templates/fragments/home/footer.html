@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
-                    <a href="#" class="brand">
+                    <a th:href="@{/}" class="brand">
                         <img th:src="@{/assets/img/logo.png}" alt="">
                     </a>
                     <p>
@@ -21,23 +21,12 @@
                             <nav>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a href="#">Home</a>
+                                        <a th:href="@{/}">Home</a>
                                     </li>
                                     <li>
-                                        <a href="#">Listing</a>
+                                        <a th:href="@{/all-post/1}">Listing</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Pages</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Extras</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Contact</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Submit Ad</a>
-                                    </li>
+
                                 </ul>
                             </nav>
                         </div>
@@ -45,13 +34,19 @@
                             <nav>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a href="#">My Ads</a>
+                                        <a th:href="@{/real-estate/manage-post/1}">
+                                            Bất động sản của tôi
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#">Sign In</a>
+                                        <a th:href="@{/loginPage}">
+                                            Đăng nhập
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#">Register</a>
+                                        <a th:href="@{/register}">
+                                            Đăng ký
+                                        </a>
                                     </li>
                                 </ul>
                             </nav>
@@ -63,13 +58,13 @@
                     <h2>Contact</h2>
                     <address>
                         <figure>
-                            124 Abia Martin Drive<br>
-                            New York, NY 10011
+                            CodeGym<br>
+                            Ha Noi, Viet Nam
                         </figure>
                         <br>
-                        <strong>Email:</strong> <a href="#">hello@example.com</a>
+                        <strong>Email:</strong> <a href="#">dinhphu@example.com</a>
                         <br>
-                        <strong>Skype: </strong> Craigs
+                        <strong>Skype: </strong> Dinh Phu
                         <br>
                         <br>
                         <a href="contact.html" class="btn btn-primary text-caps btn-framed">Contact Us</a>

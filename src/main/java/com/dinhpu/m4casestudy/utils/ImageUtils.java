@@ -2,11 +2,12 @@ package com.dinhpu.m4casestudy.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 public class ImageUtils {
     public static String hashFileName(String fileName){
         String postFix=fileName.substring(fileName.indexOf('.'));
-
+        fileName+=fileName+(new Date());
         StringBuilder sb=null;
         try {
 

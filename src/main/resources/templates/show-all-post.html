@@ -64,17 +64,17 @@
                                 <div class="wrapper">
                                     <div class="image">
                                         <h3>
-                                            <a href="#" class="tag category" th:text="${row.category}"></a>
+                                            <a th:href="@{/real-estate/detail/__${row.id}__}" class="tag category" th:text="${row.category}"></a>
 <!--                                            <a href="single-listing-1.html" class="title" th:text="${row.title}"></a>-->
                                             <span class="tag" th:text="${row.realEstateType}">Offer</span>
                                         </h3>
-                                        <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <a th:href="@{/real-estate/detail/__${row.id}__}" class="image-wrapper background-image">
                                             <img th:src="@{${row.realEstateImages[0].image}}" alt="">
                                         </a>
                                     </div>
                                     <!--end image-->
                                     <h4 class="location">
-                                        <a href="#" th:text="${row.province}"></a>
+                                        <a th:href="@{/real-estate/detail/__${row.id}__}" th:text="${row.province}"></a>
                                     </h4>
                                     <div class="price" th:text="${row.totalprice}">$125</div>
                                     <div class="meta">
@@ -284,83 +284,10 @@
                         <!--============ Side Bar ===============================================================-->
                         <aside class="sidebar">
                             <section>
-                                <h2>Search Ads</h2>
+                                <h2>Tìm kiếm</h2>
                                 <!--============ Side Bar Search Form ===========================================-->
-                                <form class="sidebar-form form">
-                                    <div class="form-group">
-                                        <label for="what" class="col-form-label">What?</label>
-                                        <input name="keyword" type="text" class="form-control" id="what" placeholder="What are you looking for?">
-                                    </div>
-                                    <!--end form-group-->
-                                    <div class="form-group">
-                                        <label for="input-location" class="col-form-label">Where?</label>
-                                        <input name="location" type="text" class="form-control" id="input-location" placeholder="Enter Location">
-                                        <span class="geo-location input-group-addon" data-toggle="tooltip" data-placement="top" title="Find My Position"><i class="fa fa-map-marker"></i></span>
-                                    </div>
-                                    <!--end form-group-->
-                                    <div class="form-group">
-                                        <label for="category" class="col-form-label">Category?</label>
-                                        <select name="category" id="category" data-placeholder="Select Category">
-                                            <option value="">Select Category</option>
-                                            <option value="1">Computers</option>
-                                            <option value="2">Real Estate</option>
-                                            <option value="3">Cars & Motorcycles</option>
-                                            <option value="4">Furniture</option>
-                                            <option value="5">Pets & Animals</option>
-                                        </select>
-                                    </div>
-                                    <!--end form-group-->
-                                    <button type="submit" class="btn btn-primary width-100">Search</button>
+                                <div th:replace="fragments/home/sidebar-form.html :: sidebar-form"> </div>
 
-                                    <!--Alternative Form-->
-                                    <div class="alternative-search-form">
-                                        <a href="#collapseAlternativeSearchForm" class="icon" data-toggle="collapse"  aria-expanded="false" aria-controls="collapseAlternativeSearchForm"><i class="fa fa-plus"></i>More Options</a>
-                                        <div class="collapse" id="collapseAlternativeSearchForm">
-                                            <div class="wrapper">
-                                                <label>
-                                                    <input type="checkbox" name="new">
-                                                    New
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" name="used">
-                                                    Used
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" name="with_photo">
-                                                    With Photo
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" name="featured">
-                                                    Featured
-                                                </label>
-                                                <div class="form-group">
-                                                    <input name="min_price" type="text" class="form-control small" id="min-price" placeholder="Minimal Price">
-                                                    <span class="input-group-addon small">$</span>
-                                                </div>
-                                                <!--end form-group-->
-                                                <div class="form-group">
-                                                    <input name="max_price" type="text" class="form-control small" id="max-price" placeholder="Maximal Price">
-                                                    <span class="input-group-addon small">$</span>
-                                                </div>
-                                                <!--end form-group-->
-                                                <div class="form-group">
-                                                    <select name="distance" id="distance" class="small" data-placeholder="Distance" >
-                                                        <option value="">Distance</option>
-                                                        <option value="1">1km</option>
-                                                        <option value="2">5km</option>
-                                                        <option value="3">10km</option>
-                                                        <option value="4">50km</option>
-                                                        <option value="5">100km</option>
-                                                    </select>
-                                                </div>
-                                                <!--end form-group-->
-                                            </div>
-                                            <!--end wrapper-->
-                                        </div>
-                                        <!--end collapse-->
-                                    </div>
-                                    <!--end alternative-search-form-->
-                                </form>
                                 <!--============ End Side Bar Search Form =======================================-->
                             </section>
                         </aside>
