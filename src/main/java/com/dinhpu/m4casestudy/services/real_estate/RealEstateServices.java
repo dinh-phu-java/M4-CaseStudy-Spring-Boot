@@ -89,6 +89,7 @@ public class RealEstateServices implements IRealEstateServices{
     }
 
     @Override
+    @Transactional
     public void removeAdvertise(Long id) {
         realEstateDAO.removeAdvertise(id);
     }
