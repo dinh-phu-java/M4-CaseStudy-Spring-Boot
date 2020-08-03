@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+            xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div class="col-md-3" th:fragment="user-menu-bar">
     <nav class="nav flex-column side-nav">
         <a class="nav-link active icon" th:href="@{/userProfile}">
@@ -22,13 +23,15 @@
         <a class="nav-link icon" th:href="@{/real-estate/list-customer/1}">
             <i class="fa fa-money"></i>Danh sách khách hàng
         </a>
-        <a class="nav-link icon" th:href="@{/admin/manage-ads/1}">
-            <i class="fa fa-money"></i>Quản lý quảng cáo
-        </a>
+        <div sec:authorize="hasRole('ADMIN')">
+            <a class="nav-link icon" th:href="@{/admin/manage-ads/1}">
+                <i class="fa fa-money"></i>Quản lý quảng cáo
+            </a>
 
-        <a class="nav-link icon" th:href="@{/admin/create-ads/1}">
-            <i class="fa fa-money"></i>Tạo quảng cáo
-        </a>
+            <a class="nav-link icon" th:href="@{/admin/create-ads/1}">
+                <i class="fa fa-money"></i>Tạo quảng cáo
+            </a>
+        </div>
     </nav>
 </div>
 
