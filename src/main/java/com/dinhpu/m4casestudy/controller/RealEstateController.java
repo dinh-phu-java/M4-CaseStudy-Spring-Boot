@@ -133,9 +133,17 @@ public class RealEstateController {
         InternalUtilities internalUtilities=new InternalUtilities();
         ExternalUtilities externalUtilities=new ExternalUtilities();
         AroundUtilities aroundUtilities=new AroundUtilities();
-        RealEstateUtils.loopForSetInternalUtilites(internals,internalUtilities);
-        RealEstateUtils.loopForSetExternalUtilites(externals,externalUtilities);
-        RealEstateUtils.loopForSetAroundUtilites(arounds,aroundUtilities);
+
+        if (internals != null){
+            RealEstateUtils.loopForSetInternalUtilites(internals,internalUtilities);
+        }
+        if (externals !=  null){
+            RealEstateUtils.loopForSetExternalUtilites(externals,externalUtilities);
+        }
+
+        if(arounds != null){
+            RealEstateUtils.loopForSetAroundUtilites(arounds,aroundUtilities);
+        }
 
         realEstateDTO.setInternalUtilities(internalUtilities);
         realEstateDTO.setExternalUtilities(externalUtilities);
