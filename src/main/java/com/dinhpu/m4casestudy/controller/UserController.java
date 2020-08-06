@@ -3,6 +3,7 @@ package com.dinhpu.m4casestudy.controller;
 import com.dinhpu.m4casestudy.dto.user.CrmChangePasswordUser;
 import com.dinhpu.m4casestudy.dto.user.CrmUpdateUser;
 import com.dinhpu.m4casestudy.model.user.User;
+import com.dinhpu.m4casestudy.services.S3Services;
 import com.dinhpu.m4casestudy.services.user.IUserServices;
 import com.dinhpu.m4casestudy.utils.ImageUtils;
 import com.dinhpu.m4casestudy.utils.UserUtils;
@@ -32,6 +33,13 @@ import java.nio.file.StandardCopyOption;
 @Controller
 @PreAuthorize("isAuthenticated()")
 public class UserController {
+
+    @Value("${jsa.s3.bucket.url}")
+    private String s3BucketUrl;
+
+    @Autowired
+    S3Services s3Services;
+
     @Autowired
     private IUserServices userServices;
 
@@ -82,22 +90,15 @@ public class UserController {
 
         MultipartFile file = crmUser.getLogoFile();
 
-
         String fileName = ImageUtils.hashFileName(file.getOriginalFilename());
-
 
         String uploadDir = uploadPath + crmUser.getId();
 
         Path uploadPath = Paths.get(uploadDir);
 
-        System.out.println(uploadPath.toAbsolutePath());
-
-        System.out.println(uploadPath.toString());
-
         String logoUrl = "";
 
         User loginUser = (User) session.getAttribute("loginUser");
-
 
         if (fileName.equals("")) {
 
@@ -118,19 +119,23 @@ public class UserController {
 
                 Path filePath = uploadPath.resolve(fileName);
 
-                System.out.println(filePath.toAbsolutePath());
-                System.out.println(filePath.toString());
-
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 
+                String keyImage=loginUser.getLogoUrl();
+                keyImage=keyImage.substring(keyImage.lastIndexOf('/')+1);
 
-                Path deletePath = Paths.get(envDeletePath + loginUser.getLogoUrl());
+                Path deletePath = Paths.get(envDeletePath +loginUser.getId()+"/"+ keyImage);
                 if (Files.exists(deletePath)){
+
                     Files.delete(deletePath);
+
+                    s3Services.deleteFile(keyImage);
+
                 }
 
-                logoUrl = resourcePath + crmUser.getId() + "/" + fileName;
 
+                s3Services.uploadFile(fileName,filePath.toString());
+                logoUrl=s3BucketUrl+fileName;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -140,6 +145,7 @@ public class UserController {
         //convert crmUser to User
         User updateUser = UserUtils.crmUserToUser(crmUser, logoUrl);
         System.out.println("update user is: " + updateUser);
+
         //get current password
         updateUser.setPassword(loginUser.getPassword());
         System.out.println("update user !!!");

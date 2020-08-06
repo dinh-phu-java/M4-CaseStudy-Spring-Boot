@@ -5,6 +5,7 @@ import com.dinhpu.m4casestudy.exception.RealEstateException;
 import com.dinhpu.m4casestudy.model.real_estate.*;
 import com.dinhpu.m4casestudy.model.user.Customers;
 import com.dinhpu.m4casestudy.model.user.User;
+import com.dinhpu.m4casestudy.services.S3Services;
 import com.dinhpu.m4casestudy.services.real_estate.*;
 import com.dinhpu.m4casestudy.services.user.ICustomerServices;
 import com.dinhpu.m4casestudy.services.user.IUserServices;
@@ -43,6 +44,12 @@ import java.util.Optional;
 public class RealEstateController {
 
     private int PAGE_SIZE=2;
+
+    @Value("${jsa.s3.bucket.url}")
+    private String s3BucketUrl;
+
+    @Autowired
+    S3Services s3Services;
 
     @Value("${upload.path}")
     private String uploadPath;

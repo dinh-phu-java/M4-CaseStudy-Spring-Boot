@@ -3,6 +3,7 @@ package com.dinhpu.m4casestudy.services;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,5 +42,13 @@ public class S3ServicesImpl implements S3Services{
             logger.info("Caught an AmazonClientException: ");
             logger.info("Error Message: " + ace.getMessage());
         }
+    }
+
+    @Override
+    public void deleteFile(String keyName) {
+        logger.info("Deleting file with name= " + keyName);
+        final DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucketName, keyName);
+        s3client.deleteObject(deleteObjectRequest);
+        logger.info("File deleted successfully.");
     }
 }

@@ -1,5 +1,6 @@
 package com.dinhpu.m4casestudy.services;
 
 public interface S3Services {
-    public void uploadFile(String keyName, String uploadFilePath);
+     void uploadFile(String keyName, String uploadFilePath);
+    void deleteFile(final String keyName);
 }
