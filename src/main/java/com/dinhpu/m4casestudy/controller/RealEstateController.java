@@ -131,6 +131,12 @@ public class RealEstateController {
                                           @RequestParam("don-vi") String donVi){
 
         Long existId=realEstateDTO.getId();
+        User loginUser=(User)session.getAttribute("loginUser");
+        User ownUser=userServices.findUserByEmail(loginUser.getEmail());
+        if (realEstateDTO.getUser()!=null){
+            if (loginUser.getId()!=realEstateDTO.getUser().getId())
+                return "redirect:/access-denied";
+        }
 
         if ( (existId == null && FileUtils.isFileEmpty(files)) ){
             session.setAttribute("message","File không được để trống");
@@ -159,8 +165,8 @@ public class RealEstateController {
         RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO,donVi);
 
 
-        User loginUser=(User)session.getAttribute("loginUser");
-        User ownUser=userServices.findUserByEmail(loginUser.getEmail());
+//        User loginUser=(User)session.getAttribute("loginUser");
+//        User ownUser=userServices.findUserByEmail(loginUser.getEmail());
 
         realEstate.setUser(ownUser);
 
@@ -183,27 +189,30 @@ public class RealEstateController {
 
                 List<RealEstateImage> realEstateImage=realEstateImageServices.findAllByRealEstate(createRealEstate);
 
-
-
-                List<Path> listImagePath=new ArrayList<>();
                 for (RealEstateImage imageObj:realEstateImage){
-                    listImagePath.add( Paths.get(envDeletePath+imageObj.getImage()));
+                    String keyImage=imageObj.getImage();
+                    keyImage=keyImage.substring(keyImage.lastIndexOf('/')+1);
+                    s3Services.deleteFile(keyImage);
                 }
 
-                for (int i=0;i<listImagePath.size();i++){
-                    try {
-                        if (Files.exists(listImagePath.get(i))){
-                            Files.delete(listImagePath.get(i));
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
+//                List<Path> listImagePath=new ArrayList<>();
+//                for (RealEstateImage imageObj:realEstateImage){
+//                    listImagePath.add( Paths.get(envDeletePath+imageObj.getImage()));
+//                }
+//
+//                for (int i=0;i<listImagePath.size();i++){
+//                    try {
+//                        if (Files.exists(listImagePath.get(i))){
+//                            Files.delete(listImagePath.get(i));
+//                        }
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
                 //có dòng này bị lỗi transaction
                 realEstateImageServices.removeAllByRealEstate(createRealEstate);
-
             }
 
             for (int i=0;i<files.length;i++){
