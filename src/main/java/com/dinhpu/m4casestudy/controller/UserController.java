@@ -88,19 +88,19 @@ public class UserController {
 
         }
 
-        MultipartFile file = crmUser.getLogoFile();
-
-        String fileName = ImageUtils.hashFileName(file.getOriginalFilename());
-
-        String uploadDir = uploadPath + crmUser.getId();
-
-        Path uploadPath = Paths.get(uploadDir);
+//        MultipartFile file = crmUser.getLogoFile();
+//
+//        String fileName = ImageUtils.hashFileName(file.getOriginalFilename());
+//
+//        String uploadDir = uploadPath + crmUser.getId();
+//
+//        Path uploadPath = Paths.get(uploadDir);
 
         String logoUrl = "";
 
         User loginUser = (User) session.getAttribute("loginUser");
 
-        if (fileName.equals("")) {
+        if (crmUser.getLogoFile().getOriginalFilename().equals("")) {
 
             System.out.println("file null");
 //                logoUrl="/dist/img/user-default.png";
@@ -109,11 +109,22 @@ public class UserController {
         } else {
 
             try {
+
+                MultipartFile file = crmUser.getLogoFile();
+
+                String fileName = ImageUtils.hashFileName(file.getOriginalFilename());
+
+                String uploadDir = uploadPath + crmUser.getId();
+
+                Path uploadPath = Paths.get(uploadDir);
+
                 if (!Files.exists(uploadPath)) {
 
                     Files.createDirectories(uploadPath);
 
                 }
+
+
 
                 InputStream inputStream = file.getInputStream();
 
@@ -129,10 +140,9 @@ public class UserController {
 
                     Files.delete(deletePath);
 
-                    s3Services.deleteFile(keyImage);
-
                 }
 
+                s3Services.deleteFile(keyImage);
 
                 s3Services.uploadFile(fileName,filePath.toString());
                 logoUrl=s3BucketUrl+fileName;
