@@ -5,7 +5,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 public class ImageUtils {
+
     public static String hashFileName(String fileName){
+        if (fileName.equals(""))
+            return "";
+
         String postFix=fileName.substring(fileName.indexOf('.'));
         fileName+=fileName+(new Date());
         StringBuilder sb=null;
@@ -28,9 +32,11 @@ public class ImageUtils {
             e.printStackTrace();
         }
 
+
         return sb.toString()+postFix;
 
     }
+
 
 //    public static void main(String[] args) {
 //        System.out.println(ImageUtils.hashFileName("abc)43((.jpg"));

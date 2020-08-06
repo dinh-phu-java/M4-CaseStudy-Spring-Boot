@@ -180,6 +180,7 @@ public class RealEstateController {
         }else{
             //xóa file cũ
             if (existId!=null){
+
                 List<RealEstateImage> realEstateImage=realEstateImageServices.findAllByRealEstate(createRealEstate);
 
 
@@ -206,10 +207,11 @@ public class RealEstateController {
             }
 
             for (int i=0;i<files.length;i++){
-
-                String fileName= files[i].getOriginalFilename();
+                String fileName= ImageUtils.hashFileName(files[i].getOriginalFilename());
 
                 if (!fileName.equals("")){
+//                if (!files[i].getOriginalFilename().equals("")){
+
                     String uploadDir=uploadPath + ownUser.getId()+"/real_estate/";
 
                     Path fileUploadPath= Paths.get(uploadDir);
@@ -227,11 +229,16 @@ public class RealEstateController {
 
                     Files.copy(inputStream,imagePath, StandardCopyOption.REPLACE_EXISTING);
 
-                        String imageUrl=resourcePath+ownUser.getId()+"/"+"real_estate/"+fileName;
+                    s3Services.uploadFile(fileName,imagePath.toString());
+
+//                    String imageUrl=resourcePath+ownUser.getId()+"/"+"real_estate/"+fileName;
+                    String imageUrl=s3BucketUrl+fileName;
 
                     RealEstateImage realEstateImage= new RealEstateImage(imageUrl,createRealEstate);
 
                     createRealEstate.addRealEstateImage(realEstateImage);
+
+                    Files.delete(imagePath);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -246,7 +253,7 @@ public class RealEstateController {
         if ( !(existId == null && FileUtils.isFileEmpty(files)) ){
             realEstateServices.save(createRealEstate);
             realEstateDTO=RealEstateUtils.realEstateToRealEstateDTO(createRealEstate);
-            message="Thêm thành công";
+            message="Thao tác thành công";
         }
 
 
