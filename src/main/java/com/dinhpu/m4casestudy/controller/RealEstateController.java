@@ -131,12 +131,6 @@ public class RealEstateController {
                                           @RequestParam("don-vi") String donVi){
 
         Long existId=realEstateDTO.getId();
-        User loginUser=(User)session.getAttribute("loginUser");
-        User ownUser=userServices.findUserByEmail(loginUser.getEmail());
-        if (realEstateDTO.getUser()!=null){
-            if (loginUser.getId()!=realEstateDTO.getUser().getId())
-                return "redirect:/access-denied";
-        }
 
         if ( (existId == null && FileUtils.isFileEmpty(files)) ){
             session.setAttribute("message","File không được để trống");
@@ -165,8 +159,8 @@ public class RealEstateController {
         RealEstate realEstate=RealEstateUtils.realEstateDTOToRealEstate(realEstateDTO,donVi);
 
 
-//        User loginUser=(User)session.getAttribute("loginUser");
-//        User ownUser=userServices.findUserByEmail(loginUser.getEmail());
+        User loginUser=(User)session.getAttribute("loginUser");
+        User ownUser=userServices.findUserByEmail(loginUser.getEmail());
 
         realEstate.setUser(ownUser);
 
@@ -388,8 +382,13 @@ public class RealEstateController {
 
 
     @GetMapping("/edit/{id}")
-    public String showEdit(@PathVariable Long id,Model theModel){
+    public String showEdit(@PathVariable Long id,Model theModel,HttpSession session){
+        User loginUser =(User)session.getAttribute("loginUser");
         RealEstate realEstate=realEstateServices.findById(id);
+        if (loginUser.getId() != realEstate.getUser().getId()){
+            return "redirect:/access-denied";
+        }
+
         if (realEstate==null){
             throw new RealEstateException("Không tìm thấy bất động sản với id: "+id);
         }
